@@ -31,7 +31,7 @@
         user = {
           name = "tacascer";
           email = "trandangtrithanh2000@gmail.com";
-          signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZeXSfiPpjH/9Jik03i2itMcpW/If0j5spJbzq9jWXb";
+          signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP4F11qhcGezqNnuicjl99tvcXdIeymu0wdPLBivoZEg";
         };
         commit.gpgsign = true;
         gpg.format = "ssh";

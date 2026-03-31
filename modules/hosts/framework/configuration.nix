@@ -19,6 +19,7 @@
       self.nixosModules.claude-code
       self.nixosModules."1password"
       self.nixosModules.node
+      self.nixosModules.alacritty
     ];
 
     custom.bash = {
