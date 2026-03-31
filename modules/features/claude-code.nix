@@ -23,9 +23,12 @@
       pkgs = import inputs.nixpkgs {
         inherit (pkgs.stdenv.hostPlatform) system;
         config.allowUnfree = true;
-        settings = {
-          includeCoAuthoredBy = false;
-        };
+      };
+      settings = {
+        includeCoAuthoredBy = false;
+      };
+      envDefault = {
+        CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION = "true";
       };
     };
   };
