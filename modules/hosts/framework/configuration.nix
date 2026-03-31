@@ -12,6 +12,8 @@
     imports = [
       # Include the results of the hardware scan.
       self.nixosModules.frameworkHardware
+      # Include the nixos-hardware module
+      inputs.nixos-hardware.nixosModules.framework-13-7040-amd
       self.nixosModules.niri
       self.nixosModules.git
       self.nixosModules.nvim
