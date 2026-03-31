@@ -19,6 +19,8 @@
       };
     };
 
+    config.programs.starship.enable = true;
+
     config.programs.bash = {
       completion.enable = true;
       shellAliases = {
