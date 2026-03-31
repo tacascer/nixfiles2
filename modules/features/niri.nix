@@ -19,6 +19,10 @@
         input.keyboard = {
           xkb.layout = "us";
         };
+        input.touchpad = {
+          tap = _: {};
+          natural-scroll = _: {};
+        };
         
         layout.gaps = 5;
         layout.preset-column-widths = [
