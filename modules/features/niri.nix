@@ -21,7 +21,10 @@
         };
         
         layout.gaps = 5;
-       
+        layout.preset-column-widths = [
+          { proportion = 0.5; }
+        ];
+
         binds = {
           "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Return".spawn-sh = lib.getExe self'.packages.myAlacritty;
