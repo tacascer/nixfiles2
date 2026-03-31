@@ -45,6 +45,49 @@
                   clipboard = "unnamedplus";
                 };
 
+                globals = {
+                  mapleader = " ";
+                  maplocalleader = " ";
+                };
+
+                binds.whichKey = {
+                  enable = true;
+                  register = {
+                    "<leader>b" = "+Buffer";
+                    "<leader>c" = "+Code";
+                    "<leader>d" = "+Debug";
+                    "<leader>f" = "+Find";
+                    "<leader>g" = "+Git";
+                    "<leader>gh" = "+Hunks";
+                    "<leader>q" = "+Quit/Session";
+                    "<leader>s" = "+Search";
+                    "<leader>u" = "+UI";
+                    "<leader>w" = "+Windows";
+                    "<leader>x" = "+Diagnostics";
+                  };
+                };
+
+                filetree.neo-tree.enable = true;
+
+                tabline.nvimBufferline.enable = true;
+
+                terminal.toggleterm = {
+                  enable = true;
+                  lazygit.enable = true;
+                };
+
+                git.gitsigns.enable = true;
+
+                utility.motion.flash-nvim.enable = true;
+
+                mini.bufremove.enable = true;
+
+                ui.noice.enable = true;
+
+                notify.nvim-notify.enable = true;
+
+                visuals.indent-blankline.enable = true;
+
                 statusline.lualine.enable = true;
                 telescope.enable = true;
                 autocomplete.nvim-cmp.enable = true;
