@@ -18,6 +18,7 @@
       self.nixosModules.bash
       self.nixosModules.claude-code
       self.nixosModules."1password"
+      self.nixosModules.node
     ];
 
     custom.bash = {
