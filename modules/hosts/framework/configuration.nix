@@ -22,6 +22,7 @@
       self.nixosModules."1password"
       self.nixosModules.node
       self.nixosModules.alacritty
+      self.nixosModules.firefox
     ];
 
     custom.bash = {
@@ -125,9 +126,6 @@
         ];
       }
     ];
-
-    # Install firefox.
-    programs.firefox.enable = true;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
