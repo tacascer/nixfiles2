@@ -51,6 +51,15 @@
           "Mod+Shift+7".move-column-to-workspace = "w6";
           "Mod+Shift+8".move-column-to-workspace = "w7";
           "Mod+Shift+9".move-column-to-workspace = "w8";
+
+          # Window management
+          "Mod+F".maximize-column = _: {};
+          "Mod+R".switch-preset-column-width = _: {};
+          "Mod+Left".focus-column-left = _: {};
+          "Mod+Right".focus-column-right = _: {};
+          "Mod+Shift+Left".move-column-left = _: {};
+          "Mod+Shift+Right".move-column-right = _: {};
+          "Mod+C".center-column = _: {};
         };
       };
     };
