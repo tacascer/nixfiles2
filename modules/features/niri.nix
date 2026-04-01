@@ -8,12 +8,18 @@
     services.displayManager.defaultSession = "niri";
   };
 
-  perSystem = { pkgs, lib, self', ... }: {
-    packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
+  perSystem = { pkgs, lib, self', system, ... }: {
+    packages.myNiri = let
+      unfreePkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
       settings = {
         spawn-at-startup = [
           (lib.getExe self'.packages.myNoctalia)
+          "${unfreePkgs._1password-gui}/bin/1password"
         ];
 
         input.keyboard = {
