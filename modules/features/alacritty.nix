@@ -13,6 +13,7 @@
     packages.myAlacritty = inputs.wrapper-modules.wrappers.alacritty.wrap {
       inherit pkgs;
       settings = {
+        window.decorations = "None";
         font = {
           normal.family = "JetBrainsMono Nerd Font";
           size = 12;

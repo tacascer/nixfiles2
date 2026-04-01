@@ -29,6 +29,13 @@
           { proportion = 0.5; }
         ];
 
+        window-rules = [
+          {
+            matches = [{ app-id = "Alacritty"; }];
+            opacity = 0.85;
+          }
+        ];
+
         binds = {
           "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Return".spawn-sh = lib.getExe self'.packages.myAlacritty;
@@ -65,8 +72,8 @@
           "Mod+Shift+Right".move-column-right = _: {};
           "Mod+Up".focus-window-up = _: {};
           "Mod+Down".focus-window-down = _: {};
-          "Mod+Shift+Up".move-window-up = _: {};
-          "Mod+Shift+Down".move-window-down = _: {};
+          "Mod+Shift+Up".move-window-up-or-to-workspace-up = _: {};
+          "Mod+Shift+Down".move-window-down-or-to-workspace-down = _: {};
           "Mod+C".center-column = _: {};
 
           # Monitor focus
