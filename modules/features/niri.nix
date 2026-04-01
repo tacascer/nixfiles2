@@ -70,8 +70,8 @@
           "Mod+Right".focus-column-right = _: {};
           "Mod+Shift+Left".move-column-left = _: {};
           "Mod+Shift+Right".move-column-right = _: {};
-          "Mod+Up".focus-window-up = _: {};
-          "Mod+Down".focus-window-down = _: {};
+          "Mod+Up".focus-window-or-workspace-up = _: {};
+          "Mod+Down".focus-window-or-workspace-down = _: {};
           "Mod+Shift+Up".move-window-up-or-to-workspace-up = _: {};
           "Mod+Shift+Down".move-window-down-or-to-workspace-down = _: {};
           "Mod+C".center-column = _: {};
