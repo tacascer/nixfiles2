@@ -27,6 +27,7 @@
         input.keyboard = {
           xkb.layout = "us";
         };
+        input.focus-follows-mouse.enable = true;
         input.touchpad = {
           tap = _: {};
           natural-scroll = _: {};
