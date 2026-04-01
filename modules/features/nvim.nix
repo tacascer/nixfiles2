@@ -67,7 +67,13 @@
                   };
                 };
 
-                filetree.neo-tree.enable = true;
+                filetree.neo-tree = {
+                  enable = true;
+                  setupOpts.window.mappings = {
+                    h = "close_node";
+                    l = "open";
+                  };
+                };
 
                 tabline.nvimBufferline.enable = true;
 
@@ -171,7 +177,9 @@
 
                   # --- File Explorer ---
                   { key = "<leader>e"; mode = "n"; action = "<cmd>Neotree toggle<CR>"; desc = "Toggle file explorer"; }
-                  { key = "<leader>E"; mode = "n"; action = "<cmd>Neotree focus<CR>"; desc = "Focus file explorer"; }
+                  { key = "<leader>E"; mode = "n"; action = "<cmd>Neotree reveal<CR>"; desc = "Reveal file in explorer"; }
+                  { key = "<leader>ge"; mode = "n"; action = "<cmd>Neotree git_status<CR>"; desc = "Git explorer"; }
+                  { key = "<leader>be"; mode = "n"; action = "<cmd>Neotree buffers<CR>"; desc = "Buffer explorer"; }
 
                   # --- Git ---
                   { key = "<leader>gg"; mode = "n"; action = "function() require('toggleterm.terminal').Terminal:new({cmd='lazygit', hidden=true, direction='float'}):toggle() end"; desc = "Lazygit"; lua = true; }
