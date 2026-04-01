@@ -24,7 +24,7 @@
           natural-scroll = _: {};
         };
         
-        layout.gaps = 5;
+        layout.gaps = 10;
         layout.preset-column-widths = [
           { proportion = 0.5; }
         ];
@@ -63,6 +63,10 @@
           "Mod+Right".focus-column-right = _: {};
           "Mod+Shift+Left".move-column-left = _: {};
           "Mod+Shift+Right".move-column-right = _: {};
+          "Mod+Up".focus-window-up = _: {};
+          "Mod+Down".focus-window-down = _: {};
+          "Mod+Shift+Up".move-window-up = _: {};
+          "Mod+Shift+Down".move-window-down = _: {};
           "Mod+C".center-column = _: {};
 
           # Monitor focus
