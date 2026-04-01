@@ -1,6 +1,11 @@
 { self, inputs, ... }: {
 
-  perSystem = { pkgs, lib, self', ... }: {
+  perSystem = { pkgs, lib, self', system, ... }: let
+    unfreePkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  in {
     packages.myHotkeyCheatsheet = pkgs.writeShellScriptBin "hotkey-cheatsheet" ''
       choice=$(cat <<'ENTRIES' | ${lib.getExe pkgs.fuzzel} --dmenu --prompt="Hotkeys: "
       Mod+W — Close Window
@@ -19,6 +24,7 @@
       Mod+Ctrl+Right — Focus Monitor Right
       Mod+Shift+Ctrl+Left — Move to Monitor Left
       Mod+Shift+Ctrl+Right — Move to Monitor Right
+      Mod+Shift+M — Spotify
       Mod+Space — Launcher
       Mod+Return — Terminal
       ENTRIES
@@ -41,6 +47,7 @@
         "Mod+Ctrl+Right — Focus Monitor Right") ${pkgs.niri}/bin/niri msg action focus-monitor-right ;;
         "Mod+Shift+Ctrl+Left — Move to Monitor Left") ${pkgs.niri}/bin/niri msg action move-column-to-monitor-left ;;
         "Mod+Shift+Ctrl+Right — Move to Monitor Right") ${pkgs.niri}/bin/niri msg action move-column-to-monitor-right ;;
+        "Mod+Shift+M — Spotify") ${lib.getExe unfreePkgs.spotify} ;;
         "Mod+Space — Launcher") ${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle ;;
         "Mod+Return — Terminal") ${lib.getExe self'.packages.myAlacritty} ;;
       esac
