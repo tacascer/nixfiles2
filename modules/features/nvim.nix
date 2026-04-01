@@ -110,10 +110,10 @@
                   { key = "<A-k>"; mode = "v"; action = ":m '<-2<CR>gv=gv"; desc = "Move lines up"; }
 
                   # --- Windows ---
-                  { key = "<C-h>"; mode = "n"; action = "<C-w>h"; desc = "Go to left window"; }
-                  { key = "<C-j>"; mode = "n"; action = "<C-w>j"; desc = "Go to lower window"; }
-                  { key = "<C-k>"; mode = "n"; action = "<C-w>k"; desc = "Go to upper window"; }
-                  { key = "<C-l>"; mode = "n"; action = "<C-w>l"; desc = "Go to right window"; }
+                  { key = "<leader>wh"; mode = "n"; action = "<C-w>h"; desc = "Go to left window"; }
+                  { key = "<leader>wj"; mode = "n"; action = "<C-w>j"; desc = "Go to lower window"; }
+                  { key = "<leader>wk"; mode = "n"; action = "<C-w>k"; desc = "Go to upper window"; }
+                  { key = "<leader>wl"; mode = "n"; action = "<C-w>l"; desc = "Go to right window"; }
                   { key = "<leader>wd"; mode = "n"; action = "<C-w>c"; desc = "Delete window"; }
                   { key = "<leader>ws"; mode = "n"; action = "<C-w>s"; desc = "Split window below"; }
                   { key = "<leader>wv"; mode = "n"; action = "<C-w>v"; desc = "Split window right"; }

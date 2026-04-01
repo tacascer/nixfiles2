@@ -35,6 +35,8 @@
       host = "framework";
     };
 
+    custom.niri.wallpaper = "/home/tacascer/Pictures/Wallpapers/wallhaven_45gdo8.jpg";
+
     custom.sudo.username = "tacascer";
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
