@@ -23,7 +23,9 @@
       self.nixosModules.node
       self.nixosModules.alacritty
       self.nixosModules.firefox
+      self.nixosModules.spotify
       self.nixosModules.sudo
+      self.nixosModules.nix-maintenance
     ];
 
     custom.bash = {
@@ -129,23 +131,6 @@
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
     ];
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-
-    system.autoUpgrade = {
-      enable = true;
-      flake = "~/myNixOS";
-      flags = [
-        "--update-input"
-        "nixpkgs"
-        "-L"
-      ];
-      allowReboot = true;
-    };
-
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;
