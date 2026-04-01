@@ -76,6 +76,7 @@
         binds = {
           "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Return".spawn-sh = lib.getExe self'.packages.myAlacritty;
+          "Mod+Shift+M".spawn = [( lib.getExe unfreePkgs.spotify )];
           "Mod+W".close-window = _: {};
 
           # Workspace focus
