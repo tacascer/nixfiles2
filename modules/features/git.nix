@@ -8,10 +8,9 @@
     lib,
     ...
   }: {
-    programs.git = {
-      enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.myGit;
-    };
+    environment.systemPackages = [
+      self.packages.${pkgs.stdenv.hostPlatform.system}.myGit
+    ];
   };
 
   perSystem = {
