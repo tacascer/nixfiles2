@@ -64,6 +64,14 @@
           "Mod+Shift+Left".move-column-left = _: {};
           "Mod+Shift+Right".move-column-right = _: {};
           "Mod+C".center-column = _: {};
+
+          # Monitor focus
+          "Mod+Ctrl+Left".focus-monitor-left = _: {};
+          "Mod+Ctrl+Right".focus-monitor-right = _: {};
+
+          # Move window to monitor
+          "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: {};
+          "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: {};
         };
       };
     };
