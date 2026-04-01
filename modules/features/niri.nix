@@ -30,9 +30,9 @@
         ];
 
         binds = {
-          "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
+          "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Return".spawn-sh = lib.getExe self'.packages.myAlacritty;
-          "Mod+Q".close-window = _: {};
+          "Mod+W".close-window = _: {};
 
           # Workspace focus
           "Mod+1".focus-workspace = "w0";
