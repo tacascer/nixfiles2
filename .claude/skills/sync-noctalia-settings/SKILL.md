@@ -13,9 +13,12 @@ Exports live noctalia-shell settings via IPC and writes them to `modules/feature
 
 1. Find the running noctalia binary path:
 ```bash
-pgrep -a noctalia
+pgrep -a quickshell
 ```
-The binary is at a nix store path like `/nix/store/...-noctalia-shell-X.Y.Z/bin/noctalia-shell`.
+Noctalia runs as `quickshell` at runtime, not `noctalia-shell`. The output shows the nix store path like `/nix/store/...-noctalia-shell-X.Y.Z/share/noctalia-shell`. The binary is at the corresponding `/bin/noctalia-shell` path in the **wrapper** package — extract it with:
+```bash
+nix build ~/myNixOS#myNoctalia --no-link --print-out-paths
+```
 
 2. Dump current settings via IPC and write only the `settings` key (not `state`) to the repo JSON:
 ```bash

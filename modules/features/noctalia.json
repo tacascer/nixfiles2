@@ -289,7 +289,7 @@
       ]
     },
     "wallpaper": {
-      "enabled": true,
+      "enabled": false,
       "overviewEnabled": false,
       "directory": "/home/tacascer/Pictures/Wallpapers",
       "monitorDirectories": [
@@ -336,7 +336,7 @@
       "useOriginalImages": false,
       "overviewBlur": 0.4,
       "overviewTint": 0.6,
-      "useWallhaven": true,
+      "useWallhaven": false,
       "wallhavenQuery": "",
       "wallhavenSorting": "relevance",
       "wallhavenOrder": "desc",
