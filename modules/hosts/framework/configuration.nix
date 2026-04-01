@@ -23,12 +23,15 @@
       self.nixosModules.node
       self.nixosModules.alacritty
       self.nixosModules.firefox
+      self.nixosModules.sudo
     ];
 
     custom.bash = {
       flakeDir = "~/myNixOS";
       host = "framework";
     };
+
+    custom.sudo.username = "tacascer";
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -110,22 +113,6 @@
         #  thunderbird
       ];
     };
-
-    security.sudo.extraRules = [
-      {
-        users = ["tacascer"];
-        commands = [
-          {
-            command = "/run/current-system/sw/bin/nixos-rebuild";
-            options = ["NOPASSWD"];
-          }
-          {
-            command = "/run/current-system/sw/bin/nix";
-            options = ["NOPASSWD"];
-          }
-        ];
-      }
-    ];
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;

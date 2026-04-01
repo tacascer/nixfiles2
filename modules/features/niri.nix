@@ -28,11 +28,17 @@
         layout.preset-column-widths = [
           { proportion = 0.5; }
         ];
+        layout.focus-ring = {
+          width = 4;
+          active-color = "#7fc8ff";
+          inactive-color = "#505050";
+        };
 
         window-rules = [
           {
             matches = [{ app-id = "Alacritty"; }];
             opacity = 0.85;
+            draw-border-with-background = false;
           }
         ];
 

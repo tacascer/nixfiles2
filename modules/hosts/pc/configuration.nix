@@ -23,12 +23,15 @@
       self.nixosModules.node
       self.nixosModules.alacritty
       self.nixosModules.firefox
+      self.nixosModules.sudo
     ];
 
     custom.bash = {
       flakeDir = "~/myNixOS";
       host = "pc";
     };
+
+    custom.sudo.username = "tacascer";
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
