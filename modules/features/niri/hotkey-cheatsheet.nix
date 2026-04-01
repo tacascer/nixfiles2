@@ -24,6 +24,7 @@
       Mod+Ctrl+Right — Focus Monitor Right
       Mod+Shift+Ctrl+Left — Move to Monitor Left
       Mod+Shift+Ctrl+Right — Move to Monitor Right
+      Mod+Shift+B — Firefox
       Mod+Shift+M — Spotify
       Mod+Space — Launcher
       Mod+Return — Terminal
@@ -47,6 +48,7 @@
         "Mod+Ctrl+Right — Focus Monitor Right") ${pkgs.niri}/bin/niri msg action focus-monitor-right ;;
         "Mod+Shift+Ctrl+Left — Move to Monitor Left") ${pkgs.niri}/bin/niri msg action move-column-to-monitor-left ;;
         "Mod+Shift+Ctrl+Right — Move to Monitor Right") ${pkgs.niri}/bin/niri msg action move-column-to-monitor-right ;;
+        "Mod+Shift+B — Firefox") ${lib.getExe pkgs.firefox} ;;
         "Mod+Shift+M — Spotify") ${lib.getExe unfreePkgs.spotify} ;;
         "Mod+Space — Launcher") ${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle ;;
         "Mod+Return — Terminal") ${lib.getExe self'.packages.myAlacritty} ;;
