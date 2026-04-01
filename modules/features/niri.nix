@@ -17,6 +17,8 @@
     in inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
       settings = {
+        outputs."DP-2".mode = "2560x1440@164.835";
+
         spawn-at-startup = [
           (lib.getExe self'.packages.myNoctalia)
           "${unfreePkgs._1password-gui}/bin/1password"
@@ -87,6 +89,7 @@
           "Mod+Shift+Up".move-window-up-or-to-workspace-up = _: {};
           "Mod+Shift+Down".move-window-down-or-to-workspace-down = _: {};
           "Mod+C".center-column = _: {};
+          "Mod+O".toggle-overview = _: {};
 
           # Monitor focus
           "Mod+Ctrl+Left".focus-monitor-left = _: {};

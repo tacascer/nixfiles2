@@ -259,7 +259,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Tokyo",
+      "name": "london",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "useFahrenheit": false,
@@ -297,6 +297,16 @@
           "directory": "/home/tacascer/Pictures/Wallpapers",
           "name": "winit",
           "wallpaper": ""
+        },
+        {
+          "directory": "/home/tacascer/Pictures/Wallpapers",
+          "name": "DP-1",
+          "wallpaper": ""
+        },
+        {
+          "directory": "/home/tacascer/Pictures/Wallpapers",
+          "name": "DP-2",
+          "wallpaper": ""
         }
       ],
       "enableMultiMonitorDirectories": false,
@@ -326,7 +336,7 @@
       "useOriginalImages": false,
       "overviewBlur": 0.4,
       "overviewTint": 0.6,
-      "useWallhaven": false,
+      "useWallhaven": true,
       "wallhavenQuery": "",
       "wallhavenSorting": "relevance",
       "wallhavenOrder": "desc",
@@ -444,7 +454,7 @@
       "diskAvailCriticalThreshold": 10,
       "batteryWarningThreshold": 20,
       "batteryCriticalThreshold": 5,
-      "enableDgpuMonitoring": false,
+      "enableDgpuMonitoring": true,
       "useCustomColors": false,
       "warningColor": "",
       "criticalColor": "",
@@ -494,7 +504,7 @@
       "bluetoothDetailsViewMode": "grid",
       "bluetoothHideUnnamedDevices": false,
       "disableDiscoverability": false,
-      "bluetoothAutoConnect": true
+      "bluetoothAutoConnect": false
     },
     "sessionMenu": {
       "enableCountdown": true,
@@ -589,7 +599,7 @@
     "audio": {
       "volumeStep": 5,
       "volumeOverdrive": false,
-      "spectrumFrameRate": 30,
+      "spectrumFrameRate": 144,
       "visualizerType": "linear",
       "spectrumMirrored": true,
       "mprisBlacklist": [],
@@ -605,7 +615,7 @@
     },
     "colorSchemes": {
       "useWallpaperColors": false,
-      "predefinedScheme": "Catppuccin",
+      "predefinedScheme": "Tokyo Night",
       "darkMode": true,
       "schedulingMode": "location",
       "manualSunrise": "06:30",
@@ -662,45 +672,6 @@
       "gridSnap": false,
       "gridSnapScale": false,
       "monitorWidgets": []
-    }
-  },
-  "state": {
-    "doNotDisturb": false,
-    "noctaliaPerformanceMode": false,
-    "barVisible": true,
-    "openedPanel": "",
-    "lockScreenActive": false,
-    "wallpapers": {},
-    "desktopWidgetsEditMode": false,
-    "display": {
-      "winit": {
-        "name": "winit",
-        "connected": true,
-        "scale": 1,
-        "width": 1728,
-        "height": 1080,
-        "x": 0,
-        "y": 0,
-        "physical_width": 0,
-        "physical_height": 0,
-        "refresh_rate": 60000,
-        "vrr_supported": false,
-        "vrr_enabled": false,
-        "transform": "Flipped180"
-      }
-    },
-    "notificationsState": {
-      "lastSeenTs": 0
-    },
-    "changelogState": {
-      "lastSeenVersion": "v4.7.1"
-    },
-    "colorSchemesList": {
-      "schemes": [],
-      "timestamp": 0
-    },
-    "ui": {
-      "settingsSidebarExpanded": true
     }
   }
 }
