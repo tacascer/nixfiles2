@@ -24,6 +24,7 @@
       self.nixosModules.alacritty
       self.nixosModules.discord
       self.nixosModules.firefox
+      self.nixosModules.obsidian
       self.nixosModules.spotify
       self.nixosModules.sudo
       self.nixosModules.nix-maintenance

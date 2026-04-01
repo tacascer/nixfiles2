@@ -14,6 +14,10 @@
       inherit pkgs;
       settings = {
         window.decorations = "None";
+        window.padding = {
+          x = 8;
+          y = 8;
+        };
         font = {
           normal.family = "JetBrainsMono Nerd Font";
           size = 12;
