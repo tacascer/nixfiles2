@@ -15,6 +15,7 @@
       # Include the results of the hardware scan.
       self.nixosModules.pcHardware
       self.nixosModules.niri
+      self.nixosModules.fuzzel
       self.nixosModules.git
       self.nixosModules.nvim
       self.nixosModules.bash

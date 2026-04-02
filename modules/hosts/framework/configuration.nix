@@ -15,6 +15,7 @@
       # Include the nixos-hardware module
       inputs.nixos-hardware.nixosModules.framework-13-7040-amd
       self.nixosModules.niri
+      self.nixosModules.fuzzel
       self.nixosModules.git
       self.nixosModules.nvim
       self.nixosModules.bash
