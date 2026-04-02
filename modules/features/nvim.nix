@@ -12,7 +12,6 @@
     }:
     {
       environment.systemPackages = [
-        pkgs.nixfmt
         pkgs.wl-clipboard
         self.packages.${pkgs.stdenv.system}.myNvim
       ];
