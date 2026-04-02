@@ -40,7 +40,7 @@
         host = "pc";
       };
 
-      custom.niri.wallpaper = "/home/tacascer/Pictures/Wallpapers/wallhaven_45gdo8.jpg";
+      custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
 
       custom.sudo.username = "tacascer";
 
