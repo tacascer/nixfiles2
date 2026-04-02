@@ -29,6 +29,7 @@
       self.nixosModules.spotify
       self.nixosModules.sudo
       self.nixosModules.nix-maintenance
+      self.nixosModules.fastfetch
     ];
 
     custom.bash = {
