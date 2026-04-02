@@ -663,7 +663,7 @@
                     # the LSP API.
                     enable = true;
 
-                    formatOnSave = true;
+                    formatOnSave = false;
                     lspkind.enable = false;
                     lightbulb.enable = true;
                     lspsaga.enable = false;
