@@ -18,8 +18,6 @@
       };
       services.displayManager.defaultSession = "niri";
 
-      environment.systemPackages = [ pkgs.fuzzel ];
-
       systemd.user.services.swaybg = lib.mkIf (cfg.wallpaper != null) {
         description = "Wallpaper daemon";
         wantedBy = ["graphical-session.target"];
@@ -52,6 +50,9 @@
           xkb.layout = "us";
         };
         input.focus-follows-mouse = _: {};
+        input.warp-mouse-to-focus = _: {
+          props.mode = "center-xy";
+        };
         input.touchpad = {
           tap = _: {};
           natural-scroll = _: {};
