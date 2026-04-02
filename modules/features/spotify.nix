@@ -1,5 +1,8 @@
-{...}: {
-  flake.nixosModules.spotify = {pkgs, ...}: {
-    environment.systemPackages = [pkgs.spotify];
-  };
+{ ... }:
+{
+  flake.nixosModules.spotify =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.spotify ];
+    };
 }

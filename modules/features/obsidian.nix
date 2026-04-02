@@ -1,5 +1,8 @@
-{...}: {
-  flake.nixosModules.obsidian = {pkgs, ...}: {
-    environment.systemPackages = [pkgs.obsidian];
-  };
+{ ... }:
+{
+  flake.nixosModules.obsidian =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.obsidian ];
+    };
 }

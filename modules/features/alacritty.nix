@@ -1,28 +1,36 @@
-{ self, inputs, ... }: {
+{
+  self,
+  inputs,
+  ...
+}:
+{
+  flake.nixosModules.alacritty =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [
+        self.packages.${pkgs.stdenv.hostPlatform.system}.myAlacritty
+      ];
+      fonts.packages = [
+        pkgs.nerd-fonts.jetbrains-mono
+      ];
+    };
 
-  flake.nixosModules.alacritty = { pkgs, ... }: {
-    environment.systemPackages = [
-      self.packages.${pkgs.stdenv.hostPlatform.system}.myAlacritty
-    ];
-    fonts.packages = [
-      pkgs.nerd-fonts.jetbrains-mono
-    ];
-  };
-
-  perSystem = { pkgs, ... }: {
-    packages.myAlacritty = inputs.wrapper-modules.wrappers.alacritty.wrap {
-      inherit pkgs;
-      settings = {
-        window.decorations = "None";
-        window.padding = {
-          x = 8;
-          y = 8;
-        };
-        font = {
-          normal.family = "JetBrainsMono Nerd Font";
-          size = 12;
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.myAlacritty = inputs.wrapper-modules.wrappers.alacritty.wrap {
+        inherit pkgs;
+        settings = {
+          window.decorations = "None";
+          window.padding = {
+            x = 8;
+            y = 8;
+          };
+          font = {
+            normal.family = "JetBrainsMono Nerd Font";
+            size = 12;
+          };
         };
       };
     };
-  };
 }
