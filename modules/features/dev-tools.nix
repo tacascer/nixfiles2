@@ -1,8 +1,13 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.nixosModules.dev-tools =
     { pkgs, ... }:
     {
-      environment.systemPackages = [ pkgs.jq pkgs.gh ];
+      programs.nix-ld.enable = true;
+
+      environment.systemPackages = [
+        pkgs.jq
+        pkgs.gh
+      ];
     };
 }
