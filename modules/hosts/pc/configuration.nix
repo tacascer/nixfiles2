@@ -56,6 +56,9 @@
       boot.loader.systemd-boot.configurationLimit = 10;
       boot.loader.efi.canTouchEfiVariables = true;
 
+      # Temporary: enable EDK2 UEFI Shell to discover Windows ESP device handle.
+      boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+
       # Use latest kernel.
       boot.kernelPackages = pkgs.linuxPackages_latest;
 
