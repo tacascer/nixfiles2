@@ -20,7 +20,7 @@
     in
     {
       packages.myHotkeyCheatsheet = pkgs.writeShellScriptBin "hotkey-cheatsheet" ''
-        choice=$(cat <<'ENTRIES' | ${lib.getExe self'.packages.myFuzzel} --dmenu
+        choice=$(cat <<'ENTRIES' | ${lib.getExe pkgs.fuzzel} --dmenu
         Mod+W — Close Window
         Mod+F — Maximize
         Mod+C — Center Column
