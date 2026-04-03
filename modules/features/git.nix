@@ -33,6 +33,9 @@
       packages.myGit = inputs.wrapper-modules.wrappers.git.wrap {
         pkgs = unfreePkgs;
         settings = {
+          core.excludesFile = toString (pkgs.writeText "global-gitignore" ''
+            .omc/
+          '');
           user = {
             name = "tacascer";
             email = "trandangtrithanh2000@gmail.com";
