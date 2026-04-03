@@ -57,8 +57,13 @@
       boot.loader.systemd-boot.configurationLimit = 10;
       boot.loader.efi.canTouchEfiVariables = true;
 
-      # Temporary: enable EDK2 UEFI Shell to discover Windows ESP device handle.
-      boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+      # Boot menu timeout (seconds).
+      boot.loader.timeout = 5;
+
+      # Windows Boot Manager on separate ESP.
+      boot.loader.systemd-boot.windows."11" = {
+        efiDeviceHandle = "HD1b"; # Discovered via UEFI Shell — may change if disk order changes
+      };
 
       # Use latest kernel.
       boot.kernelPackages = pkgs.linuxPackages_latest;
