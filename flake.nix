@@ -8,6 +8,7 @@
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
     nvf.url = "github:notashelf/nvf";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
