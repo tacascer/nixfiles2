@@ -34,7 +34,7 @@
         self.nixosModules.sudo
         self.nixosModules.nix-maintenance
         self.nixosModules.fastfetch
-        self.nixosModules.jq
+        self.nixosModules.dev-tools
       ];
 
       custom.bash = {
