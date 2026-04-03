@@ -92,6 +92,7 @@
                   utility.motion.flash-nvim.enable = true;
 
                   mini.bufremove.enable = true;
+                  mini.animate.enable = true;
 
                   ui.noice.enable = true;
 
