@@ -97,7 +97,7 @@
 
             binds = {
               "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
-              "Mod+Return".spawn-sh = lib.getExe self'.packages.myAlacritty;
+              "Mod+Return".spawn-sh = "alacritty";
               "Mod+Shift+M".spawn = [ (lib.getExe unfreePkgs.spotify) ];
               "Mod+Shift+B".spawn = [ (lib.getExe pkgs.firefox) ];
               "Mod+W".close-window = _: { };

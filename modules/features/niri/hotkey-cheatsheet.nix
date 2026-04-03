@@ -64,7 +64,7 @@
           "Mod+Shift+B — Firefox") ${lib.getExe pkgs.firefox} ;;
           "Mod+Shift+M — Spotify") ${lib.getExe unfreePkgs.spotify} ;;
           "Mod+Space — Launcher") ${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle ;;
-          "Mod+Return — Terminal") ${lib.getExe self'.packages.myAlacritty} ;;
+          "Mod+Return — Terminal") alacritty ;;
         esac
       '';
     };
