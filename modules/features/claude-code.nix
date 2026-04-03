@@ -33,7 +33,7 @@
           includeCoAuthoredBy = false;
           enabledPlugins = {
             "claude-mem@thedotmack" = true;
-            "superpowers@claude-plugins-official" = true;
+            "superpowers@claude-plugins-official" = false;
             "claude-md-management@claude-plugins-official" = true;
             "oh-my-claudecode@omc" = true;
           };
