@@ -30,7 +30,6 @@
         shellAliases = {
           sysup = "sudo nixos-rebuild switch --flake ${flakeRef}";
           sysupup = "sudo nix flake update --flake ${cfg.flakeDir} && sudo nixos-rebuild switch --flake ${flakeRef}";
-          claude-yolo = "claude --dangerously-skip-permissions";
         };
       };
     };

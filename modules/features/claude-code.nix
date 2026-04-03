@@ -14,6 +14,12 @@
       environment.systemPackages = [
         self.packages.${pkgs.stdenv.hostPlatform.system}.myClaudeCode
       ];
+
+      programs.bash = {
+        shellAliases = {
+          claude-yolo = "claude --dangerously-skip-permissions";
+        };
+      };
     };
 
   perSystem =
