@@ -16,6 +16,38 @@
         "type": "github"
       }
     },
+    "claude-mem": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774752603,
+        "narHash": "sha256-hzG54ODli2KD47OI5w784dPR/D1JMu4oayQ5ovHIhcA=",
+        "owner": "thedotmack",
+        "repo": "claude-mem",
+        "rev": "d06882126fe24f6ebcbe433385daeb8322ba8009",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thedotmack",
+        "repo": "claude-mem",
+        "type": "github"
+      }
+    },
+    "claude-plugins-official": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774995314,
+        "narHash": "sha256-uKDVcw6C1uzpiIY+hjgHxr4AU9wM1KF7t3v6zd9XBHk=",
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "rev": "b091cb4179d3b62a6e2a39910461c7ec7165b1ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -259,15 +291,51 @@
         "type": "github"
       }
     },
+    "oh-my-claudecode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774847451,
+        "narHash": "sha256-U9B+y/7c2Qtxfe3orvlNCANq2ma+7Y9zkOjH790ZQqk=",
+        "owner": "Yeachan-Heo",
+        "repo": "oh-my-claudecode",
+        "rev": "fae376508355fb03ea6a2477453f37f0a59e707f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Yeachan-Heo",
+        "repo": "oh-my-claudecode",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "claude-mem": "claude-mem",
+        "claude-plugins-official": "claude-plugins-official",
         "flake-parts": "flake-parts",
         "import-tree": "import-tree",
         "nix-colors": "nix-colors",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
+        "oh-my-claudecode": "oh-my-claudecode",
+        "superpowers": "superpowers",
         "wrapper-modules": "wrapper-modules"
+      }
+    },
+    "superpowers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775097276,
+        "narHash": "sha256-hGEMwmSojy3cNtUQvB5djExlD39O2dwcnLOMUNaVIHg=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "b7a8f76985f1e93e75dd2f2a3b424dc731bd9d37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
+        "type": "github"
       }
     },
     "systems": {
