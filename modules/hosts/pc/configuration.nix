@@ -27,6 +27,7 @@
         self.nixosModules."1password"
         self.nixosModules.node
         self.nixosModules.alacritty
+        self.nixosModules.tmux
         self.nixosModules.discord
         self.nixosModules.firefox
         self.nixosModules.obsidian
