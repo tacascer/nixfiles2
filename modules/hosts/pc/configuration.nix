@@ -17,6 +17,7 @@
       imports = [
         # Include the results of the hardware scan.
         self.nixosModules.pcHardware
+        self.nixosModules.colors
         self.nixosModules.niri
         self.nixosModules.fuzzel
         self.nixosModules.git
