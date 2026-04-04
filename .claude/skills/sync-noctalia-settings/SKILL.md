@@ -11,18 +11,9 @@ Exports live noctalia-shell settings via IPC and writes them to `modules/feature
 
 ## Steps
 
-1. Find the running noctalia binary path:
+1. Dump current settings via IPC and write only the `settings` key (not `state`) to the repo JSON:
 ```bash
-pgrep -a quickshell
-```
-Noctalia runs as `quickshell` at runtime, not `noctalia-shell`. The output shows the nix store path like `/nix/store/...-noctalia-shell-X.Y.Z/share/noctalia-shell`. The binary is at the corresponding `/bin/noctalia-shell` path in the **wrapper** package — extract it with:
-```bash
-nix build ~/myNixOS#myNoctalia --no-link --print-out-paths
-```
-
-2. Dump current settings via IPC and write only the `settings` key (not `state`) to the repo JSON:
-```bash
-/nix/store/...-noctalia-shell-X.Y.Z/bin/noctalia-shell ipc call state all | \
+nix run nixpkgs#noctalia-shell ipc call state all | \
   node -e "
     const chunks = [];
     process.stdin.on('data', c => chunks.push(c));
@@ -33,7 +24,7 @@ nix build ~/myNixOS#myNoctalia --no-link --print-out-paths
   " > modules/features/noctalia.json
 ```
 
-3. Verify the flake still evaluates:
+2. Verify the flake still evaluates:
 ```bash
 nix flake check
 ```
