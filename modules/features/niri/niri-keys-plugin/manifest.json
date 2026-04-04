@@ -1,0 +1,10 @@
+{
+  "id": "niri-keys",
+  "name": "Niri Keyboard Shortcuts",
+  "version": "1.0.0",
+  "author": "tacascer",
+  "description": "Search and execute niri keyboard shortcuts from the launcher",
+  "entryPoints": {
+    "launcherProvider": "LauncherProvider.qml"
+  }
+}
