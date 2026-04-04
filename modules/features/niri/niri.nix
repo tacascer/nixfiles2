@@ -170,6 +170,9 @@
             natural-scroll = _: { };
           };
 
+          cursor.hide-when-typing = _: { };
+          cursor.hide-after-inactive-ms = 3000;
+
           layout.gaps = 10;
           layout.preset-column-widths = [
             { proportion = 0.33; }
