@@ -11,7 +11,7 @@ Niri scrollable tiling Wayland compositor configuration and related utilities. D
 | File | Description |
 |------|-------------|
 | `niri.nix` | Main niri config — display output, keybindings, layout, window rules, wallpaper via swaybg, spawns noctalia + 1password at startup |
-| `hotkey-cheatsheet.nix` | Fuzzel-based hotkey cheatsheet script — lists all niri keybindings and executes selected action via `niri msg` |
+| `hotkey-cheatsheet.nix` | Empty module — cheatsheet logic is now auto-generated from binds in `niri.nix` |
 
 ## For AI Agents
 
@@ -20,7 +20,7 @@ Niri scrollable tiling Wayland compositor configuration and related utilities. D
 - Keybindings use the pattern `"Mod+Key".<action> = _: { };` for parameterless actions or `"Mod+Key".spawn-sh = "command"` for spawning
 - The `custom.niri.wallpaper` option controls swaybg — set to `null` to disable
 - Window rules match on `app-id` (Wayland app identifier)
-- If you add/remove keybindings in `niri.nix`, update `hotkey-cheatsheet.nix` to match
+- The hotkey cheatsheet is auto-generated from the `binds` attrset in `niri.nix` — no manual sync needed
 
 ### Testing Requirements
 - Rebuild and verify niri loads correctly — keybinding errors prevent compositor start
