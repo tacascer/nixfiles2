@@ -69,6 +69,8 @@
                       "<leader>u" = "+UI";
                       "<leader>w" = "+Windows";
                       "<leader>x" = "+Diagnostics";
+                      "]" = "+Next";
+                      "[" = "+Previous";
                     };
                   };
 
@@ -91,10 +93,26 @@
 
                   utility.motion.flash-nvim.enable = true;
 
+                  navigation.harpoon = {
+                    enable = true;
+                    mappings = {
+                      markFile = "<leader>fa";
+                      listMarks = "<leader>fh";
+                      file1 = "<leader>1";
+                      file2 = "<leader>2";
+                      file3 = "<leader>3";
+                      file4 = "<leader>4";
+                    };
+                  };
+
                   mini.bufremove.enable = true;
                   mini.animate.enable = true;
 
                   ui.noice.enable = true;
+                  ui.breadcrumbs = {
+                    enable = true;
+                    navbuddy.enable = true;
+                  };
 
                   notify.nvim-notify.enable = true;
 
@@ -437,6 +455,13 @@
                       lua = true;
                     }
                     {
+                      key = "<leader>cn";
+                      mode = "n";
+                      action = "require('nvim-navbuddy').open";
+                      desc = "Navbuddy (LSP navigation)";
+                      lua = true;
+                    }
+                    {
                       key = "]d";
                       mode = "n";
                       action = "vim.diagnostic.goto_next";
@@ -692,6 +717,55 @@
                     # Languages that will be supported in default and maximal configurations.
                     nix.enable = true;
                     markdown.enable = true;
+                  };
+
+                  treesitter.textobjects = {
+                    enable = true;
+                    setupOpts = {
+                      select = {
+                        enable = true;
+                        lookahead = true;
+                        keymaps = {
+                          "af" = "@function.outer";
+                          "if" = "@function.inner";
+                          "ac" = "@class.outer";
+                          "ic" = "@class.inner";
+                          "aa" = "@parameter.outer";
+                          "ia" = "@parameter.inner";
+                        };
+                      };
+                      move = {
+                        enable = true;
+                        set_jumps = true;
+                        goto_next_start = {
+                          "]f" = "@function.outer";
+                          "]c" = "@class.outer";
+                          "]a" = "@parameter.inner";
+                        };
+                        goto_next_end = {
+                          "]F" = "@function.outer";
+                          "]C" = "@class.outer";
+                        };
+                        goto_previous_start = {
+                          "[f" = "@function.outer";
+                          "[c" = "@class.outer";
+                          "[a" = "@parameter.inner";
+                        };
+                        goto_previous_end = {
+                          "[F" = "@function.outer";
+                          "[C" = "@class.outer";
+                        };
+                      };
+                      swap = {
+                        enable = true;
+                        swap_next = {
+                          "<leader>cs" = "@parameter.inner";
+                        };
+                        swap_previous = {
+                          "<leader>cS" = "@parameter.inner";
+                        };
+                      };
+                    };
                   };
                 };
               }
