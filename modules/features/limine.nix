@@ -1,30 +1,35 @@
 { ... }:
 {
   flake.nixosModules.limine =
-    { config, ... }:
+    {
+      config,
+      lib,
+      ...
+    }:
     let
+      cfg = config.custom.limine;
       palette = config.custom.colorScheme.palette;
     in
     {
+      options.custom.limine = {
+        extraEntries = lib.mkOption {
+          type = lib.types.lines;
+          default = "";
+          description = "Additional Limine bootloader entries (e.g. Windows chainloading).";
+        };
+      };
+
       # WARNING: nixpkgs limine module has known open issues — verify these are resolved before enabling:
       # - https://github.com/NixOS/nixpkgs/issues/493017 (sporadic bootloader installation failures)
       # - https://github.com/nixos/nixpkgs/issues/494822 (EFI registration error handling)
       # - https://github.com/NixOS/nixpkgs/issues/443031 (latest generation not always default)
 
-      boot.loader.limine = {
+      config.boot.loader.limine = {
         enable = true;
         efiSupport = true;
         maxGenerations = 10;
 
-        # Windows 11 chainloading — verify path matches your ESP layout before enabling.
-        # Current systemd-boot config uses efiDeviceHandle = "HD1b" (separate ESP).
-        # If Windows EFI is on a different partition, use guid(...):/EFI/Microsoft/Boot/bootmgfw.efi
-        # TODO: Consider host-conditional Windows entry when enabling (see Option B in plan).
-        extraEntries = ''
-          / Windows 11
-              protocol: efi
-              path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-        '';
+        extraEntries = cfg.extraEntries;
 
         style = {
           wallpapers = [ ];
