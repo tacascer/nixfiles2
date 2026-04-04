@@ -33,6 +33,7 @@
         self.nixosModules.obsidian
         self.nixosModules.spotify
         self.nixosModules.sudo
+        self.nixosModules."systemd-boot"
         self.nixosModules.nix-maintenance
         self.nixosModules.fastfetch
         self.nixosModules.dev-tools
@@ -52,21 +53,11 @@
         "flakes"
       ];
 
-      # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.systemd-boot.configurationLimit = 10;
-      boot.loader.efi.canTouchEfiVariables = true;
-
-      # Boot menu timeout (seconds).
-      boot.loader.timeout = 5;
-
-      # Windows Boot Manager on separate ESP.
-      boot.loader.systemd-boot.windows."11" = {
-        efiDeviceHandle = "HD1b"; # Discovered via UEFI Shell — may change if disk order changes
+      custom.systemd-boot = {
+        timeout = 5;
+        windows."11".efiDeviceHandle = "HD1b"; # Discovered via UEFI Shell — may change if disk order changes
+        kernelPackages = pkgs.linuxPackages_latest;
       };
-
-      # Use latest kernel.
-      boot.kernelPackages = pkgs.linuxPackages_latest;
 
       networking.hostName = "nixos"; # Define your hostname.
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
