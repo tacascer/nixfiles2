@@ -79,7 +79,10 @@
 
             layout.gaps = 10;
             layout.preset-column-widths = [
+              { proportion = 0.33; }
               { proportion = 0.5; }
+              { proportion = 0.67; }
+              { proportion = 1.0; }
             ];
             layout.focus-ring = {
               width = 4;
@@ -103,7 +106,7 @@
               "Mod+W".close-window = _: { };
 
               # Window management
-              "Mod+F".maximize-column = _: { };
+              "Mod+F".switch-preset-column-width = _: { };
               "Mod+Shift+Slash".spawn-sh = lib.getExe self'.packages.myHotkeyCheatsheet;
               "Mod+Left".focus-column-left = _: { };
               "Mod+Right".focus-column-right = _: { };

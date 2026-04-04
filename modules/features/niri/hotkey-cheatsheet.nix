@@ -22,7 +22,7 @@
       packages.myHotkeyCheatsheet = pkgs.writeShellScriptBin "hotkey-cheatsheet" ''
         choice=$(cat <<'ENTRIES' | ${lib.getExe pkgs.fuzzel} --dmenu
         Mod+W — Close Window
-        Mod+F — Maximize
+        Mod+F — Cycle Width
         Mod+C — Center Column
         Mod+O — Toggle Overview
         Mod+Left — Focus Left
@@ -46,7 +46,7 @@
 
         case "$choice" in
           "Mod+W — Close Window") ${pkgs.niri}/bin/niri msg action close-window ;;
-          "Mod+F — Maximize") ${pkgs.niri}/bin/niri msg action maximize-column ;;
+          "Mod+F — Cycle Width") ${pkgs.niri}/bin/niri msg action switch-preset-column-width ;;
           "Mod+C — Center Column") ${pkgs.niri}/bin/niri msg action center-column ;;
           "Mod+O — Toggle Overview") ${pkgs.niri}/bin/niri msg action toggle-overview ;;
           "Mod+Left — Focus Left") ${pkgs.niri}/bin/niri msg action focus-column-left ;;
