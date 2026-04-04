@@ -139,6 +139,7 @@
       caseBranches = builtins.concatStringsSep "\n" (
         map (e: "  \"${e.key} — ${e.label}\") ${e.command} ;;") shortcutEntries
       );
+
     in
     {
       packages.myHotkeyCheatsheet = pkgs.writeShellScriptBin "hotkey-cheatsheet" ''
