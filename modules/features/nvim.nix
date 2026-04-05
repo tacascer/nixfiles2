@@ -330,6 +330,13 @@
                       desc = "Find files";
                     }
                     {
+                      key = "<leader>fF";
+                      mode = "n";
+                      action = "function() require('telescope.builtin').find_files({ hidden = true, no_ignore = true }) end";
+                      desc = "Find all files (inc. hidden)";
+                      lua = true;
+                    }
+                    {
                       key = "<leader>fg";
                       mode = "n";
                       action = "<cmd>Telescope live_grep<CR>";
@@ -364,6 +371,13 @@
                       mode = "n";
                       action = "<cmd>Telescope live_grep<CR>";
                       desc = "Search by grep";
+                    }
+                    {
+                      key = "<leader>sG";
+                      mode = "n";
+                      action = ''function() require('telescope.builtin').live_grep({ additional_args = {"--hidden", "--no-ignore"} }) end'';
+                      desc = "Grep all files (inc. hidden)";
+                      lua = true;
                     }
                     {
                       key = "<leader>sh";
@@ -686,7 +700,18 @@
                   ];
 
                   statusline.lualine.enable = true;
-                  telescope.enable = true;
+                  telescope = {
+                    enable = true;
+                    setupOpts.defaults.vimgrep_arguments = [
+                      "${pkgs.ripgrep}/bin/rg"
+                      "--color=never"
+                      "--no-heading"
+                      "--with-filename"
+                      "--line-number"
+                      "--column"
+                      "--smart-case"
+                    ];
+                  };
                   autocomplete.nvim-cmp.enable = true;
 
                   spellcheck = {
