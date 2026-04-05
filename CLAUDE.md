@@ -16,8 +16,8 @@ sudo nixos-rebuild switch --flake ~/myNixOS#framework  # or #pc
 sudo nix flake update --flake ~/myNixOS && sudo nixos-rebuild switch --flake ~/myNixOS#framework
 
 # Shell aliases (defined in bash.nix, parameterized per host):
-#   sysup        - rebuild current host
-#   sysup-update - update inputs + rebuild
+#   nrbs         - rebuild current host
+#   nrbsu        - update inputs + rebuild
 #   claude-yolo  - claude --dangerously-skip-permissions
 
 # Evaluate without building (useful for checking syntax)

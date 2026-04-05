@@ -13,7 +13,7 @@ User-space feature modules — each file wraps, configures, or enables a program
 | `colors.nix` | Central color scheme — exposes `custom.colorScheme` option using nix-colors (Tokyo Night Storm) |
 | `claude-code.nix` | Claude Code CLI with OMC plugins, settings, and HUD — uses unfree nixpkgs |
 | `nvim.nix` | Neovim via nvf framework — Tokyo Night theme, LSP, Telescope, DAP, extensive keymaps |
-| `bash.nix` | Bash config with starship prompt, host-parameterized aliases (`sysup`, `sysupup`, `claude-yolo`) |
+| `bash.nix` | Bash config with starship prompt, host-parameterized aliases (`nrbs`, `nrbsu`, `claude-yolo`) |
 | `git.nix` | Git with 1Password SSH signing, user config — uses unfree nixpkgs for `op-ssh-sign` |
 | `noctalia.nix` | Noctalia shell launcher — reads settings from `noctalia.json`, no nixosModule (spawned by niri) |
 | `alacritty.nix` | Alacritty terminal — themed via `custom.colorScheme.palette`, JetBrainsMono Nerd Font |
