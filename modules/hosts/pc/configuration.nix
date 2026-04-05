@@ -27,13 +27,13 @@
         self.nixosModules."1password"
         self.nixosModules.node
         self.nixosModules.alacritty
+        self.nixosModules.limine
         self.nixosModules.tmux
         self.nixosModules.discord
         self.nixosModules.firefox
         self.nixosModules.obsidian
         self.nixosModules.spotify
         self.nixosModules.sudo
-        self.nixosModules."systemd-boot"
         self.nixosModules.nix-maintenance
         self.nixosModules.fastfetch
         self.nixosModules.dev-tools
@@ -53,11 +53,13 @@
         "flakes"
       ];
 
-      custom.systemd-boot = {
-        timeout = 5;
-        windows."11".efiDeviceHandle = "HD1b"; # Discovered via UEFI Shell — may change if disk order changes
-        kernelPackages = pkgs.linuxPackages_latest;
-      };
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+
+      custom.limine.extraEntries = ''
+        /Windows 11
+            protocol: chainload
+            image_path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
 
       networking.hostName = "nixos"; # Define your hostname.
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
