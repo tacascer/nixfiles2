@@ -54,9 +54,9 @@
       ];
 
       custom.limine.extraEntries = ''
-        /Windows 11
-            protocol: chainload
-            image_path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+        /Windows
+            protocol: efi
+            path: guid(921ef68f-cc0c-49d8-9c99-3730b768deb4):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
 
       networking.hostName = "nixos"; # Define your hostname.
