@@ -11,10 +11,11 @@
       programs.nix-ld.enable = true;
       programs.direnv.enable = true;
 
-      environment.systemPackages = [
-        pkgs.bazelisk
-        pkgs.jq
-        pkgs.gh
+      environment.systemPackages = with pkgs; [
+        bazelisk
+        jq
+        gh
+        util-linux
       ];
     };
 }

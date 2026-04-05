@@ -59,9 +59,7 @@
         let
           words = lib.splitString "-" s;
           capitalize =
-            w:
-            (lib.toUpper (builtins.substring 0 1 w))
-            + builtins.substring 1 (builtins.stringLength w - 1) w;
+            w: (lib.toUpper (builtins.substring 0 1 w)) + builtins.substring 1 (builtins.stringLength w - 1) w;
         in
         builtins.concatStringsSep " " (map capitalize words);
 
@@ -143,12 +141,12 @@
     in
     {
       packages.myHotkeyCheatsheet = pkgs.writeShellScriptBin "hotkey-cheatsheet" ''
-choice=$(${lib.getExe pkgs.fuzzel} --dmenu < ${entriesFile})
-[ -z "$choice" ] && exit 0
-case "$choice" in
-${caseBranches}
-esac
-'';
+        choice=$(${lib.getExe pkgs.fuzzel} --dmenu < ${entriesFile})
+        [ -z "$choice" ] && exit 0
+        case "$choice" in
+        ${caseBranches}
+        esac
+      '';
 
       packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
         inherit pkgs;

@@ -33,7 +33,7 @@
         self.nixosModules.obsidian
         self.nixosModules.spotify
         self.nixosModules.sudo
-        self.nixosModules."systemd-boot"
+        self.nixosModules.limine
         self.nixosModules.nix-maintenance
         self.nixosModules.fastfetch
         self.nixosModules.dev-tools
