@@ -53,8 +53,6 @@
         "flakes"
       ];
 
-      boot.kernelPackages = pkgs.linuxPackages_latest;
-
       custom.limine.extraEntries = ''
         /Windows 11
             protocol: chainload
