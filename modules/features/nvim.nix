@@ -752,6 +752,20 @@
                     # Languages that will be supported in default and maximal configurations.
                     nix.enable = true;
                     markdown.enable = true;
+
+                    # Languages for ~/Projects/bazel-repo
+                    ts.enable = true;
+                    kotlin.enable = true;
+                    rust.enable = true;
+                    go.enable = true;
+                    html.enable = true;
+                    css.enable = true;
+                    sql.enable = true;
+                    bash.enable = true;
+                    json.enable = true;
+                    yaml.enable = true;
+                    toml.enable = true;
+                    xml.enable = true;
                   };
 
                   treesitter.textobjects = {
