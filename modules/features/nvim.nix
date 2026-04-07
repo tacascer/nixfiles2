@@ -32,7 +32,7 @@
             (
               { pkgs, ... }:
               {
-                config.vim = {nvim
+                config.vim = {
                   theme = {
                     enable = true;
                     name = "tokyonight";
