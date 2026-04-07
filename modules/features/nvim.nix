@@ -32,7 +32,7 @@
             (
               { pkgs, ... }:
               {
-                config.vim = {
+                config.vim = {nvim
                   theme = {
                     enable = true;
                     name = "tokyonight";
@@ -752,8 +752,6 @@
                     # Languages that will be supported in default and maximal configurations.
                     nix.enable = true;
                     markdown.enable = true;
-
-                    # Languages for ~/Projects/bazel-repo
                     ts.enable = true;
                     kotlin.enable = true;
                     rust.enable = true;
