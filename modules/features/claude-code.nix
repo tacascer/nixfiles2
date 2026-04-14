@@ -35,6 +35,9 @@
           inherit (pkgs.stdenv.hostPlatform) system;
           config.allowUnfree = true;
         };
+        flags = {
+          "--append-system-prompt" = builtins.readFile ./claude-home-instructions.md;
+        };
         settings = {
           includeCoAuthoredBy = false;
           enabledPlugins = {
