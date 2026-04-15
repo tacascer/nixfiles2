@@ -24,6 +24,7 @@
             pkgs.tmuxPlugins.yank
           ];
           configAfter = ''
+            set -ga terminal-features ',tmux-256color:hyperlinks'
             set -g status-style 'bg=#${palette.base01},fg=#${palette.base05}'
             set -g status-left '#[bg=#${palette.base0D},fg=#${palette.base00},bold] #S #[default] '
             set -g status-right '#[fg=#${palette.base04}] %H:%M %d-%b '
