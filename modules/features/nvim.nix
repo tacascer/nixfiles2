@@ -752,7 +752,7 @@
                     # Languages that will be supported in default and maximal configurations.
                     nix = {
                       enable = true;
-                      format.type = "nixfmt";
+                      format.type = ["nixfmt"];
                     };
                     markdown.enable = true;
                     ts.enable = true;
