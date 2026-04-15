@@ -724,7 +724,7 @@
                     # the LSP API.
                     enable = true;
 
-                    formatOnSave = false;
+                    formatOnSave = true;
                     lspkind.enable = false;
                     lightbulb.enable = true;
                     lspsaga.enable = false;
