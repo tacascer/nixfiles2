@@ -35,7 +35,7 @@
                 };
                 mouse = {
                   enabled = true;
-                  mods = "None";
+                  mods = "Shift";
                 };
               }
             ];
