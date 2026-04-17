@@ -40,10 +40,7 @@
         self.nixosModules.dev-tools
       ];
 
-      custom.bash = {
-        flakeDir = "~/myNixOS";
-        host = "pc";
-      };
+      custom.bash.flakeDir = "~/myNixOS";
 
       custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
 
@@ -60,7 +57,7 @@
             path: guid(921ef68f-cc0c-49d8-9c99-3730b768deb4):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
 
-      networking.hostName = "nixos"; # Define your hostname.
+      networking.hostName = "pc";
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
       # Configure network proxy if necessary

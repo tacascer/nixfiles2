@@ -40,10 +40,7 @@
         self.nixosModules.dev-tools
       ];
 
-      custom.bash = {
-        flakeDir = "~/myNixOS";
-        host = "framework";
-      };
+      custom.bash.flakeDir = "~/myNixOS";
 
       custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
 
@@ -54,7 +51,7 @@
         "flakes"
       ];
 
-      networking.hostName = "nixos"; # Define your hostname.
+      networking.hostName = "framework";
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
       # Configure network proxy if necessary
