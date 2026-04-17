@@ -29,8 +29,6 @@
             bind '"' split-window -v -c '#{pane_current_path}'
             bind % split-window -h -c '#{pane_current_path}'
             bind c new-window -c '#{pane_current_path}'
-            set -ga terminal-features ',alacritty:hyperlinks'
-            set -ga terminal-features ',xterm-256color:hyperlinks'
             set -g status-style 'bg=#${palette.base01},fg=#${palette.base05}'
             set -g status-left '#[bg=#${palette.base0D},fg=#${palette.base00},bold] #S #[default] '
             set -g status-right '#[fg=#${palette.base04}] %H:%M %d-%b '
