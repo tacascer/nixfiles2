@@ -43,6 +43,17 @@ let
       cp -f ${configFile} "$HOME/.codex/config.toml"
       exec ${pkgs.codex}/bin/codex "$@"
     '';
+
+  mkCodexYoloWrapped =
+    pkgs: settings:
+    let
+      configFile = mkConfigFile pkgs settings;
+    in
+    pkgs.writeShellScriptBin "codex-yolo" ''
+      mkdir -p "$HOME/.codex"
+      cp -f ${configFile} "$HOME/.codex/config.toml"
+      exec ${pkgs.codex}/bin/codex --full-auto "$@"
+    '';
 in
 {
   flake.nixosModules.codex =
@@ -66,6 +77,7 @@ in
 
       config.environment.systemPackages = [
         (mkCodexWrapped pkgs cfg.settings)
+        (mkCodexYoloWrapped pkgs cfg.settings)
       ];
     };
 
@@ -73,5 +85,6 @@ in
     { pkgs, ... }:
     {
       packages.myCodex = mkCodexWrapped pkgs defaultSettings;
+      packages.myCodexYolo = mkCodexYoloWrapped pkgs defaultSettings;
     };
 }
