@@ -36,6 +36,7 @@
           core.excludesFile = toString (
             pkgs.writeText "global-gitignore" ''
               .omc/
+              .worktrees/
             ''
           );
           user = {
