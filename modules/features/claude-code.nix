@@ -24,19 +24,6 @@
         shellAliases = {
           claude-yolo = "claude --dangerously-skip-permissions";
         };
-        interactiveShellInit = ''
-          # Auto-create .envrc for flake-based projects (including worktrees)
-          _direnv_auto_envrc() {
-            if [[ "$_direnv_last_dir" != "$PWD" ]]; then
-              _direnv_last_dir="$PWD"
-              if [[ -f "flake.nix" && ! -f ".envrc" ]]; then
-                echo 'use flake' > .envrc
-                direnv allow .
-              fi
-            fi
-          }
-          PROMPT_COMMAND="_direnv_auto_envrc;''${PROMPT_COMMAND}"
-        '';
       };
     };
 
