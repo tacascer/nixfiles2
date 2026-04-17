@@ -10,6 +10,7 @@
     in
     {
       environment.systemPackages = [
+        pkgs.fzf
         (inputs.wrapper-modules.wrappers.tmux.wrap {
           inherit pkgs;
           prefix = "C-a";
@@ -20,6 +21,7 @@
           historyLimit = 5000;
           terminal = "tmux-256color";
           plugins = [
+            pkgs.tmuxPlugins.fzf-tmux-url
             pkgs.tmuxPlugins.resurrect
             pkgs.tmuxPlugins.yank
           ];
