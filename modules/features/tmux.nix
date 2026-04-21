@@ -22,7 +22,12 @@
           terminal = "tmux-256color";
           plugins = [
             pkgs.tmuxPlugins.fzf-tmux-url
-            pkgs.tmuxPlugins.resurrect
+            {
+              plugin = pkgs.tmuxPlugins.resurrect;
+              configBefore = ''
+                set -g @resurrect-capture-pane-contents 'on'
+              '';
+            }
             {
               plugin = pkgs.tmuxPlugins.continuum;
               configBefore = ''
@@ -36,7 +41,6 @@
             bind '"' split-window -v -c '#{pane_current_path}'
             bind % split-window -h -c '#{pane_current_path}'
             bind c new-window -c '#{pane_current_path}'
-            set -g @resurrect-capture-pane-contents 'on'
             set -g status-style 'bg=#${palette.base01},fg=#${palette.base05}'
             set -g status-left '#[bg=#${palette.base0D},fg=#${palette.base00},bold] #S #[default] '
             set -g status-right '#[fg=#${palette.base04}] %H:%M %d-%b '
