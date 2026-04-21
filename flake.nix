@@ -9,6 +9,10 @@
     nvf.url = "github:notashelf/nvf";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-colors.url = "github:misterio77/nix-colors";
+    tmux-nerd-font-window-name = {
+      url = "github:joshmedeski/tmux-nerd-font-window-name";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     oh-my-claudecode = {
       url = "github:Yeachan-Heo/oh-my-claudecode";
