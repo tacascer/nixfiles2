@@ -49,7 +49,7 @@ Each host lives under `hosts/<name>/` and consists of:
 
 - Inside hosts, consume same-flake packages via `perSystem.self.<pname>` when Blueprint passes `perSystem`.
 - Inside reusable modules, consume same-flake packages via `flake.packages.${pkgs.stdenv.hostPlatform.system}.<pname>`.
-- Do not reintroduce flake-parts-only `self` / `self'` package access patterns.
+- Do not reintroduce legacy pre-Blueprint `self` / `self'` package access patterns.
 
 ## Package Naming
 
@@ -66,18 +66,7 @@ Canonical package outputs are:
 - `nvim`
 - `omx`
 
-Legacy names removed by the migration:
-
-- `myClaudeCode` -> `claude-code`
-- `myCodex` -> `codex`
-- `myCodexYolo` -> `codex-yolo`
-- `myFastFetch` -> `fastfetch`
-- `myGit` -> `git`
-- `myHotkeyCheatsheet` -> `hotkey-cheatsheet`
-- `myNiri` -> `niri`
-- `myNoctalia` -> `noctalia`
-- `myNvim` -> `nvim`
-- `myOmx` -> `omx`
+Legacy camel-cased `my*` outputs were replaced by these canonical hyphenated package names during the Blueprint migration. New code and docs should only use the canonical names listed above.
 
 ## Key Conventions
 
