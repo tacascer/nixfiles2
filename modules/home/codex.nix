@@ -22,6 +22,19 @@
       analytics = {
         enabled = false;
       };
+      tui = {
+        status_line = [
+          "model-with-reasoning"
+          "current-dir"
+          "model-name"
+          "context-remaining"
+          "five-hour-limit"
+          "weekly-limit"
+          "used-tokens"
+          "total-input-tokens"
+          "total-output-tokens"
+        ];
+      };
     };
     context = codexContextFile;
   };
