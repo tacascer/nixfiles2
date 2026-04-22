@@ -4,71 +4,95 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A NixOS flake configuration managing two hosts (`framework`, `pc`) for user `tacascer`. Both are x86_64-linux with KDE Plasma 6, niri window manager, and shared feature modules.
+A Blueprint-native NixOS flake for two Linux hosts (`framework`, `pc`) owned by `tacascer`. Both hosts share reusable NixOS modules from `modules/nixos/`, consume same-flake packages from `packages/`, and preserve the existing desktop/tooling behavior.
 
 ## Common Commands
 
 ```bash
-# Rebuild and switch to new configuration
-sudo nixos-rebuild switch --flake ~/myNixOS#framework  # or #pc
+# Rebuild and switch to a host configuration
+sudo nixos-rebuild switch --flake ~/myNixOS#framework
+sudo nixos-rebuild switch --flake ~/myNixOS#pc
 
-# Update flake inputs then rebuild
-sudo nix flake update --flake ~/myNixOS && sudo nixos-rebuild switch --flake ~/myNixOS#framework
+# Update inputs then rebuild
+sudo nix flake update --flake ~/myNixOS
+sudo nixos-rebuild switch --flake ~/myNixOS#framework
 
-# Shell aliases (defined in bash.nix, parameterized per host):
-#   nrbs         - rebuild current host
-#   nrbsu        - update inputs + rebuild
-#   claude-yolo  - claude --dangerously-skip-permissions
-
-# Evaluate without building (useful for checking syntax)
-nix flake check
-
-# Show flake outputs
+# Evaluate the flake
 nix flake show
+nix flake show --all-systems
+nix flake check
 ```
 
 ## Architecture
 
-**Flake entry point**: `flake.nix` uses `flake-parts` + `import-tree` to automatically discover and import all `.nix` files under `modules/`.
+### Flake layout
 
-**Key inputs**:
-- `nixpkgs` (unstable)
-- `flake-parts` - flake organization framework
-- `import-tree` - auto-imports all modules from the `modules/` directory tree
-- `wrapper-modules` (`BirdeeHub/nix-wrapper-modules`) - declarative tool wrapping for git, niri, noctalia, alacritty, claude-code
-- `nvf` (`notashelf/nvf`) - declarative neovim configuration framework
-- `nixos-hardware` - hardware-specific optimizations (used by `framework` host)
+The flake is organized around Blueprint's standard folder structure:
 
-### Module Pattern
+- `hosts/` — host-local NixOS configurations
+- `modules/nixos/` — reusable NixOS modules exported as `flake.nixosModules.<name>`
+- `packages/` — same-flake package builders exported as `flake.packages.<system>.<pname>`
+- `formatter.nix` — default formatter surface
+- `flake.nix` — thin Blueprint entrypoint plus input declarations
 
-Most feature modules in `modules/features/` follow this two-part structure:
+### Host composition
 
-```nix
-{self, inputs, ...}: {
-  flake.nixosModules.<name> = { pkgs, ... }: { /* NixOS module — enables program, adds system packages */ };
-  perSystem = { pkgs, ... }: { packages.my<Name> = inputs.wrapper-modules.wrappers.<tool>.wrap { ... }; };
-}
-```
+Each host lives under `hosts/<name>/` and consists of:
 
-The `nixosModule` installs the wrapped package into the system. The `perSystem` block builds it via `wrapper-modules`. Not all modules need both parts — `firefox.nix` has no wrapped package, `noctalia.nix` has no nixosModule (it's spawned by niri).
+- `configuration.nix` — imports reusable modules from `flake.nixosModules.*`
+- `hardware-configuration.nix` — host-local hardware scan data
 
-### Host Composition
+`framework` additionally imports `inputs.nixos-hardware.nixosModules.framework-13-7040-amd`.
+`pc` preserves its latest-kernel boot choice through the shared boot stack and does not use `nixos-hardware`.
 
-Each host has `modules/hosts/<name>/default.nix` (creates `nixosConfigurations.<name>`) and `configuration.nix` (imports feature modules via `self.nixosModules.<name>`). The two hosts share all feature modules but differ in hardware config and `custom.bash` settings.
+### Same-flake package consumption
 
-**Adding a new feature**: create `modules/features/<name>.nix`, then add `self.nixosModules.<name>` to each host's `configuration.nix` imports.
+- Inside hosts, consume same-flake packages via `perSystem.self.<pname>` when Blueprint passes `perSystem`.
+- Inside reusable modules, consume same-flake packages via `flake.packages.${pkgs.stdenv.hostPlatform.system}.<pname>`.
+- Do not reintroduce flake-parts-only `self` / `self'` package access patterns.
 
-### Directory Layout
+## Package Naming
 
-- `modules/parts.nix` - defines supported systems
-- `modules/features/` - user-space feature modules (bash, git, niri, nvim, noctalia, claude-code, alacritty, firefox, 1password, node)
-- `modules/hosts/framework/` - Framework laptop config (uses `nixos-hardware` module)
-- `modules/hosts/pc/` - Desktop PC config
+Canonical package outputs are:
+
+- `claude-code`
+- `codex`
+- `codex-yolo`
+- `fastfetch`
+- `git`
+- `hotkey-cheatsheet`
+- `niri`
+- `noctalia`
+- `nvim`
+- `omx`
+
+Legacy names removed by the migration:
+
+- `myClaudeCode` -> `claude-code`
+- `myCodex` -> `codex`
+- `myCodexYolo` -> `codex-yolo`
+- `myFastFetch` -> `fastfetch`
+- `myGit` -> `git`
+- `myHotkeyCheatsheet` -> `hotkey-cheatsheet`
+- `myNiri` -> `niri`
+- `myNoctalia` -> `noctalia`
+- `myNvim` -> `nvim`
+- `myOmx` -> `omx`
 
 ## Key Conventions
 
-- Tool configuration uses `wrapper-modules` wrappers (`inputs.wrapper-modules.wrappers.<tool>.wrap { settings = { ... }; }`) instead of dotfiles — settings are Nix attrsets, not config file syntax
-- Neovim config uses `nvf` framework, not raw lua/vimscript — keymaps use `{ key, mode, action, desc, lua }` attrset format
-- All modules are auto-discovered by `import-tree` — no manual registration in `flake.nix` needed, but new feature modules must be imported in each host's `configuration.nix`
-- Git commits are signed via 1Password SSH agent (`op-ssh-sign`)
-- Modules needing unfree packages create their own `unfreePkgs` import (see `git.nix`, `claude-code.nix`)
+- Tool wrappers still use `wrapper-modules` when appropriate; wrapper settings remain Nix attrsets, not raw dotfile syntax.
+- Neovim is still built with `nvf`.
+- Hardware configs stay host-local under `hosts/<name>/hardware-configuration.nix`; they are not reusable module exports.
+- Reusable module files live in `modules/nixos/`; package builders live in `packages/`.
+- Canonical package names must be used in new code and docs.
+
+## Platform Gating
+
+The systems matrix remains explicit:
+
+- `x86_64-linux`
+- `aarch64-linux`
+- `aarch64-darwin`
+
+Linux-only package families must be omitted entirely from unsupported systems instead of being exposed and failing during evaluation. In particular, `niri` and `hotkey-cheatsheet` must be absent from `packages.aarch64-darwin`.
