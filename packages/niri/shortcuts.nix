@@ -5,6 +5,8 @@
   unfreePkgs,
 }:
 let
+  hasSpotify = pkgs.stdenv.hostPlatform.system == "x86_64-linux";
+
   # Title-case a hyphenated string: "close-window" → "Close Window"
   titleCase =
     s:
@@ -27,7 +29,6 @@ let
   binds = {
     "Mod+Space".spawn-sh = "${lib.getExe perSystem.self.noctalia} ipc call launcher toggle";
     "Mod+Return".spawn-sh = "alacritty";
-    "Mod+Shift+M".spawn = [ (lib.getExe unfreePkgs.spotify) ];
     "Mod+Shift+B".spawn = [ (lib.getExe pkgs.firefox) ];
     "Mod+W".close-window = _: { };
 
@@ -52,6 +53,9 @@ let
     # Move window to monitor
     "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: { };
     "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: { };
+  }
+  // lib.optionalAttrs hasSpotify {
+    "Mod+Shift+M".spawn = [ (lib.getExe unfreePkgs.spotify) ];
   };
 
   # Exclude the cheatsheet bind to avoid self-reference in the shortcut list
