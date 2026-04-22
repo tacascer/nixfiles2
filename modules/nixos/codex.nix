@@ -1,39 +1,84 @@
-{ flake, lib, config, pkgs, ... }:
+{
+  flake,
+  config,
+  pkgs,
+  ...
+}:
 let
-  cfg = config.custom.codex;
+  omxPackage = flake.packages.${pkgs.stdenv.hostPlatform.system}.omx;
+  omxHookCommand =
+    "${pkgs.nodejs}/bin/node ${omxPackage}/lib/node_modules/oh-my-codex/dist/scripts/codex-native-hook.js";
 
-  defaultSettings = {
-    model = "o4-mini";
-    model_provider = "openai";
-    approval_policy = "on-request";
-    sandbox_mode = "read-only";
-    web_search = "cached";
-    features = {
-      shell_tool = true;
-    };
-    history = {
-      persistence = "save-all";
-    };
-    analytics = {
-      enabled = false;
+  defaultHooks = {
+    hooks = {
+      SessionStart = [
+        {
+          matcher = "startup|resume";
+          hooks = [
+            {
+              type = "command";
+              command = omxHookCommand;
+            }
+          ];
+        }
+      ];
+      PreToolUse = [
+        {
+          matcher = "Bash";
+          hooks = [
+            {
+              type = "command";
+              command = omxHookCommand;
+              statusMessage = "Running OMX Bash preflight";
+            }
+          ];
+        }
+      ];
+      PostToolUse = [
+        {
+          hooks = [
+            {
+              type = "command";
+              command = omxHookCommand;
+              statusMessage = "Running OMX tool review";
+            }
+          ];
+        }
+      ];
+      UserPromptSubmit = [
+        {
+          hooks = [
+            {
+              type = "command";
+              command = omxHookCommand;
+              statusMessage = "Applying OMX prompt routing";
+            }
+          ];
+        }
+      ];
+      Stop = [
+        {
+          hooks = [
+            {
+              type = "command";
+              command = omxHookCommand;
+              timeout = 30;
+            }
+          ];
+        }
+      ];
     };
   };
 
-  tomlFormat = pkgs.formats.toml { };
-  configFile = tomlFormat.generate "codex-config.toml" cfg.settings;
+  jsonFormat = pkgs.formats.json { };
+  hooksFile = jsonFormat.generate "codex-hooks.json" defaultHooks;
+  agentsFile = omxPackage + "/lib/node_modules/oh-my-codex/templates/AGENTS.md";
 in
 {
-  options.custom.codex = {
-    settings = lib.mkOption {
-      type = tomlFormat.type;
-      default = defaultSettings;
-      description = "Codex config.toml settings as a Nix attrset. Maps directly to TOML.";
-    };
-  };
-
   config = {
     home-manager.extraSpecialArgs = {
-      codexConfigFile = configFile;
+      codexHooksFile = hooksFile;
+      codexContextFile = agentsFile;
     };
 
     home-manager.users.${config.custom.homeManager.username}.imports = [
