@@ -1,11 +1,13 @@
 {
   pkgs,
-  lib,
   inputs,
   system,
   perSystem,
   ...
 }:
+let
+  lib = pkgs.lib;
+in
 if pkgs.stdenv.hostPlatform.isDarwin then
   pkgs.runCommandLocal "hotkey-cheatsheet-unsupported-on-darwin" {
     meta.platforms = lib.platforms.linux;
