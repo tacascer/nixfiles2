@@ -13,11 +13,11 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
   - `packages/niri/shortcuts.nix`
 - Canonical package names must be used for all public outputs.
 - Unsupported package families must be omitted from a system's attrset entirely.
+- Codex full-auto mode is invoked as `codex --yolo`; do not reintroduce a separate `codex-yolo` package output.
 
 ## Canonical Package Names
 - `claude-code`
 - `codex`
-- `codex-yolo`
 - `fastfetch`
 - `git`
 - `hotkey-cheatsheet`

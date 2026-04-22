@@ -1,6 +1,4 @@
-# Custom wrapper for OpenAI Codex CLI using wrapPackage (no pre-built wrapper
-# exists in nix-wrapper-modules, unlike git/claude-code/alacritty).
-{ pkgs, lib, config, ... }:
+{ flake, lib, config, pkgs, ... }:
 let
   cfg = config.custom.codex;
 
@@ -21,38 +19,25 @@ let
     };
   };
 
-  mkConfigFile =
-    settings:
-    let
-      tomlFormat = pkgs.formats.toml { };
-    in
-    tomlFormat.generate "codex-config.toml" settings;
-
-  mkCodexWrapped =
-    binaryName: extraArgs: settings:
-    let
-      configFile = mkConfigFile settings;
-    in
-    pkgs.writeShellScriptBin binaryName ''
-      codex_home="''${CODEX_HOME:-$HOME/.codex}"
-      mkdir -p "$codex_home"
-      if [ ! -e "$codex_home/config.toml" ]; then
-        cp ${configFile} "$codex_home/config.toml"
-      fi
-      exec ${pkgs.codex}/bin/codex ${extraArgs} "$@"
-    '';
+  tomlFormat = pkgs.formats.toml { };
+  configFile = tomlFormat.generate "codex-config.toml" cfg.settings;
 in
 {
   options.custom.codex = {
     settings = lib.mkOption {
-      type = (pkgs.formats.toml { }).type;
+      type = tomlFormat.type;
       default = defaultSettings;
       description = "Codex config.toml settings as a Nix attrset. Maps directly to TOML.";
     };
   };
 
-  config.environment.systemPackages = [
-    (mkCodexWrapped "codex" "" cfg.settings)
-    (mkCodexWrapped "codex-yolo" "--yolo" cfg.settings)
-  ];
+  config = {
+    home-manager.extraSpecialArgs = {
+      codexConfigFile = configFile;
+    };
+
+    home-manager.users.${config.custom.homeManager.username}.imports = [
+      flake.homeModules.codex
+    ];
+  };
 }

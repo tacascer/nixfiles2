@@ -57,7 +57,6 @@ Canonical package outputs are:
 
 - `claude-code`
 - `codex`
-- `codex-yolo`
 - `fastfetch`
 - `git`
 - `hotkey-cheatsheet`
@@ -67,6 +66,8 @@ Canonical package outputs are:
 - `omx`
 
 Legacy camel-cased `my*` outputs were replaced by these canonical hyphenated package names during the Blueprint migration. New code and docs should only use the canonical names listed above.
+
+For Codex automation, use `codex --yolo` rather than a separate `codex-yolo` package/output.
 
 ## Key Conventions
 
