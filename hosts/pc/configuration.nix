@@ -34,6 +34,13 @@
 
   custom.sudo.username = "tacascer";
 
+  custom.codex.trustedProjectsRelativeToHome = [
+    "."
+    "myNixOS"
+    "Projects/gradle-build-scan-server"
+    "Projects/bazel-repo"
+  ];
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

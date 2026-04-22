@@ -1,11 +1,34 @@
 {
+  config,
+  lib,
   pkgs,
   omxPackage,
+  codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
 let
-  omxHookCommand =
-    "${pkgs.nodejs}/bin/node ${omxPackage}/lib/node_modules/oh-my-codex/dist/scripts/codex-native-hook.js";
+  homeDirectory = config.home.homeDirectory;
+
+  resolveTrustedProjectPath =
+    relativePath:
+    let
+      normalizedRelativePath = lib.removePrefix "./" (lib.removeSuffix "/" relativePath);
+    in
+    if normalizedRelativePath == "" || normalizedRelativePath == "." then
+      homeDirectory
+    else
+      "${homeDirectory}/${normalizedRelativePath}";
+
+  trustedProjects = builtins.listToAttrs (
+    map (relativePath: {
+      name = resolveTrustedProjectPath relativePath;
+      value = {
+        trust_level = "trusted";
+      };
+    }) codexTrustedProjectsRelativeToHome
+  );
+
+  omxHookCommand = "${pkgs.nodejs}/bin/node ${omxPackage}/lib/node_modules/oh-my-codex/dist/scripts/codex-native-hook.js";
   omxScriptsPath = "${omxPackage}/lib/node_modules/oh-my-codex/dist";
 
   defaultHooks = {
@@ -141,12 +164,7 @@ in
         };
       };
 
-      projects = {
-        "/home/tacascer/myNixOS".trust_level = "trusted";
-        "/home/tacascer/Projects/gradle-build-scan-server".trust_level = "trusted";
-        "/home/tacascer".trust_level = "trusted";
-        "/home/tacascer/Projects/bazel-repo".trust_level = "trusted";
-      };
+      projects = trustedProjects;
 
       tui.status_line = [
         "model-with-reasoning"
@@ -160,8 +178,7 @@ in
         "total-output-tokens"
       ];
     };
-    context =
-      builtins.readFile "${omxPackage}/lib/node_modules/oh-my-codex/templates/AGENTS.md";
+    context = builtins.readFile "${omxPackage}/lib/node_modules/oh-my-codex/templates/AGENTS.md";
   };
 
   home.file.".codex/hooks.json".source = hooksFile;

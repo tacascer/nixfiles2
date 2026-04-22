@@ -1,4 +1,9 @@
-{ flake, inputs, pkgs, ... }:
+{
+  flake,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -35,6 +40,13 @@
   custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
 
   custom.sudo.username = "tacascer";
+
+  custom.codex.trustedProjectsRelativeToHome = [
+    "."
+    "myNixOS"
+    "Projects/gradle-build-scan-server"
+    "Projects/bazel-repo"
+  ];
 
   nix.settings.experimental-features = [
     "nix-command"
