@@ -9,7 +9,6 @@
     enable = true;
     package = pkgs.codex;
     settings = {
-      model = "o4-mini";
       model_provider = "openai";
       approval_policy = "on-request";
       sandbox_mode = "read-only";
