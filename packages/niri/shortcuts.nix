@@ -51,7 +51,6 @@ let
     # Move window to monitor
     "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: { };
     "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: { };
-    "Mod+Shift+M".spawn-sh = "spotify_player";
   }
   ;
 
