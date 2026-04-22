@@ -31,16 +31,21 @@ let
     tomlFormat.generate "codex-config.toml" settings;
 
   # Codex writes runtime state (SQLite, logs, credentials) to CODEX_HOME,
-  # so it cannot point to a read-only Nix store path. Instead, the wrapper
-  # copies the declarative config.toml into ~/.codex/ before launching codex.
+  # so it cannot point to a read-only Nix store path. The wrapper seeds a
+  # default config.toml into CODEX_HOME only when one does not already exist,
+  # which keeps first-run setup declarative without clobbering OMX-managed or
+  # user-managed config changes later.
   mkCodexWrapped =
     pkgs: settings:
     let
       configFile = mkConfigFile pkgs settings;
     in
     pkgs.writeShellScriptBin "codex" ''
-      mkdir -p "$HOME/.codex"
-      cp -f ${configFile} "$HOME/.codex/config.toml"
+      codex_home="''${CODEX_HOME:-$HOME/.codex}"
+      mkdir -p "$codex_home"
+      if [ ! -e "$codex_home/config.toml" ]; then
+        cp ${configFile} "$codex_home/config.toml"
+      fi
       exec ${pkgs.codex}/bin/codex "$@"
     '';
 
@@ -50,9 +55,12 @@ let
       configFile = mkConfigFile pkgs settings;
     in
     pkgs.writeShellScriptBin "codex-yolo" ''
-      mkdir -p "$HOME/.codex"
-      cp -f ${configFile} "$HOME/.codex/config.toml"
-      exec ${pkgs.codex}/bin/codex --full-auto "$@"
+      codex_home="''${CODEX_HOME:-$HOME/.codex}"
+      mkdir -p "$codex_home"
+      if [ ! -e "$codex_home/config.toml" ]; then
+        cp ${configFile} "$codex_home/config.toml"
+      fi
+      exec ${pkgs.codex}/bin/codex --yolo "$@"
     '';
 in
 {

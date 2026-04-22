@@ -13,8 +13,10 @@
 
       environment.systemPackages = with pkgs; [
         bazelisk
+        cargo
         jq
         gh
+        rustc
         util-linux
       ];
     };

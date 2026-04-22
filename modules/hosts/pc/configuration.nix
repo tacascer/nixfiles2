@@ -25,6 +25,7 @@
         self.nixosModules.bash
         self.nixosModules.claude-code
         self.nixosModules.codex
+        self.nixosModules.omx
         self.nixosModules."1password"
         self.nixosModules.node
         self.nixosModules.alacritty
