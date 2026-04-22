@@ -2,11 +2,9 @@
   pkgs,
   lib,
   perSystem,
-  unfreePkgs,
+  ...
 }:
 let
-  hasSpotify = pkgs.stdenv.hostPlatform.system == "x86_64-linux";
-
   # Title-case a hyphenated string: "close-window" → "Close Window"
   titleCase =
     s:
@@ -53,10 +51,9 @@ let
     # Move window to monitor
     "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: { };
     "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: { };
+    "Mod+Shift+M".spawn-sh = "spotify_player";
   }
-  // lib.optionalAttrs hasSpotify {
-    "Mod+Shift+M".spawn = [ (lib.getExe unfreePkgs.spotify) ];
-  };
+  ;
 
   # Exclude the cheatsheet bind to avoid self-reference in the shortcut list
   displayBinds = builtins.removeAttrs binds [ "Mod+Shift+Slash" ];

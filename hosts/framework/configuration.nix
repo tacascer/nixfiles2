@@ -11,6 +11,7 @@
     flake.nixosModules.git
     flake.nixosModules.nvim
     flake.nixosModules.bash
+    flake.nixosModules."home-manager"
     flake.nixosModules.claude-code
     flake.nixosModules.codex
     flake.nixosModules.omx
@@ -21,7 +22,7 @@
     flake.nixosModules.discord
     flake.nixosModules.firefox
     flake.nixosModules.obsidian
-    flake.nixosModules.spotify
+    flake.nixosModules."spotify-player"
     flake.nixosModules.sudo
     flake.nixosModules.limine
     flake.nixosModules.nix-maintenance
