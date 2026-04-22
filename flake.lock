@@ -280,6 +280,23 @@
         "type": "github"
       }
     },
+    "omx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776761477,
+        "narHash": "sha256-UHVJzRMDxZYoDldl3aFkJNOlMr/gsXlbe1cDpfgdV28=",
+        "owner": "Yeachan-Heo",
+        "repo": "oh-my-codex",
+        "rev": "3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Yeachan-Heo",
+        "repo": "oh-my-codex",
+        "rev": "3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "blueprint": "blueprint",
@@ -290,6 +307,7 @@
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "oh-my-claudecode": "oh-my-claudecode",
+        "omx": "omx",
         "superpowers": "superpowers",
         "tmux-nerd-font-window-name": "tmux-nerd-font-window-name",
         "wrapper-modules": "wrapper-modules"

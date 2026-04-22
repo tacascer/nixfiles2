@@ -8,6 +8,10 @@
     nvf.url = "github:notashelf/nvf";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-colors.url = "github:misterio77/nix-colors";
+    omx = {
+      url = "github:Yeachan-Heo/oh-my-codex/3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39";
+      flake = false;
+    };
     tmux-nerd-font-window-name = {
       url = "github:joshmedeski/tmux-nerd-font-window-name";
       inputs.nixpkgs.follows = "nixpkgs";
