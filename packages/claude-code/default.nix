@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, system, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  system,
+  ...
+}:
 let
   unfreePkgs = import inputs.nixpkgs {
     inherit system;

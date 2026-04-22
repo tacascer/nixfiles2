@@ -1,4 +1,9 @@
-{ pkgs, lib, perSystem, unfreePkgs }:
+{
+  pkgs,
+  lib,
+  perSystem,
+  unfreePkgs,
+}:
 let
   # Title-case a hyphenated string: "close-window" → "Close Window"
   titleCase =

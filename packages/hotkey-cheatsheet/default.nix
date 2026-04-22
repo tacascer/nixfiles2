@@ -1,4 +1,11 @@
-{ pkgs, lib, inputs, system, perSystem, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  system,
+  perSystem,
+  ...
+}:
 if pkgs.stdenv.hostPlatform.isDarwin then
   pkgs.runCommandLocal "hotkey-cheatsheet-unsupported-on-darwin" {
     meta.platforms = lib.platforms.linux;
@@ -11,7 +18,12 @@ else
     };
 
     shortcuts = import ../niri/shortcuts.nix {
-      inherit pkgs lib perSystem unfreePkgs;
+      inherit
+        pkgs
+        lib
+        perSystem
+        unfreePkgs
+        ;
     };
   in
   shortcuts.hotkeyCheatsheet.overrideAttrs (old: {
