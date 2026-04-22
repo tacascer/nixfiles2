@@ -14,6 +14,8 @@ if pkgs.stdenv.hostPlatform.isDarwin then
   } "mkdir -p $out"
 else
   let
+    has1Password = pkgs.stdenv.hostPlatform.system == "x86_64-linux";
+
     unfreePkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -35,8 +37,8 @@ else
 
         spawn-at-startup = [
           (lib.getExe perSystem.self.noctalia)
-          "${unfreePkgs._1password-gui}/bin/1password"
-        ];
+        ]
+        ++ lib.optional has1Password "${unfreePkgs._1password-gui}/bin/1password";
 
         input.keyboard = {
           xkb.layout = "us";
