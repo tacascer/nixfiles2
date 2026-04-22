@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  system,
-  perSystem,
-  ...
-}:
+{ pkgs, lib, inputs, system, perSystem, ... }:
 if pkgs.stdenv.hostPlatform.isDarwin then
   pkgs.runCommandLocal "niri-unsupported-on-darwin" {
     meta.platforms = lib.platforms.linux;
@@ -18,12 +11,7 @@ else
     };
 
     shortcuts = import ./shortcuts.nix {
-      inherit
-        pkgs
-        lib
-        perSystem
-        unfreePkgs
-        ;
+      inherit pkgs lib perSystem unfreePkgs;
     };
 
     wrapped = inputs.wrapper-modules.wrappers.niri.wrap {
