@@ -1,11 +1,11 @@
 {
   pkgs,
-  lib,
   inputs,
   system,
   ...
 }:
 let
+  lib = pkgs.lib;
   unfreePkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
