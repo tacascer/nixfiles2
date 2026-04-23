@@ -27,6 +27,7 @@
     flake.nixosModules.discord
     flake.nixosModules.firefox
     flake.nixosModules.obsidian
+    flake.nixosModules.opencode
     flake.nixosModules."spotify-player"
     flake.nixosModules.sudo
     flake.nixosModules.limine
