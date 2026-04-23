@@ -11,7 +11,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-colors.url = "github:misterio77/nix-colors";
     omx = {
-      url = "github:Yeachan-Heo/oh-my-codex/3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39";
+      url = "github:Yeachan-Heo/oh-my-codex/56c93fd3daed9f6043f0bbb65476d355d47083c5";
       flake = false;
     };
     tmux-nerd-font-window-name = {

@@ -35,7 +35,7 @@ pkgs.buildNpmPackage {
   version = packageMeta.version;
   src = inputs.omx;
 
-  npmDepsHash = "sha256-gGlxQLwp0NBsc/SBUEwJJYPMUKre+txgG8SCIBK7NcA=";
+  npmDepsHash = "sha256-UHzPLZrOqdIB9BDQ/WJlR1XaxUptkY3Nn7UyJt4wwUc=";
   npmFlags = [ "--ignore-scripts" ];
 
   postInstall = ''

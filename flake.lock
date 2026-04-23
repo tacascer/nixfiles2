@@ -303,17 +303,17 @@
     "omx": {
       "flake": false,
       "locked": {
-        "lastModified": 1776761477,
-        "narHash": "sha256-UHVJzRMDxZYoDldl3aFkJNOlMr/gsXlbe1cDpfgdV28=",
+        "lastModified": 1776897741,
+        "narHash": "sha256-2X8GLUF68Mdc50wFEcSBVLw101KTFggEKaYDO/jTF+U=",
         "owner": "Yeachan-Heo",
         "repo": "oh-my-codex",
-        "rev": "3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39",
+        "rev": "56c93fd3daed9f6043f0bbb65476d355d47083c5",
         "type": "github"
       },
       "original": {
         "owner": "Yeachan-Heo",
         "repo": "oh-my-codex",
-        "rev": "3f4f978f2a1ea950e4ae05e12f687e3f81d3ea39",
+        "rev": "56c93fd3daed9f6043f0bbb65476d355d47083c5",
         "type": "github"
       }
     },
