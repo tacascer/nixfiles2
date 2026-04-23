@@ -15,6 +15,13 @@
       plugins = [
         pkgs.tmuxPlugins.fzf-tmux-url
         {
+          plugin = pkgs.tmuxPlugins.tmux-fzf;
+          configBefore = ''
+            set-environment -g TMUX_FZF_ORDER 'pane|window|session|copy-mode|command|keybinding|clipboard|process'
+            set-environment -g TMUX_FZF_PANE_FORMAT '[#{window_name}] #{pane_current_path} :: #{pane_current_command} [#{pane_width}x#{pane_height}] [history #{history_size}/#{history_limit}] #{?pane_active,[active],[inactive]}'
+          '';
+        }
+        {
           plugin = pkgs.tmuxPlugins.resurrect;
           configBefore = ''
             set -g @resurrect-capture-pane-contents 'on'
