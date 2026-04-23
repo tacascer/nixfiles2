@@ -705,7 +705,7 @@
             lspSignature.enable = !true; # conflicts with blink in maximal
             otter-nvim.enable = true;
             nvim-docs-view.enable = true;
-            harper-ls.enable = true;
+            presets.harper.enable = true;
           };
 
           debugger = {
@@ -728,7 +728,7 @@
               format.type = [ "nixfmt" ];
             };
             markdown.enable = true;
-            ts.enable = true;
+            typescript.enable = true;
             kotlin.enable = true;
             rust.enable = true;
             go.enable = true;

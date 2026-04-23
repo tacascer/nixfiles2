@@ -36,7 +36,7 @@
         }
         pkgs.tmuxPlugins.yank
         {
-          plugin = inputs.tmux-nerd-font-window-name.packages.${pkgs.system}.default;
+          plugin = inputs.tmux-nerd-font-window-name.packages.${pkgs.stdenv.hostPlatform.system}.default;
           configBefore = ''
             set -g window-status-format '#I #{nerd_font_window_name} '
             set -g window-status-current-format '#I #{nerd_font_window_name} '
