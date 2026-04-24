@@ -12,8 +12,8 @@ let
 in
 {
   options.custom.opencode.ohMyOpenAgent.settings = lib.mkOption {
-    inherit (jsonFormat) type;
-    default = { };
+    type = lib.types.nullOr jsonFormat.type;
+    default = null;
     description = ''
       Declarative contents for ~/.config/opencode/oh-my-openagent.json.
       Use this instead of the upstream interactive installer when you want to
