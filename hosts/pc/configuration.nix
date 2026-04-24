@@ -10,7 +10,6 @@
     flake.nixosModules.nvim
     flake.nixosModules.bash
     flake.nixosModules."home-manager"
-    flake.nixosModules.claude-code
     flake.nixosModules.codex
     flake.nixosModules.omx
     flake.nixosModules."1password"
