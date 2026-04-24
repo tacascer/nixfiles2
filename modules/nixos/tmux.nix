@@ -47,6 +47,12 @@
       configAfter = ''
         set -g renumber-windows on
 
+        unbind x
+        bind x confirm-before -p 'Kill pane #P? (y/n)' kill-pane
+
+        unbind '&'
+        bind '&' confirm-before -p 'Kill window #I? (y/n)' kill-window
+
         bind '"' split-window -v -c '#{pane_current_path}'
         bind % split-window -h -c '#{pane_current_path}'
         bind c new-window -c '#{pane_current_path}'
