@@ -300,6 +300,23 @@
         "type": "github"
       }
     },
+    "oh-my-openagent": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776988062,
+        "narHash": "sha256-Jv0rczaWfCLXLQR7O7rtz5NW2d8pq3xeKem8VeMRJgU=",
+        "owner": "code-yeongyu",
+        "repo": "oh-my-openagent",
+        "rev": "7641fc52a12ea69dcd35496f0d0cedf78dfa5374",
+        "type": "github"
+      },
+      "original": {
+        "owner": "code-yeongyu",
+        "ref": "dev",
+        "repo": "oh-my-openagent",
+        "type": "github"
+      }
+    },
     "omx": {
       "flake": false,
       "locked": {
@@ -328,6 +345,7 @@
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "oh-my-claudecode": "oh-my-claudecode",
+        "oh-my-openagent": "oh-my-openagent",
         "omx": "omx",
         "superpowers": "superpowers",
         "tmux-nerd-font-window-name": "tmux-nerd-font-window-name",
