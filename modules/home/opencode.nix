@@ -7,31 +7,34 @@
 let
   packageMeta = builtins.fromJSON (builtins.readFile "${ohMyOpenAgentSrc}/package.json");
   jsonFormat = pkgs.formats.json { };
+  primaryModel = "openai/gpt-5.4";
+  fastModel = "openai/gpt-5.4-mini-fast";
+  quickModel = "openai/gpt-5.4-mini";
   defaultOhMyOpenAgentSettings = {
     "$schema" = "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
     agents = {
-      hephaestus.model = "opencode/gpt-5-nano";
-      oracle.model = "opencode/gpt-5-nano";
-      librarian.model = "opencode/gpt-5-nano";
-      explore.model = "opencode/gpt-5-nano";
-      multimodal-looker.model = "opencode/gpt-5-nano";
-      prometheus.model = "opencode/gpt-5-nano";
-      metis.model = "opencode/gpt-5-nano";
-      momus.model = "opencode/gpt-5-nano";
-      atlas.model = "opencode/gpt-5-nano";
-      sisyphus-junior.model = "opencode/gpt-5-nano";
-      sisyphus.model = "opencode/gpt-5-nano";
-      sisyphus.ultrawork.model = "opencode/gpt-5-nano";
+      hephaestus.model = primaryModel;
+      oracle.model = primaryModel;
+      librarian.model = fastModel;
+      explore.model = fastModel;
+      multimodal-looker.model = primaryModel;
+      prometheus.model = primaryModel;
+      metis.model = primaryModel;
+      momus.model = primaryModel;
+      atlas.model = primaryModel;
+      sisyphus-junior.model = primaryModel;
+      sisyphus.model = primaryModel;
+      sisyphus.ultrawork.model = primaryModel;
     };
     categories = {
-      visual-engineering.model = "opencode/gpt-5-nano";
-      ultrabrain.model = "opencode/gpt-5-nano";
-      deep.model = "opencode/gpt-5-nano";
-      artistry.model = "opencode/gpt-5-nano";
-      quick.model = "opencode/gpt-5-nano";
-      unspecified-low.model = "opencode/gpt-5-nano";
-      unspecified-high.model = "opencode/gpt-5-nano";
-      writing.model = "opencode/gpt-5-nano";
+      visual-engineering.model = primaryModel;
+      ultrabrain.model = primaryModel;
+      deep.model = primaryModel;
+      artistry.model = primaryModel;
+      quick.model = quickModel;
+      unspecified-low.model = quickModel;
+      unspecified-high.model = primaryModel;
+      writing.model = primaryModel;
     };
   };
   effectiveOhMyOpenAgentSettings =
