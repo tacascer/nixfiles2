@@ -14,6 +14,7 @@
     cargo
     jq
     gh
+    nixd
     rustc
     util-linux
   ];
