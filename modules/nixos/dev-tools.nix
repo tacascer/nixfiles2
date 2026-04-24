@@ -11,7 +11,9 @@
   environment.systemPackages = with pkgs; [
     python314
     bazelisk
+    biome
     cargo
+    lcov
     jq
     gh
     nixd
