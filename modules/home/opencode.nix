@@ -68,10 +68,14 @@ in
   programs.opencode = {
     enable = true;
     extraPackages = [ pkgs.bun ];
-    settings.plugin = [ "oh-my-openagent@${packageMeta.version}" ];
+    settings = {
+      plugin = [ "oh-my-openagent@${packageMeta.version}" ];
+      instructions = [ "AGENTS.md" ];
+    };
     commands = "${ohMyOpenAgentSrc}/.opencode/command";
     skills = "${ohMyOpenAgentSrc}/.opencode/skills";
   };
 
+  xdg.configFile."opencode/AGENTS.md".source = ./claude-home-instructions.md;
   xdg.configFile."opencode/oh-my-openagent.json".source = pluginConfigFile;
 }
