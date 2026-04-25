@@ -32,6 +32,10 @@ in
 
     home-manager.users.${cfg.username} = {
       home.stateVersion = cfg.stateVersion;
+      home.sessionVariables = {
+        EDITOR = "vim";
+        VISUAL = "vim";
+      };
       programs.home-manager.enable = true;
     };
   };
