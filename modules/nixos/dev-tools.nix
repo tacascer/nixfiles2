@@ -18,6 +18,7 @@
     gh
     lazygit
     nixd
+    rust-analyzer
     rustc
     util-linux
     yaml-language-server
