@@ -17,8 +17,6 @@
     flake.nixosModules.nvim
     flake.nixosModules.bash
     flake.nixosModules."home-manager"
-    flake.nixosModules.codex
-    flake.nixosModules.omx
     flake.nixosModules."1password"
     flake.nixosModules.node
     flake.nixosModules.alacritty
@@ -41,13 +39,6 @@
   custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
 
   custom.sudo.username = "tacascer";
-
-  custom.codex.trustedProjectsRelativeToHome = [
-    "."
-    "myNixOS"
-    "Projects/gradle-build-scan-server"
-    "Projects/bazel-repo"
-  ];
 
   nix.settings.experimental-features = [
     "nix-command"
