@@ -26,6 +26,7 @@ let
 
   binds = {
     "Mod+Space".spawn-sh = "${lib.getExe perSystem.self.noctalia} ipc call launcher toggle";
+    "Mod+L".spawn-sh = "${lib.getExe perSystem.self.noctalia} ipc call lockScreen lock";
     "Mod+Return".spawn-sh = "alacritty";
     "Mod+Shift+B".spawn = [ (lib.getExe pkgs.firefox) ];
     "Mod+W".close-window = _: { };

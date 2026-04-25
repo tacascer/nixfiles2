@@ -13,10 +13,13 @@ in
   };
 
   config = {
+    environment.variables.NOCTALIA_PAM_SERVICE = "noctalia-lock";
+
     programs.niri = {
       enable = true;
       package = flake.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
+    security.pam.services.noctalia-lock = { };
     services.displayManager.defaultSession = "niri";
 
     systemd.user.services.swaybg = lib.mkIf (cfg.wallpaper != null) {
