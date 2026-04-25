@@ -23,6 +23,7 @@
     flake.nixosModules.node
     flake.nixosModules.alacritty
     flake.nixosModules.tmux
+    flake.nixosModules.yazi
     flake.nixosModules.discord
     flake.nixosModules.firefox
     flake.nixosModules.obsidian
