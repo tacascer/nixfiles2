@@ -16,6 +16,7 @@
     lcov
     jq
     gh
+    lazygit
     nixd
     rustc
     util-linux
