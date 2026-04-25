@@ -19,5 +19,6 @@
     nixd
     rustc
     util-linux
+    yaml-language-server
   ];
 }
