@@ -16,6 +16,7 @@
     lcov
     jq
     gh
+    lazydocker
     lazygit
     nixd
     rust-analyzer
