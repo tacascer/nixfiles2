@@ -7,11 +7,11 @@
 let
   packageMeta = builtins.fromJSON (builtins.readFile "${ohMyOpenAgentSrc}/package.json");
   jsonFormat = pkgs.formats.json { };
-  primaryModel = "openai/gpt-5.5";
+  primaryModel = "openai/gpt-5.4";
   primaryReasoning = "high";
-  fastModel = "openai/gpt-5.5-mini";
+  fastModel = "openai/gpt-5.4-mini";
   fastReasoning = "low";
-  quickModel = "openai/gpt-5.5-mini";
+  quickModel = "openai/gpt-5.4-mini";
   quickReasoning = "none";
   defaultOhMyOpenAgentSettings = {
     "$schema" = "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
