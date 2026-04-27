@@ -9,6 +9,8 @@
 let
   cfg = config.custom.opencode;
   jsonFormat = pkgs.formats.json { };
+  llmAgentsPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  ohMyOpencodePackage = llmAgentsPackages.oh-my-opencode;
 in
 {
   options.custom.opencode.ohMyOpenAgent.settings = lib.mkOption {
@@ -23,7 +25,9 @@ in
 
   config = {
     home-manager.extraSpecialArgs = {
-      ohMyOpenAgentSrc = inputs."oh-my-openagent";
+      opencodePackage = llmAgentsPackages.opencode;
+      ohMyOpencodePackage = ohMyOpencodePackage;
+      ohMyOpencodeAssets = ohMyOpencodePackage.src;
       ohMyOpenAgentSettings = cfg.ohMyOpenAgent.settings;
     };
 

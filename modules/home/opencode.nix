@@ -1,12 +1,15 @@
 {
   pkgs,
-  ohMyOpenAgentSrc,
+  opencodePackage,
+  ohMyOpencodePackage,
+  ohMyOpencodeAssets,
   ohMyOpenAgentSettings ? null,
   ...
 }:
 let
-  packageMeta = builtins.fromJSON (builtins.readFile "${ohMyOpenAgentSrc}/package.json");
   jsonFormat = pkgs.formats.json { };
+  ohMyOpencodePluginEntry = "file://${ohMyOpencodePackage}/lib/oh-my-opencode/dist/index.js";
+  ohMyOpencodeSchema = "${ohMyOpencodePackage}/lib/oh-my-opencode/dist/oh-my-opencode.schema.json";
   primaryModel = "openai/gpt-5.4";
   primaryReasoning = "high";
   fastModel = "openai/gpt-5.4-mini";
@@ -14,7 +17,7 @@ let
   quickModel = "openai/gpt-5.4-mini";
   quickReasoning = "none";
   defaultOhMyOpenAgentSettings = {
-    "$schema" = "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
+    "$schema" = ohMyOpencodeSchema;
     agents = {
       hephaestus.model = primaryModel;
       hephaestus.reasoningEffort = primaryReasoning;
@@ -67,15 +70,15 @@ in
 {
   programs.opencode = {
     enable = true;
+    package = opencodePackage;
     extraPackages = [ pkgs.bun ];
+    context = ./claude-home-instructions.md;
     settings = {
-      plugin = [ "oh-my-openagent@${packageMeta.version}" ];
-      instructions = [ "AGENTS.md" ];
+      plugin = [ ohMyOpencodePluginEntry ];
     };
-    commands = "${ohMyOpenAgentSrc}/.opencode/command";
-    skills = "${ohMyOpenAgentSrc}/.opencode/skills";
+    commands = ohMyOpencodeAssets + "/.opencode/command";
+    skills = ohMyOpencodeAssets + "/.opencode/skills";
   };
 
-  xdg.configFile."opencode/AGENTS.md".source = ./claude-home-instructions.md;
   xdg.configFile."opencode/oh-my-openagent.json".source = pluginConfigFile;
 }

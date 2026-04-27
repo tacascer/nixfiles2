@@ -35,10 +35,7 @@
       url = "github:anthropics/claude-plugins-official";
       flake = false;
     };
-    "oh-my-openagent" = {
-      url = "github:code-yeongyu/oh-my-openagent?ref=dev";
-      flake = false;
-    };
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
