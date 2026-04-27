@@ -12,9 +12,9 @@ let
   ohMyOpencodeSchema = "${ohMyOpencodePackage}/lib/oh-my-opencode/dist/oh-my-opencode.schema.json";
   primaryModel = "openai/gpt-5.5";
   primaryReasoning = "high";
-  fastModel = "openai/gpt-5.5-fast";
+  fastModel = "openai/gpt-5.4-mini";
   fastReasoning = "low";
-  quickModel = "openai/gpt-5.5-fast";
+  quickModel = "openai/gpt-5.4-mini";
   quickReasoning = "none";
   defaultOhMyOpenAgentSettings = {
     "$schema" = ohMyOpencodeSchema;
