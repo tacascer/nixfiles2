@@ -10,11 +10,11 @@ let
   jsonFormat = pkgs.formats.json { };
   ohMyOpencodePluginEntry = "file://${ohMyOpencodePackage}/lib/oh-my-opencode/dist/index.js";
   ohMyOpencodeSchema = "${ohMyOpencodePackage}/lib/oh-my-opencode/dist/oh-my-opencode.schema.json";
-  primaryModel = "openai/gpt-5.4";
+  primaryModel = "openai/gpt-5.5";
   primaryReasoning = "high";
-  fastModel = "openai/gpt-5.4-mini";
+  fastModel = "openai/gpt-5.5-mini";
   fastReasoning = "low";
-  quickModel = "openai/gpt-5.4-mini";
+  quickModel = "openai/gpt-5.5-mini";
   quickReasoning = "none";
   defaultOhMyOpenAgentSettings = {
     "$schema" = ohMyOpencodeSchema;
