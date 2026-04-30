@@ -1,5 +1,5 @@
 {
-  pkgs,
+  claudeCodePackage,
   claudeCodeClaudeMd,
   claudeCodeMdManagementPlugin,
   claudeCodeOhMyClaudecodePlugin,
@@ -9,7 +9,7 @@
 {
   programs.claude-code = {
     enable = true;
-    package = pkgs.claude-code;
+    package = claudeCodePackage;
     context = claudeCodeClaudeMd;
     plugins = [
       claudeCodeOhMyClaudecodePlugin

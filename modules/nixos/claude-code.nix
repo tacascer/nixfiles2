@@ -6,12 +6,22 @@
   pkgs,
   ...
 }:
+let
+  llmAgentsPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  claudeCodePackage = llmAgentsPackages.claude-code;
+  claudePluginsPackage = llmAgentsPackages.claude-plugins;
+  ohMyClaudecodePackage = llmAgentsPackages.oh-my-claudecode;
+  claudeCodeMdManagementPlugin = "${claudePluginsPackage}/plugins/claude-md-management";
+  claudeCodeOhMyClaudecodePlugin = "${ohMyClaudecodePackage}/lib/node_modules/oh-my-claude-sisyphus";
+  claudeCodeStatusLineCommand = "${lib.getExe pkgs.nodejs} ${ohMyClaudecodePackage}/lib/node_modules/oh-my-claude-sisyphus/dist/hud/index.js";
+in
 {
   home-manager.extraSpecialArgs = {
+    claudeCodePackage = claudeCodePackage;
     claudeCodeClaudeMd = ../home/claude-home-instructions.md;
-    claudeCodeMdManagementPlugin = "${inputs.claude-plugins-official}/plugins/claude-md-management";
-    claudeCodeOhMyClaudecodePlugin = inputs.oh-my-claudecode;
-    claudeCodeStatusLineCommand = "${lib.getExe pkgs.nodejs} ${inputs.oh-my-claudecode}/dist/hud/index.js";
+    claudeCodeMdManagementPlugin = claudeCodeMdManagementPlugin;
+    claudeCodeOhMyClaudecodePlugin = claudeCodeOhMyClaudecodePlugin;
+    claudeCodeStatusLineCommand = claudeCodeStatusLineCommand;
   };
 
   home-manager.users.${config.custom.homeManager.username}.imports = [
