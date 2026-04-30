@@ -19,20 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    oh-my-claudecode = {
-      url = "github:Yeachan-Heo/oh-my-claudecode";
-      flake = false;
-    };
     claude-mem = {
       url = "github:thedotmack/claude-mem";
       flake = false;
     };
     superpowers = {
       url = "github:obra/superpowers";
-      flake = false;
-    };
-    claude-plugins-official = {
-      url = "github:anthropics/claude-plugins-official";
       flake = false;
     };
     llm-agents.url = "github:numtide/llm-agents.nix";

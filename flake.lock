@@ -113,22 +113,6 @@
         "type": "github"
       }
     },
-    "claude-plugins-official": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777318640,
-        "narHash": "sha256-DA4XeLIE7TnTR3bILpw9pHJr2aaFP+h7/TMDeE13JTo=",
-        "owner": "anthropics",
-        "repo": "claude-plugins-official",
-        "rev": "1c81b812991b6cf68535eb81933256bad635bc15",
-        "type": "github"
-      },
-      "original": {
-        "owner": "anthropics",
-        "repo": "claude-plugins-official",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -419,22 +403,6 @@
         "type": "github"
       }
     },
-    "oh-my-claudecode": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777021650,
-        "narHash": "sha256-DMNJ3hllo3QbUUf5wB67JZsDazI9Z2bZMB5x/5ehDHQ=",
-        "owner": "Yeachan-Heo",
-        "repo": "oh-my-claudecode",
-        "rev": "c1cd5d08b5279c82d2d2d9057fb61473ceacead4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Yeachan-Heo",
-        "repo": "oh-my-claudecode",
-        "type": "github"
-      }
-    },
     "omx": {
       "flake": false,
       "locked": {
@@ -456,14 +424,12 @@
       "inputs": {
         "blueprint": "blueprint",
         "claude-mem": "claude-mem",
-        "claude-plugins-official": "claude-plugins-official",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "nix-colors": "nix-colors",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nvf": "nvf",
-        "oh-my-claudecode": "oh-my-claudecode",
         "omx": "omx",
         "superpowers": "superpowers",
         "tmux-nerd-font-window-name": "tmux-nerd-font-window-name",
