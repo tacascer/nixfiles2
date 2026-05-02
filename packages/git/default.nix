@@ -17,6 +17,7 @@ inputs.wrapper-modules.wrappers.git.wrap {
       pkgs.writeText "global-gitignore" ''
         .omc/
         .worktrees/
+        .sisyphus/
       ''
     );
     user = {
