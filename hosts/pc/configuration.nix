@@ -13,7 +13,7 @@
     flake.nixosModules."1password"
     flake.nixosModules.node
     flake.nixosModules.alacritty
-    flake.nixosModules.docker
+    flake.nixosModules.podman
     flake.nixosModules.limine
     flake.nixosModules.tmux
     flake.nixosModules.yazi
