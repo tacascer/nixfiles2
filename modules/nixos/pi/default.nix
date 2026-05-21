@@ -32,6 +32,7 @@ in
       type = lib.types.listOf lib.types.str;
       default = [
         "npm:pi-subagents@0.25.0"
+        "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
     };
