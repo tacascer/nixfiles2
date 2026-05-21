@@ -26,8 +26,8 @@ let
     packages = cfg.packages;
   };
 
-  piSubagentPane = pkgs.writeShellApplication {
-    name = "pi-subagent-pane";
+  piInstancePane = pkgs.writeShellApplication {
+    name = "pi-instance-pane";
     runtimeInputs = [
       piPackage
       pkgs.coreutils
@@ -35,7 +35,7 @@ let
     ];
     text = ''
       if [[ -z "''${TMUX:-}" ]]; then
-        echo "pi-subagent-pane must be run from inside tmux." >&2
+        echo "pi-instance-pane must be run from inside tmux." >&2
         exit 1
       fi
 
@@ -46,22 +46,22 @@ let
       fi
 
       if [[ -z "$prompt" ]]; then
-        printf '%s\n' "usage: pi-subagent-pane <task prompt>" >&2
-        printf '%s\n' "       printf '%s\\n' '<task prompt>' | pi-subagent-pane" >&2
+        printf '%s\n' "usage: pi-instance-pane <task prompt>" >&2
+        printf '%s\n' "       printf '%s\\n' '<task prompt>' | pi-instance-pane" >&2
         exit 1
       fi
 
-      state_dir="''${XDG_RUNTIME_DIR:-/tmp}/pi-subagent-panes"
+      state_dir="''${XDG_RUNTIME_DIR:-/tmp}/pi-instance-panes"
       mkdir -p "$state_dir"
       prompt_file="$(mktemp "$state_dir/task.XXXXXX.md")"
       output_file="$(mktemp "$state_dir/output.XXXXXX.md")"
       printf '%s\n' "$prompt" > "$prompt_file"
 
-      title="pi-subagent"
-      cmd="cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); printf '\\n[pi-subagent-pane] output: %s\\n[pi-subagent-pane] prompt: %s\\n' $(printf '%q' "$output_file") $(printf '%q' "$prompt_file"); exec \"''${SHELL:-bash}\""
+      title="pi-instance"
+      cmd="cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); printf '\\n[pi-instance-pane] output: %s\\n[pi-instance-pane] prompt: %s\\n' $(printf '%q' "$output_file") $(printf '%q' "$prompt_file"); exec \"''${SHELL:-bash}\""
 
       tmux split-window -h -c "$PWD" -T "$title" "$cmd"
-      tmux display-message "spawned pi subagent pane; output: $output_file"
+      tmux display-message "spawned pi instance pane; output: $output_file"
       printf '%s\n' "$output_file"
     '';
   };
@@ -69,13 +69,13 @@ let
   appendSystemPrompt = ''
     ## Local delegation preference
 
-    When the user asks you to spawn or delegate to subagents and you are running
-    inside tmux, prefer observable tmux panes over hidden background work.
-    Use `pi-subagent-pane` to start each independent subagent in its own tmux
-    pane, passing a self-contained task prompt. Capture the output path printed
-    by the command, continue your own work, then read the output file when you
-    need the result. If tmux is unavailable or the user explicitly asks for the
-    subagent extension, use the normal available subagent tools instead.
+    When work can be parallelized, delegated, or run in the background and you
+    are running inside tmux, prefer observable tmux panes over hidden background
+    work. Use `pi-instance-pane` to start each independent Pi instance in its
+    own tmux pane, passing a self-contained task prompt. Capture the output path
+    printed by the command, continue your own work, then read the output file
+    when you need the result. If tmux is unavailable, use the normal available
+    background-work mechanisms instead.
   '';
 in
 {
@@ -99,7 +99,7 @@ in
   config = {
     environment.systemPackages = [
       piPackage
-      piSubagentPane
+      piInstancePane
       pkgs.nodejs
     ];
 
@@ -107,29 +107,29 @@ in
       ".pi/agent/settings.json".text = builtins.toJSON (defaultSettings // cfg.settings);
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
-      ".pi/agent/skills/tmux-subagent-panes/SKILL.md".text = ''
+      ".pi/agent/skills/tmux-pi-instance-panes/SKILL.md".text = ''
         ---
-        name: tmux-subagent-panes
-        description: Use when delegating work to subagents from Pi, especially when the user asks for subagents in separate tmux panes or observable parallel work.
+        name: tmux-pi-instance-panes
+        description: Use when parallel or background work should run in separate observable Pi tmux panes.
         ---
 
-        # Tmux Subagent Panes
+        # Tmux Pi Instance Panes
 
-        When spawning subagents from inside tmux, prefer visible tmux panes so the user can observe and interact with each child agent.
+        When work can be parallelized, delegated, or run in the background from inside tmux, prefer visible tmux panes so the user can observe and interact with each spawned Pi instance.
 
         ## Command
 
         Use the declarative helper:
 
         ```bash
-        pi-subagent-pane "<self-contained subagent task>"
+        pi-instance-pane "<self-contained task>"
         ```
 
         For multiline prompts:
 
         ```bash
-        cat <<'EOF' | pi-subagent-pane
-        <self-contained subagent task>
+        cat <<'EOF' | pi-instance-pane
+        <self-contained task>
         EOF
         ```
 
@@ -141,7 +141,7 @@ in
 
         Continue your own work while panes run. Read the printed output files when you need results.
 
-        If not inside tmux, or if the user specifically wants the `pi-subagents` extension, use the normal subagent tool instead.
+        If not inside tmux, use the normal available background-work mechanisms instead.
       '';
     };
   };
