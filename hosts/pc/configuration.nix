@@ -4,6 +4,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     flake.nixosModules.colors
+    flake.nixosModules."chinese-input"
     flake.nixosModules.niri
     flake.nixosModules.fuzzel
     flake.nixosModules.git

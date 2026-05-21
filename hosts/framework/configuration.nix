@@ -11,6 +11,7 @@
     # Include the nixos-hardware module
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     flake.nixosModules.colors
+    flake.nixosModules."chinese-input"
     flake.nixosModules.niri
     flake.nixosModules.fuzzel
     flake.nixosModules.git
