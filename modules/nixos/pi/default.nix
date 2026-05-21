@@ -106,6 +106,7 @@ in
     home-manager.users.${username}.home.file = {
       ".pi/agent/settings.json".text = builtins.toJSON (defaultSettings // cfg.settings);
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
+      ".pi/agent/extensions/permission-gate.ts".source = ./extensions/permission-gate.ts;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
       ".pi/agent/skills/tmux-pi-instance-panes/SKILL.md".text = ''
         ---
