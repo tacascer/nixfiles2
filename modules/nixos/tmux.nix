@@ -46,6 +46,8 @@
       ];
       configAfter = ''
         set -g renumber-windows on
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
 
         unbind x
         bind x confirm-before -p 'Kill pane #P? (y/n)' kill-pane
