@@ -58,7 +58,14 @@ let
       printf '%s\n' "$prompt" > "$prompt_file"
 
       title="pi-instance"
-      cmd="cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); printf '\\n[pi-instance-pane] output: %s\\n[pi-instance-pane] prompt: %s\\n' $(printf '%q' "$output_file") $(printf '%q' "$prompt_file"); exec \"''${SHELL:-bash}\""
+      env_exports="export PI_PARENT_OUTPUT_FILE=$(printf '%q' "$output_file"); "
+      for name in PI_PARENT_JOB_ID PI_PARENT_EVENT_FILE; do
+        if [[ -n "''${!name:-}" ]]; then
+          env_exports+="export $name=$(printf '%q' "''${!name}"); "
+        fi
+      done
+
+      cmd="$env_exports cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); printf '\\n[pi-instance-pane] output: %s\\n[pi-instance-pane] prompt: %s\\n' $(printf '%q' "$output_file") $(printf '%q' "$prompt_file"); exec \"''${SHELL:-bash}\""
 
       tmux split-window -h -c "$PWD" -T "$title" "$cmd"
       tmux display-message "spawned pi instance pane; output: $output_file"
@@ -108,43 +115,8 @@ in
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
       ".pi/agent/extensions/permission-gate.ts".source = ./extensions/permission-gate.ts;
+      ".pi/agent/extensions/tmux-pi-instance-panes.ts".source = ./extensions/tmux-pi-instance-panes.ts;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
-      ".pi/agent/skills/tmux-pi-instance-panes/SKILL.md".text = ''
-        ---
-        name: tmux-pi-instance-panes
-        description: Use when parallel or background work should run in separate observable Pi tmux panes.
-        ---
-
-        # Tmux Pi Instance Panes
-
-        When work can be parallelized, delegated, or run in the background from inside tmux, prefer visible tmux panes so the user can observe and interact with each spawned Pi instance.
-
-        ## Command
-
-        Use the declarative helper:
-
-        ```bash
-        pi-instance-pane "<self-contained task>"
-        ```
-
-        For multiline prompts:
-
-        ```bash
-        cat <<'EOF' | pi-instance-pane
-        <self-contained task>
-        EOF
-        ```
-
-        The helper:
-        - creates a new tmux pane in the current working directory
-        - runs `pi -p` with the prompt in that pane
-        - tees the child output to a temp file
-        - prints the output file path to the parent pane
-
-        Continue your own work while panes run. Read the printed output files when you need results.
-
-        If not inside tmux, use the normal available background-work mechanisms instead.
-      '';
     };
   };
 }
