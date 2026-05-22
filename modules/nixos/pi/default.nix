@@ -123,6 +123,7 @@ in
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
       ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
       ".pi/agent/extensions/tmux-pi-instance-panes.ts".source = ./extensions/tmux-pi-instance-panes.ts;
+      ".pi/agent/skills/brainstorming".source = ./skills/brainstorming;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
     };
   };
