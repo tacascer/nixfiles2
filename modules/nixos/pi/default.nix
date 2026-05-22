@@ -65,10 +65,11 @@ let
         fi
       done
 
-      cmd="$env_exports cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); printf '\\n[pi-instance-pane] output: %s\\n[pi-instance-pane] prompt: %s\\n' $(printf '%q' "$output_file") $(printf '%q' "$prompt_file"); exec \"''${SHELL:-bash}\""
+      cmd="$env_exports cd $(printf '%q' "$PWD"); pi -p @$(printf '%q' "$prompt_file") 2>&1 | tee $(printf '%q' "$output_file"); exit \"''${PIPESTATUS[0]}\""
 
-      tmux split-window -h -c "$PWD" -T "$title" "$cmd"
-      tmux display-message "spawned pi instance pane; output: $output_file"
+      pane_id="$(tmux split-window -h -c "$PWD" -P -F '#{pane_id}' "$cmd")"
+      tmux select-pane -t "$pane_id" -T "$title"
+      tmux display-message "spawned pi instance pane $pane_id; output: $output_file"
       printf '%s\n' "$output_file"
     '';
   };
