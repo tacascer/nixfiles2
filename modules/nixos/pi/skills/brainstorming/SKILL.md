@@ -1,6 +1,6 @@
 ---
 name: brainstorming
-description: Use before creative or design-sensitive work: adding features, modifying behavior, refactoring, changing configuration semantics, or building new Pi/NixOS workflows. Guides a Pi-native design discussion before implementation.
+description: "Use before creative or design-sensitive work: adding features, modifying behavior, refactoring, changing configuration semantics, or building new Pi/NixOS workflows. Guides a Pi-native design discussion before implementation."
 ---
 
 # Brainstorming
