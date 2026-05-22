@@ -121,7 +121,6 @@ in
       ".pi/agent/settings.json".text = builtins.toJSON (defaultSettings // cfg.settings);
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
-      ".pi/agent/extensions/permission-gate.ts".source = ./extensions/permission-gate.ts;
       ".pi/agent/extensions/tmux-pi-instance-panes.ts".source = ./extensions/tmux-pi-instance-panes.ts;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
     };
