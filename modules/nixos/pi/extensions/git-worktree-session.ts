@@ -59,10 +59,24 @@ async function currentWorktreeState(pi: ExtensionAPI, cwd: string): Promise<Work
 	};
 }
 
-function latestRecordedState(ctx: { sessionManager: { getEntries(): Array<any> } }): WorktreeSessionState | undefined {
+type SessionEntryReader = {
+	getEntries(): Array<any>;
+	getBranch?: () => Array<any>;
+};
+
+function sessionBranchEntries(sessionManager: SessionEntryReader): Array<any> {
+	return typeof sessionManager.getBranch === "function"
+		? sessionManager.getBranch()
+		: sessionManager.getEntries();
+}
+
+export function latestRecordedState(ctx: { sessionManager: SessionEntryReader }): WorktreeSessionState | undefined {
 	let state: WorktreeSessionState | undefined;
 
-	for (const entry of ctx.sessionManager.getEntries()) {
+	// Only consider entries on the active branch. getEntries() returns every
+	// append-only entry in the session file, including abandoned branches, which
+	// can otherwise make shutdown prompt for a worktree from a stale branch.
+	for (const entry of sessionBranchEntries(ctx.sessionManager)) {
 		if (entry.type === "custom" && entry.customType === ENTRY_TYPE && entry.data) {
 			const data = entry.data as Partial<WorktreeSessionState>;
 			if (typeof data.worktreePath === "string" && typeof data.mainWorktreePath === "string") {
@@ -74,11 +88,11 @@ function latestRecordedState(ctx: { sessionManager: { getEntries(): Array<any> }
 	return state;
 }
 
-function isLinkedWorktree(state: WorktreeSessionState): boolean {
+export function isLinkedWorktree(state: WorktreeSessionState): boolean {
 	return state.worktreePath !== state.mainWorktreePath;
 }
 
-function shouldPromptForPreservation(reason: string): boolean {
+export function shouldPromptForPreservation(reason: string): boolean {
 	return reason === "quit" || reason === "new";
 }
 
