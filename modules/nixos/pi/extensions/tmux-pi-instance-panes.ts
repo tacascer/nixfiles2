@@ -130,13 +130,16 @@ export default function (pi: ExtensionAPI) {
 	pi.registerTool({
 		name: "spawn_pi_instance_pane",
 		label: "Spawn Pi Instance Pane",
-		description: "Start an independent Pi agent in a visible tmux pane for parallel/background work and return child output and JSONL event paths.",
-		promptSnippet: "Spawn an independent Pi agent in a visible tmux pane for parallel/background work with JSONL status events.",
+		description: "Start an independent Pi agent in a visible tmux pane for parallel, background, delegated, or context-isolated work and return child output and JSONL event paths.",
+		promptSnippet: "Spawn an independent Pi agent in a visible tmux pane for parallel, background, delegated, or context-isolated work with JSONL status events.",
 		promptGuidelines: [
-			"Use spawn_pi_instance_pane when work can be parallelized, delegated, or run in the background and the session is inside tmux.",
-			"Give spawn_pi_instance_pane a self-contained task prompt, then continue other work and read the returned JSONL event file or output file when the result is needed.",
-			"Use read_pi_instance_pane_events to inspect structured child status from the returned eventFile.",
-			"Do not use spawn_pi_instance_pane when not inside tmux; use normal available background-work mechanisms instead.",
+			"Use spawn_pi_instance_pane when work can be parallelized, delegated, run in the background, or isolated from the main context as a well-defined subtask and the session is inside tmux.",
+			"Use context-isolated child instances for bounded subtasks whose detailed exploration, logs, or intermediate reasoning would unnecessarily pollute the parent conversation.",
+			"Good candidates include focused research, inspection, validation, or implementation subtasks with clear success criteria.",
+			"Give spawn_pi_instance_pane a self-contained, bounded task prompt; include all necessary context because the child instance should not depend on the parent conversation.",
+			"Avoid spawning child instances for vague tasks, tasks requiring ongoing user interaction, or tasks tightly coupled to the parent agent's current reasoning.",
+			"Use read_pi_instance_pane_events or read the returned output file before relying on child results.",
+			"Do not use spawn_pi_instance_pane when not inside tmux; use normal available mechanisms instead.",
 		],
 		parameters: Type.Object({
 			prompt: Type.String({

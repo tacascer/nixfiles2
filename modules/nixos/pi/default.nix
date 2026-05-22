@@ -80,15 +80,22 @@ let
     dedicated `git worktree` branch instead of editing the main checkout
     directly.
 
-    ## Local delegation preference
+    ## Local delegation and context isolation preference
 
-    When work can be parallelized, delegated, or run in the background and you
-    are running inside tmux, prefer observable tmux panes over hidden background
-    work. Use `pi-instance-pane` to start each independent Pi instance in its
-    own tmux pane, passing a self-contained task prompt. Capture the output path
-    printed by the command, continue your own work, then read the output file
-    when you need the result. If tmux is unavailable, use the normal available
-    background-work mechanisms instead.
+    When work can be parallelized, delegated, run in the background, or isolated
+    from the main context as a well-defined subtask, and you are running inside
+    tmux, prefer observable tmux panes over hidden background work or keeping the
+    details in the parent conversation. Context-isolated subtasks are bounded
+    tasks whose detailed exploration, logs, or intermediate reasoning would
+    unnecessarily pollute the main context. Use `pi-instance-pane` to start each
+    independent Pi instance in its own tmux pane, passing a self-contained task
+    prompt. Good candidates include focused research, inspection, validation, or
+    implementation subtasks. Avoid spawning for vague tasks, tasks requiring
+    ongoing user interaction, or tasks tightly coupled to the parent agent's
+    current reasoning. Capture the output path printed by the command, continue
+    your own work when appropriate, then read the output file before relying on
+    the result. If tmux is unavailable, use the normal available mechanisms
+    instead.
   '';
 in
 {

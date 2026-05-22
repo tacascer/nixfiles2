@@ -9,7 +9,7 @@ Use this skill to turn a rough request into an approved design before implementa
 
 ## Hard Gate
 
-Do not write implementation code, scaffold files, edit existing behavior, or run mutating implementation commands until the user has approved a design. Reading files, inspecting project state, and writing the final approved spec are allowed as part of this skill.
+Do not write implementation code, scaffold files, edit existing behavior, or run mutating implementation commands until the user has approved a design. Reading files and inspecting project state are allowed as part of this skill.
 
 For changes in a git repository, remember the repository worktree safety rule: before code changes, create and work from a dedicated `git worktree` branch. Brainstorming itself may inspect the current checkout; implementation must happen in the dedicated worktree.
 
@@ -22,8 +22,8 @@ Create and maintain `todo` items for these stages, completing each stage before 
 3. **Compare approaches** — propose 2-3 viable approaches with trade-offs and a recommendation.
 4. **Present design** — describe the selected design in reviewable sections sized to the complexity of the work.
 5. **Get approval** — ask explicitly whether the design is approved or needs changes.
-6. **Write spec** — after approval, save the design as a spec document.
-7. **Self-review spec** — fix placeholders, contradictions, scope creep, and ambiguous requirements inline.
+6. **Write design file** — after approval, save the design under `/tmp/pi-designs/` so it is outside the git worktree.
+7. **Self-review design file** — fix placeholders, contradictions, scope creep, and ambiguous requirements inline in the `/tmp` design file.
 8. **Stop** — do not proceed to implementation planning or code unless the user asks for the next step.
 
 ## Clarifying Questions
@@ -66,45 +66,17 @@ Cover the relevant subset of:
 - validation/testing strategy
 - implementation sequence at a high level
 
-Ask whether the design looks right before writing the spec. If the user requests changes, revise the design and ask again.
+Ask whether the design looks right. If the user requests changes, revise the design and ask again.
 
-## Spec Document
+## Design Records
 
-After explicit approval, write the design to:
+Always write the approved brainstorming design to a file under `/tmp/pi-designs/`, using a path like `/tmp/pi-designs/YYYY-MM-DD-<topic>-design.md`. Create the directory if needed.
 
-```text
-docs/specs/YYYY-MM-DD-<topic>-design.md
-```
+Never create, stage, commit, or check in design spec files from brainstorming. Do not add brainstorming design specs under `docs/specs/` or any other tracked project path. Tell the user the `/tmp` design path and note that it is intentionally outside the git worktree.
 
-If the project already has a stronger convention for specs or plans, follow that instead. Create the directory if needed.
+## Design Self-Review
 
-Use this structure unless a project convention says otherwise:
-
-```markdown
-# <Title> Design
-
-Date: YYYY-MM-DD
-
-## Goal
-
-## Non-Goals
-
-## Context
-
-## Design
-
-## Alternatives Considered
-
-## Validation
-
-## Open Questions
-```
-
-`Open Questions` should say `None.` if all questions are resolved. Do not leave `TBD`, `TODO`, placeholders, or vague requirements in the spec.
-
-## Spec Self-Review
-
-Before telling the user the spec is ready, review and fix it for:
+Before telling the user the design is ready, review and fix the `/tmp` design file for:
 
 1. Placeholder text such as `TBD`, `TODO`, or incomplete bullets.
 2. Internal contradictions.
@@ -112,7 +84,7 @@ Before telling the user the spec is ready, review and fix it for:
 4. Ambiguous requirements that could be interpreted more than one way.
 5. Missing validation or testing notes.
 
-Then tell the user the spec path and ask whether they want changes before any implementation work begins.
+Then tell the user the `/tmp` design path and ask whether they want changes before any implementation work begins.
 
 ## Pi-Specific Practices
 
