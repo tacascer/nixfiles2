@@ -8,6 +8,8 @@ A Blueprint-native NixOS flake for two Linux hosts (`framework`, `pc`) owned by 
 
 ## Common Commands
 
+Before making any code changes, create and work from a dedicated `git worktree` branch instead of editing the main checkout directly.
+
 ```bash
 # Rebuild and switch to a host configuration
 sudo nixos-rebuild switch --flake ~/myNixOS#framework

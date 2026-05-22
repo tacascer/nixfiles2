@@ -1,4 +1,4 @@
-<!-- Generated: 2026-04-03 | Updated: 2026-04-03 -->
+<!-- Generated: 2026-04-03 | Updated: 2026-05-22 -->
 
 # myNixOS
 
@@ -23,6 +23,7 @@ A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop
 ## For AI Agents
 
 ### Working In This Directory
+- Before making any code changes, create and work from a dedicated `git worktree` branch instead of editing the main checkout directly
 - This is a **Nix flake** — all configuration is declarative Nix expressions
 - Do NOT create dotfiles or config files; use `wrapper-modules` wrappers instead
 - All `.nix` files under `modules/` are auto-imported by `import-tree` — no manual registration in `flake.nix` needed

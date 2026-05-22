@@ -74,6 +74,12 @@ let
   };
 
   appendSystemPrompt = ''
+    ## Repository worktree safety
+
+    Before making any code changes in a git repository, create and work from a
+    dedicated `git worktree` branch instead of editing the main checkout
+    directly.
+
     ## Local delegation preference
 
     When work can be parallelized, delegated, or run in the background and you
