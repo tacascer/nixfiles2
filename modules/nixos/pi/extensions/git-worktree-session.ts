@@ -2,7 +2,8 @@
  * Git Worktree Session Extension
  *
  * Records the git worktree associated with each Pi session. When Pi exits from
- * a linked worktree, asks whether to remove or keep that worktree.
+ * or clears a session linked to a worktree, asks whether to remove or keep that
+ * worktree.
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
@@ -77,6 +78,10 @@ function isLinkedWorktree(state: WorktreeSessionState): boolean {
 	return state.worktreePath !== state.mainWorktreePath;
 }
 
+function shouldPromptForPreservation(reason: string): boolean {
+	return reason === "quit" || reason === "new";
+}
+
 export default function (pi: ExtensionAPI) {
 	let state: WorktreeSessionState | undefined;
 	let recordedThisRuntime = false;
@@ -95,7 +100,7 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	pi.on("session_shutdown", async (event, ctx) => {
-		if (event.reason !== "quit") return;
+		if (!shouldPromptForPreservation(event.reason)) return;
 
 		const tracked = state ?? latestRecordedState(ctx);
 		if (!tracked || !isLinkedWorktree(tracked)) return;
@@ -109,9 +114,10 @@ export default function (pi: ExtensionAPI) {
 		const dirty = status.code === 0 && status.stdout.trim().length > 0;
 		const branch = tracked.branch ? ` (${tracked.branch})` : "";
 		const dirtyNote = dirty ? "\n\nThis worktree has uncommitted changes; removal may fail unless it is clean." : "";
+		const action = event.reason === "new" ? "cleared context from" : "used";
 
 		const choice = await ctx.ui.select(
-			`Pi session used git worktree:\n${tracked.worktreePath}${branch}${dirtyNote}\n\nRemove it now or keep it?`,
+			`Pi session ${action} git worktree:\n${tracked.worktreePath}${branch}${dirtyNote}\n\nRemove it now or keep it?`,
 			[
 				"Remove worktree",
 				"Keep worktree",
