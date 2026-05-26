@@ -134,6 +134,12 @@ in
       ".pi/agent/extensions/tmux-pi-instance-panes.ts".source = ./extensions/tmux-pi-instance-panes.ts;
       ".pi/agent/skills/brainstorming".source = ./skills/brainstorming;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
+      ".pi/agent/skills/post-brainstorming-implementation".source = ./skills/post-brainstorming-implementation;
+      ".pi/agent/skills/child-pi-explorer".source = ./skills/child-pi-explorer;
+      ".pi/agent/skills/child-pi-implementer".source = ./skills/child-pi-implementer;
+      ".pi/agent/skills/child-pi-spec-reviewer".source = ./skills/child-pi-spec-reviewer;
+      ".pi/agent/skills/child-pi-code-quality-reviewer".source = ./skills/child-pi-code-quality-reviewer;
+      ".pi/agent/skills/child-pi-validation-analyst".source = ./skills/child-pi-validation-analyst;
     };
   };
 }
