@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     flake.nixosModules.colors
     flake.nixosModules."chinese-input"
+    flake.nixosModules.keyboard
     flake.nixosModules.niri
     flake.nixosModules.fuzzel
     flake.nixosModules.git
@@ -83,12 +84,6 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
