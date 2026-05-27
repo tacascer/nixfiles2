@@ -5,7 +5,7 @@ import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 
-type SpawnPaneParams = {
+type SpawnInstanceParams = {
 	prompt: string;
 };
 
@@ -82,6 +82,20 @@ function readJsonl(path: string): Array<Record<string, unknown>> {
 		});
 }
 
+function parseSpawnOutput(stdout: string): { outputPath?: string; tmuxSession?: string; tmuxWindow?: string } {
+	const details: { outputPath?: string; tmuxSession?: string; tmuxWindow?: string } = {};
+
+	for (const line of stdout.split(/\r?\n/)) {
+		if (line.startsWith("output=")) details.outputPath = line.slice("output=".length);
+		if (line.startsWith("session=")) details.tmuxSession = line.slice("session=".length);
+		if (line.startsWith("window=")) details.tmuxWindow = line.slice("window=".length);
+	}
+
+	return details;
+}
+
+const parentSessionId = randomUUID();
+
 export default function (pi: ExtensionAPI) {
 	// When this same extension is loaded in a child Pi process, these environment
 	// variables connect it back to the parent via an append-only JSONL file.
@@ -128,18 +142,18 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	pi.registerTool({
-		name: "spawn_pi_instance_pane",
-		label: "Spawn Pi Instance Pane",
-		description: "Start an independent Pi agent in a visible tmux pane for parallel, background, delegated, or context-isolated work and return child output and JSONL event paths.",
-		promptSnippet: "Spawn an independent Pi agent in a visible tmux pane for parallel, background, delegated, or context-isolated work with JSONL status events.",
+		name: "spawn_pi_instance",
+		label: "Spawn Pi Instance",
+		description: "Start an independent Pi agent in a tmux window within the session scoped to this parent Pi session, and return child output and JSONL event paths.",
+		promptSnippet: "Spawn an independent Pi agent in a new tmux window within this parent Pi session's tmux session, with JSONL status events.",
 		promptGuidelines: [
-			"Use spawn_pi_instance_pane when work can be parallelized, delegated, run in the background, or isolated from the main context as a well-defined subtask and the session is inside tmux.",
+			"Use spawn_pi_instance when work can be parallelized, delegated, run in the background, or isolated from the main context as a well-defined subtask and the parent session is inside tmux."
 			"Use context-isolated child instances for bounded subtasks whose detailed exploration, logs, or intermediate reasoning would unnecessarily pollute the parent conversation.",
 			"Good candidates include focused research, inspection, validation, or implementation subtasks with clear success criteria.",
-			"Give spawn_pi_instance_pane a self-contained, bounded task prompt; include all necessary context because the child instance should not depend on the parent conversation.",
+			"Give spawn_pi_instance a self-contained, bounded task prompt; include all necessary context because the child instance should not depend on the parent conversation.",
 			"Avoid spawning child instances for vague tasks, tasks requiring ongoing user interaction, or tasks tightly coupled to the parent agent's current reasoning.",
-			"Use read_pi_instance_pane_events or read the returned output file before relying on child results.",
-			"Do not use spawn_pi_instance_pane when not inside tmux; use normal available mechanisms instead.",
+			"Use read_pi_instance_events or read the returned output file before relying on child results.",
+			"Do not use spawn_pi_instance when not inside tmux; use normal available mechanisms instead.",
 		],
 		parameters: Type.Object({
 			prompt: Type.String({
@@ -147,14 +161,14 @@ export default function (pi: ExtensionAPI) {
 				minLength: 1,
 			}),
 		}),
-		async execute(_toolCallId, params: SpawnPaneParams, _signal, onUpdate, ctx) {
+		async execute(_toolCallId, params: SpawnInstanceParams, _signal, onUpdate, ctx) {
 			if (!process.env.TMUX) {
 				return {
 					isError: true,
 					content: [
 						{
 							type: "text" as const,
-							text: "Not inside tmux; spawn_pi_instance_pane is unavailable in this session.",
+							text: "Not inside tmux; spawn_pi_instance is unavailable in this session.",
 						},
 					],
 					details: { tmux: false },
@@ -162,7 +176,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			const jobId = randomUUID();
-			const bridgeDir = join(process.env.XDG_RUNTIME_DIR || tmpdir(), "pi-instance-panes", jobId);
+			const bridgeDir = join(process.env.XDG_RUNTIME_DIR || tmpdir(), "pi-instances", jobId);
 			const eventFile = join(bridgeDir, "events.jsonl");
 			mkdirSync(bridgeDir, { recursive: true });
 			appendBridgeEvent(eventFile, {
@@ -173,24 +187,27 @@ export default function (pi: ExtensionAPI) {
 			});
 
 			onUpdate?.({
-				content: [{ type: "text" as const, text: "Spawning child Pi instance in a tmux pane with JSONL bridge..." }],
+				content: [{ type: "text" as const, text: "Spawning child Pi instance in a tmux window with JSONL bridge..." }],
 			});
 
 			try {
 				const command = [
+					`PI_PARENT_SESSION_ID=${shellQuote(parentSessionId)}`,
 					`PI_PARENT_JOB_ID=${shellQuote(jobId)}`,
 					`PI_PARENT_EVENT_FILE=${shellQuote(eventFile)}`,
-					"pi-instance-pane",
+					"pi-instance",
 					'"$1"',
 				].join(" ");
 				const result = await pi.exec("bash", ["-lc", command, "pi-spawn", params.prompt], { cwd: ctx.cwd });
-				const outputPath = result.stdout.trim().split(/\r?\n/).filter(Boolean).at(-1);
+				const { outputPath, tmuxSession, tmuxWindow } = parseSpawnOutput(result.stdout);
 
 				appendBridgeEvent(eventFile, {
 					jobId,
 					type: "spawned",
 					timestamp: new Date().toISOString(),
 					outputPath,
+					tmuxSession,
+					tmuxWindow,
 				});
 
 				return {
@@ -198,14 +215,16 @@ export default function (pi: ExtensionAPI) {
 						{
 							type: "text" as const,
 							text: outputPath
-								? `Spawned child Pi instance pane. Output file: ${outputPath}\nJSONL event file: ${eventFile}\nJob ID: ${jobId}`
-								: `Spawned child Pi instance pane.\nJSONL event file: ${eventFile}\nJob ID: ${jobId}\n\n${result.stdout}`,
+								? `Spawned child Pi instance in tmux session${tmuxSession ? ` ${tmuxSession}` : ""}${tmuxWindow ? ` window ${tmuxWindow}` : ""}. Output file: ${outputPath}\nJSONL event file: ${eventFile}\nJob ID: ${jobId}`
+								: `Spawned child Pi instance in tmux window.\nJSONL event file: ${eventFile}\nJob ID: ${jobId}\n\n${result.stdout}`,
 						},
 					],
 					details: {
 						jobId,
 						eventFile,
 						outputPath,
+						tmuxSession,
+						tmuxWindow,
 						stdout: result.stdout,
 						stderr: result.stderr,
 					},
@@ -223,7 +242,7 @@ export default function (pi: ExtensionAPI) {
 					content: [
 						{
 							type: "text" as const,
-							text: `Failed to spawn child Pi instance pane: ${error instanceof Error ? error.message : String(error)}\nJSONL event file: ${eventFile}`,
+							text: `Failed to spawn child Pi instance tmux window: ${error instanceof Error ? error.message : String(error)}\nJSONL event file: ${eventFile}`,
 						},
 					],
 					details: { jobId, eventFile, error: error instanceof Error ? error.message : String(error) },
@@ -233,15 +252,15 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	pi.registerTool({
-		name: "read_pi_instance_pane_events",
-		label: "Read Pi Instance Pane Events",
-		description: "Read structured JSONL status events emitted by a child Pi instance pane.",
-		promptSnippet: "Read structured JSONL status events from a spawned child Pi instance pane.",
+		name: "read_pi_instance_events",
+		label: "Read Pi Instance Events",
+		description: "Read structured JSONL status events emitted by a child Pi instance.",
+		promptSnippet: "Read structured JSONL status events from a spawned child Pi instance.",
 		promptGuidelines: [
-			"Use read_pi_instance_pane_events with the eventFile returned by spawn_pi_instance_pane to check child progress or completion.",
+			"Use read_pi_instance_events with the eventFile returned by spawn_pi_instance to check child progress or completion.",
 		],
 		parameters: Type.Object({
-			eventFile: Type.String({ description: "Path to the events.jsonl file returned by spawn_pi_instance_pane." }),
+			eventFile: Type.String({ description: "Path to the events.jsonl file returned by spawn_pi_instance." }),
 		}),
 		async execute(_toolCallId, params: ReadEventsParams) {
 			try {

@@ -92,5 +92,5 @@ Then tell the user the `/tmp` design path and ask whether they want changes befo
 - Use `todo` to make the workflow visible.
 - Use `ask_user_question` for structured one-question prompts.
 - Do not use `write`/`edit` for implementation before design approval.
-- Do not use `spawn_pi_instance_pane` for implementation before design approval.
-- If implementation later benefits from delegation and tmux is available, prefer visible Pi instance panes as described by the system prompt.
+- Do not use `spawn_pi_instance` for implementation before design approval.
+- If implementation later benefits from delegation and tmux is available, prefer Pi instance windows in the parent-scoped tmux session as described by the system prompt.

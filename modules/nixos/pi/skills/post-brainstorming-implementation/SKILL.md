@@ -1,6 +1,6 @@
 ---
 name: post-brainstorming-implementation
-description: Use after an approved brainstorming design and explicit user request to implement. Orchestrates git worktree setup, tmux child Pi spawning, role/status handling, review gates, validation, and handoff.
+description: Use after an approved brainstorming design and explicit user request to implement. Orchestrates git worktree setup, tmux child Pi instance windows, role/status handling, review gates, validation, and handoff.
 ---
 
 # Post-Brainstorming Implementation
@@ -11,7 +11,7 @@ Use this skill after a brainstorming design has been approved and the user expli
 
 - Do not implement without an approved design and explicit implementation request.
 - In a git repository, create and work from a dedicated `git worktree` branch before code changes.
-- If inside tmux, spawn at least one visible child Pi instance before substantive implementation edits.
+- If inside tmux, spawn at least one child Pi instance window in the parent-scoped tmux session before substantive implementation edits.
 - Parent Pi owns final correctness, integration, validation, and user-facing decisions.
 - Child Pi outputs are advisory until the parent reads their event/output files and verifies relevant files or diffs.
 
@@ -22,7 +22,7 @@ Use this skill after a brainstorming design has been approved and the user expli
 3. Check repository status and preserve user changes.
 4. Create a dedicated worktree branch and continue from that worktree.
 5. Create `todo` items for implementation, child delegation, review, validation, and handoff.
-6. Spawn at least one visible child Pi instance with a self-contained role prompt.
+6. Spawn at least one child Pi instance window in the parent-scoped tmux session with a self-contained role prompt.
 7. Use role skills for child prompts:
    - `child-pi-explorer` for unclear work or context research.
    - `child-pi-implementer` for bounded implementation.
