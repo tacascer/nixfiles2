@@ -1,6 +1,6 @@
 ---
 name: child-pi-implementer
-description: Use inside a spawned child Pi instance when assigned a bounded implementation task. Implements exactly the provided task, validates it, self-reviews, and reports DONE/DONE_WITH_CONCERNS/NEEDS_CONTEXT/BLOCKED.
+description: Use inside a child Pi subagent when assigned a bounded implementation task. Implements exactly the provided task, validates it, self-reviews, and reports DONE/DONE_WITH_CONCERNS/NEEDS_CONTEXT/BLOCKED.
 ---
 
 # Child Pi Implementer

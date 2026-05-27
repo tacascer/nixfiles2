@@ -17,7 +17,7 @@ For changes in a git repository, remember the repository worktree safety rule: b
 
 Create and maintain `todo` items for these stages, completing each stage before starting the next:
 
-1. **Explore context** — use child Pi explorer instances for read-only context gathering when available, with parent-side read-only inspection as fallback.
+1. **Explore context** — use child Pi explorer subagents for read-only context gathering when available, with parent-side read-only inspection as fallback.
 2. **Clarify intent** — ask one question at a time until purpose, constraints, scope, and success criteria are clear.
 3. **Compare approaches** — propose 2-3 viable approaches with trade-offs and a recommendation.
 4. **Write design draft** — save the full selected design under `/tmp/pi-designs/` so it is outside the git worktree.
@@ -28,12 +28,13 @@ Create and maintain `todo` items for these stages, completing each stage before 
 
 ## Child Pi Exploration
 
-During **Explore context**, prefer `spawn_pi_instance` when available:
+During **Explore context**, prefer pi-subagents `Agent` when available:
 
-- Spawn at least one child Pi explorer with a self-contained prompt covering the working directory, user request, focused exploration goal, relevant files or directories if known, read-only/no-user-interaction constraints, and explicit final report format.
-- Spawn multiple focused explorers when independent context tracks can be investigated in parallel, such as implementation files, project docs, upstream/API behavior, or recent git history.
-- Read an explicit final status/report from every spawned child before relying on or summarizing that child's findings. Do not infer completion from quiet logs, diffs, or parent-side validation.
-- If spawning is unavailable, fails, or a child reports `NEEDS_CONTEXT`, `BLOCKED`, times out, or lacks an explicit final report, report that outcome and either fall back to bounded parent-side read-only inspection, spawn a narrower follow-up child, or ask a clarifying question.
+- Start at least one `Explore` subagent with `Agent` and a self-contained prompt covering the working directory, user request, focused exploration goal, relevant files or directories if known, read-only/no-user-interaction constraints, and explicit final report format.
+- Start multiple focused explorers when independent context tracks can be investigated in parallel, such as implementation files, project docs, upstream/API behavior, or recent git history. Use background mode for independent long-running exploration.
+- Use `get_subagent_result` with waiting enabled for background agents, and read an explicit final status/report from every delegated child before relying on or summarizing that child's findings. Do not infer completion from quiet logs, diffs, or parent-side validation.
+- Use `steer_subagent` only when a running explorer needs redirected scope or constraints.
+- If delegation is unavailable, fails, or a child reports `NEEDS_CONTEXT`, `BLOCKED`, times out, or lacks an explicit final report, report that outcome and either fall back to bounded parent-side read-only inspection, start a narrower follow-up child, or ask a clarifying question.
 - Keep child exploration read-only; implementation edits remain forbidden until after the design is approved and the user asks for implementation.
 
 ## Clarifying Questions
@@ -103,7 +104,7 @@ Then tell the user the `/tmp` design path, provide a concise summary, and ask wh
 - Use `read` and `bash` for parent-side context inspection.
 - Use `todo` to make the workflow visible.
 - Use `ask_user_question` for structured one-question prompts.
-- During Explore context, prefer `spawn_pi_instance` for read-only child Pi exploration when available, and read explicit final reports before relying on child findings.
+- During Explore context, prefer pi-subagents `Agent` for read-only child Pi exploration when available, use `get_subagent_result` for background results, and read explicit final reports before relying on child findings.
 - Do not use `write`/`edit` for implementation before design approval.
-- Do not use `spawn_pi_instance` for implementation work before design approval; pre-approval child use is limited to read-only exploration.
-- If implementation later benefits from delegation and tmux is available, prefer Pi instance windows in the parent-scoped tmux session as described by the system prompt.
+- Do not use `Agent` for implementation work before design approval; pre-approval child use is limited to read-only exploration.
+- If implementation later benefits from delegation, prefer pi-subagents `Agent`, `get_subagent_result`, and `steer_subagent` as described by the system prompt.

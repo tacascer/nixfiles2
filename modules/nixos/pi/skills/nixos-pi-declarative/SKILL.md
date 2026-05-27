@@ -13,7 +13,7 @@ This repository manages Pi declaratively through `modules/nixos/pi/default.nix` 
 - Make persistent changes in `modules/nixos/pi/default.nix` under `custom.pi` options/defaults or the generated Home Manager files.
 - Keep Pi itself installed from `inputs.llm-agents.packages.${system}.pi`.
 - Use Nix-provided `nodejs`/`npm` for Pi package installation via the declarative `npmCommand` setting.
-- Pin Pi packages when possible, e.g. `npm:pi-subagents@0.25.0`, to make rebuilds reproducible.
+- Pin Pi packages when possible, e.g. `npm:@tintinweb/pi-subagents@0.8.0`, to make rebuilds reproducible.
 
 ## Common tasks
 
@@ -27,7 +27,7 @@ This repository manages Pi declaratively through `modules/nixos/pi/default.nix` 
 3. Prefer pinned package specs:
    ```nix
    packages = [
-     "npm:pi-subagents@0.25.0"
+     "npm:@tintinweb/pi-subagents@0.8.0"
    ];
    ```
 4. Validate:
@@ -57,6 +57,10 @@ Then rebuild the host, for example:
 ```bash
 sudo nixos-rebuild switch --flake ~/myNixOS#framework
 ```
+
+## Current declarative Pi packages
+
+- `npm:@tintinweb/pi-subagents@0.8.0` provides the `Agent`, `get_subagent_result`, `steer_subagent`, and `/agents` delegation workflow. Keep this package pinned unless the user explicitly requests an update.
 
 ## Current important files
 

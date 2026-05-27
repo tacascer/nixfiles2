@@ -1,6 +1,6 @@
 ---
 name: child-pi-spec-reviewer
-description: Use inside a spawned child Pi instance after an implementer reports completion. Verifies actual files and diff against the approved design and assigned task before code-quality review.
+description: Use inside a child Pi subagent after an implementer reports completion. Verifies actual files and diff against the approved design and assigned task before code-quality review.
 ---
 
 # Child Pi Spec Compliance Reviewer

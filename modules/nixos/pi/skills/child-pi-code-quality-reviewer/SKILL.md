@@ -1,6 +1,6 @@
 ---
 name: child-pi-code-quality-reviewer
-description: Use inside a spawned child Pi instance only after spec compliance passes. Reviews implementation quality, maintainability, tests, simplicity, and project conventions without editing files.
+description: Use inside a child Pi subagent only after spec compliance passes. Reviews implementation quality, maintainability, tests, simplicity, and project conventions without editing files.
 ---
 
 # Child Pi Code Quality Reviewer

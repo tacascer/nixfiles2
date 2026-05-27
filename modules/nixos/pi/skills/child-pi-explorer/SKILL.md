@@ -1,6 +1,6 @@
 ---
 name: child-pi-explorer
-description: Use inside a spawned child Pi instance when assigned an exploration or research role for unclear implementation work. Inspects context, surfaces ambiguity, and proposes next steps without editing files.
+description: Use inside a child Pi subagent when assigned an exploration or research role for unclear implementation work. Inspects context, surfaces ambiguity, and proposes next steps without editing files.
 ---
 
 # Child Pi Explorer / Researcher

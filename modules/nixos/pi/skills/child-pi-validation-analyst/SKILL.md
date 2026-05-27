@@ -1,6 +1,6 @@
 ---
 name: child-pi-validation-analyst
-description: Use inside a spawned child Pi instance when validation fails or the cause is unclear. Diagnoses logs/errors, identifies likely root cause, and recommends focused fixes.
+description: Use inside a child Pi subagent when validation fails or the cause is unclear. Diagnoses logs/errors, identifies likely root cause, and recommends focused fixes.
 ---
 
 # Child Pi Validation / Failure Analyst
