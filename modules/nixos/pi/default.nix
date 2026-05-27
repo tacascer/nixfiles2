@@ -85,6 +85,9 @@ in
       ".pi/agent/skills/brainstorming".source = ./skills/brainstorming;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
       ".pi/agent/skills/post-brainstorming-implementation".source = ./skills/post-brainstorming-implementation;
+      ".pi/agent/skills/pi-writing-plans".source = ./skills/pi-writing-plans;
+      ".pi/agent/skills/pi-subagent-driven-development".source = ./skills/pi-subagent-driven-development;
+      ".pi/agent/skills/pi-finishing-development-branch".source = ./skills/pi-finishing-development-branch;
       ".pi/agent/skills/child-pi-explorer".source = ./skills/child-pi-explorer;
       ".pi/agent/skills/child-pi-implementer".source = ./skills/child-pi-implementer;
       ".pi/agent/skills/child-pi-spec-reviewer".source = ./skills/child-pi-spec-reviewer;

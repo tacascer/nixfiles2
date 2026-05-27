@@ -1,132 +1,93 @@
 ---
 name: post-brainstorming-implementation
-description: Use after an approved brainstorming design and explicit user request to implement. Orchestrates git worktree setup, pi-subagents delegation, role/status handling, review gates, validation, and handoff.
+description: Use after an approved brainstorming design and explicit user request to implement. Coordinates worktree setup and delegates planning, subagent-driven development, finishing, validation, and handoff to Pi workflow skills.
 ---
 
 # Post-Brainstorming Implementation
 
-Use this skill after a brainstorming design has been approved and the user explicitly asks to implement it.
+Use this skill only after the user has approved a brainstorming design and then explicitly asked to implement it.
 
-## Hard Gates
+This is the coordinator and safety gate for implementation. It should route the work through the focused skills `pi-writing-plans`, `pi-subagent-driven-development`, and `pi-finishing-development-branch` instead of duplicating their full workflows here.
 
-- Do not implement without an approved design and explicit implementation request.
-- In a git repository, create and work from a dedicated `git worktree` branch before code changes.
-- Use pi-subagents `Agent` for every safely separable exploration, implementation, review, or validation task before the parent performs substantive implementation edits.
-- Prefer delegation over parent-handled implementation. Parent direct edits should be limited to orchestration glue, final integration, conflict resolution, tiny inseparable edits, or cases where delegation is unsafe.
-- Parent Pi owns orchestration, final correctness, integration, validation, and user-facing decisions.
-- Child Pi outputs are advisory until the parent reads an explicit final report/status from each child and verifies relevant files or diffs.
+## Required Preconditions
 
-## Required Flow
+Before any implementation work:
 
-1. Read the approved design file.
-2. Inspect local instructions such as `AGENTS.md`, `CLAUDE.md`, and relevant nested guidance.
-3. Check repository status and preserve user changes.
-4. Create a dedicated worktree branch and continue from that worktree.
-5. Create `todo` items for implementation, child delegation, review, validation, and handoff.
-6. Build a dependency graph from the approved design:
-   - identify implementation tasks, impacted files, validation needs, and review scopes;
-   - mark dependencies between tasks and review gates;
-   - mark each task as parallel-safe, serialized, or parent-handled with a short rationale.
-7. If boundaries, ownership, or affected files are unclear, start a parallel explorer wave before implementation planning is finalized.
-8. Start parallel child implementer waves with `Agent` for independent, non-overlapping implementation tasks. Serialize only tasks that depend on unfinished work, have overlapping edit ownership, require parent-only judgment, or are too small/inseparable to delegate safely.
-9. After each implementation wave, use `get_subagent_result` as needed and read every child's explicit final report, inspect relevant files or diffs, and perform parent integration or conflict resolution.
-10. For implementation tasks, run review gates in order:
-    - start spec reviewer children with `Agent` after implementation is complete for their assigned scope;
-    - start code-quality reviewer children with `Agent` only after spec compliance passes for that scope.
-11. Repeat fix/review waves as needed, using implementer children for bounded fixes whenever safe.
-12. Run final validation in the parent session.
-13. If validation fails and the cause is not trivial and inseparable, start one or more validation analyst children with `Agent`, exact commands, logs, and relevant context; use `get_subagent_result` as needed and read their explicit final reports before choosing fixes.
-14. Review final diff and summarize handoff.
+- Confirm there is an approved design artifact, normally under `/tmp/pi-designs/`.
+- Confirm the user explicitly requested implementation after approving that design.
+- Read the approved design completely.
+- Inspect applicable local instructions, including repository `AGENTS.md`, `CLAUDE.md` when present, and nested guidance for touched paths.
+- Check repository status and identify user changes before modifying files.
+- Preserve user changes. Do not overwrite, move, stash, or rebase ambiguous existing work without explicit user direction.
+- In a git repository, create or verify a dedicated `git worktree` branch before code changes. Continue implementation from that worktree.
+- Do not use mutable Pi install commands; manage Pi configuration and skills declaratively through the repository.
 
-## Role Selection
+If any precondition is missing or ambiguous, stop and ask for clarification instead of implementing.
 
-Use role skills for child prompts:
+## Coordination Flow
 
-- `child-pi-explorer` for unclear work, context research, decomposition, or ownership discovery.
-- `child-pi-implementer` for bounded implementation and bounded fixes.
-- `child-pi-spec-reviewer` after implementation is complete for the assigned scope.
-- `child-pi-code-quality-reviewer` only after spec review passes for the assigned scope.
-- `child-pi-validation-analyst` for validation failures.
+After the gates pass:
 
-Child agents should not infer requirements from the parent conversation.
+1. Establish the worktree path and branch, then operate from that worktree.
+2. Create parent todo items for planning, implementation, reviews, validation, and handoff.
+3. Invoke `pi-writing-plans` to convert the approved design into a temporary implementation plan under `/tmp/pi-plans/`.
+4. Read and sanity-check the plan for scoped tasks, file ownership, dependencies, validation commands, and review gates.
+5. Invoke `pi-subagent-driven-development` to execute the plan with child Pi agents where useful.
+6. Invoke `pi-finishing-development-branch` for final validation, diff review, branch/worktree summary, known issues, and next actions.
 
-## Parallelization Discipline
+Keep parent work focused on orchestration, safety decisions, integration, and user-facing judgment.
 
-- Prefer breadth-first parallel waves of children over one-at-a-time delegation whenever tasks do not depend on each other.
-- A task is parallel-safe when it has clear acceptance criteria, clear file/ownership boundaries, no dependency on an unfinished task, and no expected overlap with another active edit.
-- Do not parallelize dependent review gates: spec review happens after implementation; code-quality review happens only after spec compliance passes.
-- Do not assign overlapping edits in the same worktree to multiple children unless ownership is explicitly partitioned and conflicts are acceptable.
-- For large independent work with expected conflicts, consider separate child worktrees or branches, but do not make that the default.
-- Keep parent implementation limited. If a substantial task is parent-handled or serialized instead of delegated/parallelized, record the safety, dependency, or scope rationale for the handoff.
-- When a child reports `NEEDS_CONTEXT` or `BLOCKED`, clarify the task, split it, change role, or ask the user if needed; never retry a blocked prompt unchanged.
+## Simplified Path for Tiny or Inseparable Work
 
-## Subagent Tooling
+You may use a simplified path only when the work is genuinely too small or too tightly coupled to benefit from separate planning and subagent waves.
 
-- Use `Agent` to start each child/subagent with the selected role prompt and required instructions.
-- Use background mode for independent long-running work that can proceed while the parent continues orchestration.
-- Use `get_subagent_result` with waiting enabled to retrieve background results before relying on them.
-- Use `steer_subagent` only when a running child must be redirected with clarified scope, constraints, or stop instructions.
+Before using the simplified path, record a short rationale covering:
 
-## Child Prompt Rules
+- why the change is tiny or inseparable;
+- why child delegation or a full `/tmp/pi-plans/` plan would add more risk or overhead than value;
+- which files are in scope;
+- what validation will still run.
 
-Every child prompt must be self-contained and include:
+Even on the simplified path:
 
-- Role.
-- Working directory.
-- Approved design path.
-- Full task text.
-- Relevant context and files.
-- Before you begin criteria for reporting `NEEDS_CONTEXT` before work starts.
-- Permissions for edits, commands, and commits.
-- Escalation rules for `NEEDS_CONTEXT` and `BLOCKED`.
-- Self-review requirements, required for implementers and encouraged for other roles.
-- Required report format.
+- the approved design and explicit implementation request are still required;
+- repository instructions and local status must still be checked;
+- a dedicated git worktree branch is still required before edits in a git repository;
+- user changes must still be preserved;
+- final diff review, validation, and handoff are still required.
 
-## Child Output Discipline
+If any subagent is used on the simplified path, all child output rules below still apply.
 
-- Wait for and read an explicit final status/report from every delegated child before relying on or summarizing that child.
-- Do not infer child completion from quiet event logs, file diffs, parent-side validation, or tool silence.
-- If a child output lacks an explicit final status/report, treat that child as incomplete or failed; wait, start a replacement with a clarified prompt, or report the failure.
-- Verify relevant files or diffs after child implementation before review or integration decisions.
+## Subagent Requirements
 
-## Status Handling
+Prefer Pi subagents for separable exploration, implementation, review, and validation work. Spawn visual-mode child Pi instances when supported by the current tooling and user preference, but do not block solely because visual mode is unavailable.
 
-General child statuses:
+For every child Pi agent:
 
-- `DONE`: read output, inspect relevant files/diff, then proceed.
-- `DONE_WITH_CONCERNS`: resolve correctness or scope concerns before review; record minor concerns.
-- `NEEDS_CONTEXT`: provide missing context and start a replacement or continue with a clarified prompt.
-- `BLOCKED`: change something before retrying; provide context, split the task, change role, or ask the user.
+- provide a self-contained prompt with role, working directory, approved design path, plan path when relevant, exact task, file permissions, validation commands, escalation rules, and required final report format;
+- do not allow the child to infer requirements from hidden parent context;
+- wait for and read an explicit final status/report before relying on that child;
+- do not infer completion from file diffs, quiet logs, validation success, or tool silence;
+- treat missing or unclear final status as incomplete until resolved.
 
-Reviewer statuses:
+If a child reports `NEEDS_CONTEXT` or `BLOCKED`, clarify, split, reroute, or ask the user as appropriate. Never retry the same blocked prompt unchanged.
 
-- `SPEC_COMPLIANT`: proceed to code quality review.
-- `SPEC_ISSUES_FOUND`: send issues to an implementer/fix child, then repeat spec review.
-- `QUALITY_APPROVED`: proceed to integration or next task.
-- `QUALITY_ISSUES_FOUND`: send issues to an implementer/fix child, then repeat quality review after fixes.
+## Delegated Skill Responsibilities
 
-Never retry the same blocked prompt unchanged.
+- `pi-writing-plans` owns plan creation, task boundaries, dependencies, validation commands, review gates, parallel-safety rationale, and plan self-review.
+- `pi-subagent-driven-development` owns plan execution with child implementers, spec reviewers, code-quality reviewers, validation analysts, explicit status handling, and parent inspection between gates.
+- `pi-finishing-development-branch` owns final validation, diff review, handoff summary, and next-action reporting.
 
-## Validation
+Do not copy those detailed workflows here. If their instructions conflict with the safety gates in this coordinator, the stricter safety gate applies.
 
-Parent runs final validation. For this NixOS flake, typical commands are:
+## Final Handoff
 
-```bash
-nix-instantiate --parse modules/nixos/pi/default.nix
-nix flake check
-nix flake show
-```
+The final response should include:
 
-Host rebuilds are only run when requested or appropriate.
-
-## Handoff
-
-Final response includes:
-
-- Worktree path and branch.
-- Summary of changes.
-- Subagent batches started, roles, tasks, final statuses, and which work was parallelized.
-- Tasks intentionally serialized or parent-handled, with safety/dependency rationale.
-- Validation commands and outcomes.
-- Known issues or follow-ups.
-- Manual user actions, if any.
+- worktree path and branch;
+- approved design path and plan path, if a plan was created;
+- whether the full or simplified path was used, with rationale for simplified work;
+- summary of changes;
+- child Pi roles/tasks and explicit final statuses that were read;
+- validation commands and outcomes;
+- known issues, follow-ups, or manual user actions.
