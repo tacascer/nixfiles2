@@ -11,9 +11,10 @@ Use this skill after a brainstorming design has been approved and the user expli
 
 - Do not implement without an approved design and explicit implementation request.
 - In a git repository, create and work from a dedicated `git worktree` branch before code changes.
-- If inside tmux, spawn at least one child Pi instance window in the parent-scoped tmux session before substantive implementation edits.
-- Parent Pi owns final correctness, integration, validation, and user-facing decisions.
-- Child Pi outputs are advisory until the parent reads their event/output files and verifies relevant files or diffs.
+- If inside tmux, spawn child Pi instances for every safely separable exploration, implementation, review, or validation task before the parent performs substantive implementation edits.
+- Prefer delegation over parent-handled implementation. Parent direct edits should be limited to orchestration glue, final integration, conflict resolution, tiny inseparable edits, or cases where delegation is unsafe.
+- Parent Pi owns orchestration, final correctness, integration, validation, and user-facing decisions.
+- Child Pi outputs are advisory until the parent reads an explicit final report/status from each child and verifies relevant files or diffs.
 
 ## Required Flow
 
@@ -22,18 +23,42 @@ Use this skill after a brainstorming design has been approved and the user expli
 3. Check repository status and preserve user changes.
 4. Create a dedicated worktree branch and continue from that worktree.
 5. Create `todo` items for implementation, child delegation, review, validation, and handoff.
-6. Spawn at least one child Pi instance window in the parent-scoped tmux session with a self-contained role prompt.
-7. Use role skills for child prompts:
-   - `child-pi-explorer` for unclear work or context research.
-   - `child-pi-implementer` for bounded implementation.
-   - `child-pi-spec-reviewer` after implementation.
-   - `child-pi-code-quality-reviewer` only after spec review passes.
-   - `child-pi-validation-analyst` for validation failures.
-8. Read child outputs/events before relying on findings or changes.
-9. For implementation tasks, run review gates in order: spec compliance, then code quality.
-10. Integrate changes and reconcile conflicts.
-11. Run final validation in the parent session.
-12. Review final diff and summarize handoff.
+6. Build a dependency graph from the approved design:
+   - identify implementation tasks, impacted files, validation needs, and review scopes;
+   - mark dependencies between tasks and review gates;
+   - mark each task as parallel-safe, serialized, or parent-handled with a short rationale.
+7. If boundaries, ownership, or affected files are unclear, spawn a parallel explorer wave before implementation planning is finalized.
+8. Spawn parallel child implementer waves for independent, non-overlapping implementation tasks. Serialize only tasks that depend on unfinished work, have overlapping edit ownership, require parent-only judgment, or are too small/inseparable to delegate safely.
+9. After each implementation wave, read every child's explicit final report, inspect relevant files or diffs, and perform parent integration or conflict resolution.
+10. For implementation tasks, run review gates in order:
+    - spawn spec reviewer children after implementation is complete for their assigned scope;
+    - spawn code-quality reviewer children only after spec compliance passes for that scope.
+11. Repeat fix/review waves as needed, using implementer children for bounded fixes whenever safe.
+12. Run final validation in the parent session.
+13. If validation fails and the cause is not trivial and inseparable, spawn one or more validation analyst children with exact commands, logs, and relevant context; read their explicit final reports before choosing fixes.
+14. Review final diff and summarize handoff.
+
+## Role Selection
+
+Use role skills for child prompts:
+
+- `child-pi-explorer` for unclear work, context research, decomposition, or ownership discovery.
+- `child-pi-implementer` for bounded implementation and bounded fixes.
+- `child-pi-spec-reviewer` after implementation is complete for the assigned scope.
+- `child-pi-code-quality-reviewer` only after spec review passes for the assigned scope.
+- `child-pi-validation-analyst` for validation failures.
+
+Child agents should not infer requirements from the parent conversation.
+
+## Parallelization Discipline
+
+- Prefer breadth-first parallel waves of children over one-at-a-time delegation whenever tasks do not depend on each other.
+- A task is parallel-safe when it has clear acceptance criteria, clear file/ownership boundaries, no dependency on an unfinished task, and no expected overlap with another active edit.
+- Do not parallelize dependent review gates: spec review happens after implementation; code-quality review happens only after spec compliance passes.
+- Do not assign overlapping edits in the same worktree to multiple children unless ownership is explicitly partitioned and conflicts are acceptable.
+- For large independent work with expected conflicts, consider separate child worktrees or branches, but do not make that the default.
+- Keep parent implementation limited. If a substantial task is parent-handled or serialized instead of delegated/parallelized, record the safety, dependency, or scope rationale for the handoff.
+- When a child reports `NEEDS_CONTEXT` or `BLOCKED`, clarify the task, split it, change role, or ask the user if needed; never retry a blocked prompt unchanged.
 
 ## Child Prompt Rules
 
@@ -50,7 +75,12 @@ Every child prompt must be self-contained and include:
 - Self-review requirements, required for implementers and encouraged for other roles.
 - Required report format.
 
-Child agents should not infer requirements from the parent conversation.
+## Child Output Discipline
+
+- Wait for and read an explicit final status/report from every spawned child before relying on or summarizing that child.
+- Do not infer child completion from quiet event logs, file diffs, parent-side validation, or event silence.
+- If a child output lacks an explicit final status/report, treat that child as incomplete or failed; wait, respawn with a clarified prompt, or report the failure.
+- Verify relevant files or diffs after child implementation before review or integration decisions.
 
 ## Status Handling
 
@@ -88,7 +118,8 @@ Final response includes:
 
 - Worktree path and branch.
 - Summary of changes.
-- Child agents spawned and roles/results.
+- Child batches spawned, roles, tasks, final statuses, and which work was parallelized.
+- Tasks intentionally serialized or parent-handled, with safety/dependency rationale.
 - Validation commands and outcomes.
 - Known issues or follow-ups.
 - Manual user actions, if any.
