@@ -147,7 +147,7 @@ export default function (pi: ExtensionAPI) {
 		description: "Start an independent Pi agent in a tmux window within the session scoped to this parent Pi session, and return child output and JSONL event paths.",
 		promptSnippet: "Spawn an independent Pi agent in a new tmux window within this parent Pi session's tmux session, with JSONL status events.",
 		promptGuidelines: [
-			"Use spawn_pi_instance when work can be parallelized, delegated, run in the background, or isolated from the main context as a well-defined subtask and the parent session is inside tmux."
+			"Use spawn_pi_instance when work can be parallelized, delegated, run in the background, or isolated from the main context as a well-defined subtask and the parent session is inside tmux.",
 			"Use context-isolated child instances for bounded subtasks whose detailed exploration, logs, or intermediate reasoning would unnecessarily pollute the parent conversation.",
 			"Good candidates include focused research, inspection, validation, or implementation subtasks with clear success criteria.",
 			"Give spawn_pi_instance a self-contained, bounded task prompt; include all necessary context because the child instance should not depend on the parent conversation.",
