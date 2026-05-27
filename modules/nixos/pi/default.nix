@@ -78,7 +78,7 @@ let
       fi
       window_name="pi-$window_suffix"
       env_exports="export PI_PARENT_OUTPUT_FILE=$(printf '%q' "$output_file"); "
-      for name in PI_PARENT_SESSION_ID PI_PARENT_JOB_ID PI_PARENT_EVENT_FILE; do
+      for name in PI_PARENT_SESSION_ID PI_PARENT_JOB_ID PI_PARENT_EVENT_FILE PI_PARENT_IPC_ENDPOINT; do
         if [[ -n "''${!name:-}" ]]; then
           env_exports+="export $name=$(printf '%q' "''${!name}"); "
         fi
