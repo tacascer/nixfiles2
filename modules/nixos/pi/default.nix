@@ -60,6 +60,7 @@ in
         "npm:pi-web-access@0.10.7"
         "npm:@samfp/pi-memory@1.3.2"
         "npm:@tintinweb/pi-subagents@0.8.0"
+        "npm:context-mode@1.0.151"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
     };
