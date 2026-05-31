@@ -91,6 +91,10 @@
 
           visuals.indent-blankline.enable = true;
 
+          extraPackages = [
+            pkgs.starpls
+          ];
+
           extraLuaFiles = [
             (pkgs.writeText "highlight-yank.lua" ''
               vim.api.nvim_create_autocmd("TextYankPost", {
@@ -98,6 +102,36 @@
                   vim.highlight.on_yank()
                 end,
               })
+            '')
+            (pkgs.writeText "starpls.lua" ''
+              vim.filetype.add({
+                extension = {
+                  bzl = "bzl",
+                  star = "bzl",
+                },
+                filename = {
+                  BUILD = "bzl",
+                  ["BUILD.bazel"] = "bzl",
+                  WORKSPACE = "bzl",
+                  ["WORKSPACE.bazel"] = "bzl",
+                  ["MODULE.bazel"] = "bzl",
+                },
+              })
+
+              local starpls_config = {
+                cmd = { "${pkgs.starpls}/bin/starpls" },
+                filetypes = { "bzl" },
+              }
+
+              if vim.lsp and vim.lsp.config and vim.lsp.enable then
+                starpls_config.root_markers = { "MODULE.bazel", "WORKSPACE", "WORKSPACE.bazel", ".git" }
+                vim.lsp.config("starpls", starpls_config)
+                vim.lsp.enable("starpls")
+              else
+                local lspconfig = require("lspconfig")
+                starpls_config.root_dir = lspconfig.util.root_pattern("MODULE.bazel", "WORKSPACE", "WORKSPACE.bazel", ".git")
+                lspconfig.starpls.setup(starpls_config)
+              end
             '')
           ];
 
