@@ -764,7 +764,26 @@
             markdown.enable = true;
             typescript.enable = true;
             kotlin.enable = true;
-            rust.enable = true;
+            rust = {
+              enable = true;
+              lsp.opts = ''
+                ['rust-analyzer'] = {
+                  files = {
+                    excludeDirs = {
+                      ".direnv",
+                      ".git",
+                      ".worktrees",
+                      "bazel-bin",
+                      "bazel-out",
+                      "bazel-testlogs",
+                      "bazel-bazel-repo",
+                      "node_modules",
+                      "target",
+                    },
+                  },
+                },
+              '';
+            };
             go.enable = true;
             html.enable = true;
             css.enable = true;
