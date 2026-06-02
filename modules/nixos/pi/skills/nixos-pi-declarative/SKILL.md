@@ -60,7 +60,7 @@ sudo nixos-rebuild switch --flake ~/myNixOS#framework
 
 ## Current declarative Pi packages
 
-- `npm:@tintinweb/pi-subagents@0.8.0` provides the `Agent`, `get_subagent_result`, `steer_subagent`, and `/agents` delegation workflow. Keep this package pinned unless the user explicitly requests an update.
+- `npm:@tintinweb/pi-subagents@0.10.0` provides the `Agent`, `get_subagent_result`, `steer_subagent`, and `/agents` delegation workflow. Keep this package pinned unless the user explicitly requests an update.
 
 ## Current important files
 
