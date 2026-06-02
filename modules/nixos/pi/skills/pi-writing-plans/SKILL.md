@@ -1,11 +1,11 @@
 ---
 name: pi-writing-plans
-description: Convert an approved Pi design from /tmp/pi-designs into a temporary, reviewable implementation plan under /tmp/pi-plans with explicit task boundaries, validation, dependencies, and subagent execution guidance.
+description: Convert an approved Pi design from /tmp/pi-designs into a temporary, reviewable implementation plan under /tmp/pi-plans after either an explicit planning/implementation request or a direct approved-spec handoff from brainstorming.
 ---
 
 # Pi Writing Plans
 
-Use this skill after a user has approved a design artifact under `/tmp/pi-designs/...` and has explicitly asked for implementation planning or implementation. The output is a plan file outside the tracked worktree by default, normally `/tmp/pi-plans/YYYY-MM-DD-<topic>-plan.md`.
+Use this skill after a user has approved a design artifact under `/tmp/pi-designs/...` and either explicitly asked for implementation planning/implementation or the brainstorming workflow directly handed off the approved written spec. The output is a plan file outside the tracked worktree by default, normally `/tmp/pi-plans/YYYY-MM-DD-<topic>-plan.md`.
 
 ## Purpose
 
@@ -16,10 +16,12 @@ Turn an approved design into a concrete implementation plan that is detailed eno
 Before writing a plan, verify:
 
 - The approved design path is exact and exists under `/tmp/pi-designs/` unless the user explicitly provided another location.
-- The user has approved the design and requested planning or implementation.
-- The target repository working directory and dedicated worktree path are known.
+- The user has approved the design, and either requested planning/implementation or the brainstorming workflow directly handed off the approved written spec.
+- The target repository working directory and dedicated worktree path are known when repository edits will be needed.
 - Relevant repository instructions have been inspected.
 - The plan destination is outside the tracked worktree by default, usually under `/tmp/pi-plans/`.
+- No mutable Pi install commands are required.
+- No implementation code will be written before planning gates and execution gates are complete.
 
 If any item is missing and cannot be inferred safely from explicit user instructions, stop and ask for context rather than inventing it.
 
@@ -113,4 +115,4 @@ Before presenting the plan path, read the plan as if a different parent agent wi
 
 ## Output to Parent/User
 
-Report only a concise summary plus the exact plan path. Include any concerns that affect safe execution. Do not begin implementation from this skill unless another skill or the user explicitly instructs execution.
+Report only a concise summary plus the exact plan path. Include any concerns that affect safe execution. Do not begin implementation code from this skill. Planning may be invoked by explicit request or direct brainstorming handoff, but implementation execution requires the appropriate follow-on skill or explicit user instruction after the plan gates are satisfied.

@@ -1,25 +1,29 @@
 ---
 name: post-brainstorming-implementation
-description: Use after an approved brainstorming design and explicit user request to implement. Coordinates worktree setup and delegates planning, subagent-driven development, finishing, validation, and handoff to Pi workflow skills.
+description: Use after an approved brainstorming design plus either an explicit user implementation request or a direct approved-spec handoff from brainstorming. Direct handoff authorizes planning only; implementation execution still needs the normal execution gate.
 ---
 
 # Post-Brainstorming Implementation
 
-Use this skill only after the user has approved a brainstorming design and then explicitly asked to implement it.
+Use this skill after the user has approved a brainstorming design and either explicitly asked to implement it or the brainstorming workflow directly hands off an approved written spec.
 
-This is the coordinator and safety gate for implementation. It should route the work through the focused skills `pi-writing-plans`, `pi-subagent-driven-development`, and `pi-finishing-development-branch` instead of duplicating their full workflows here.
+A direct brainstorming handoff authorizes implementation planning only. It does not by itself authorize implementation execution. Continue from planning into `pi-subagent-driven-development` only when the user explicitly requested implementation/execution or the planning workflow's own approval/execution gate has been satisfied.
+
+This is the coordinator and safety gate for post-brainstorming work. It should route the work through the focused skills `pi-writing-plans`, `pi-subagent-driven-development`, and `pi-finishing-development-branch` instead of duplicating their full workflows here.
 
 ## Required Preconditions
 
 Before any implementation work:
 
 - Confirm there is an approved design artifact, normally under `/tmp/pi-designs/`.
-- Confirm the user explicitly requested implementation after approving that design.
+- Confirm either the user explicitly requested implementation after approving that design, or the brainstorming workflow directly handed off the approved written spec after user approval.
+- If entry is a direct brainstorming handoff without an explicit implementation/execution request, treat it as authorization for planning only until the appropriate plan approval/execution gate is satisfied.
 - Read the approved design completely.
 - Inspect applicable local instructions, including repository `AGENTS.md`, `CLAUDE.md` when present, and nested guidance for touched paths.
 - Check repository status and identify user changes before modifying files.
 - Preserve user changes. Do not overwrite, move, stash, or rebase ambiguous existing work without explicit user direction.
-- In a git repository, create or verify a dedicated `git worktree` branch before code changes. Continue implementation from that worktree.
+- In a git repository, create or verify a dedicated `git worktree` branch before repository edits for planning or implementation when repository rules require it. Continue implementation from that worktree.
+- Do not write implementation code before the planning gates complete.
 - Do not use mutable Pi install commands; manage Pi configuration and skills declaratively through the repository.
 
 If any precondition is missing or ambiguous, stop and ask for clarification instead of implementing.
@@ -28,12 +32,14 @@ If any precondition is missing or ambiguous, stop and ask for clarification inst
 
 After the gates pass:
 
-1. Establish the worktree path and branch, then operate from that worktree.
-2. Create parent todo items for planning, implementation, reviews, validation, and handoff.
+1. Establish the worktree path and branch when repository edits will be needed, then operate from that worktree.
+2. Create parent todo items for planning, review, and any later execution/validation/handoff stages that are authorized.
 3. Invoke `pi-writing-plans` to convert the approved design into a temporary implementation plan under `/tmp/pi-plans/`.
 4. Read and sanity-check the plan for scoped tasks, file ownership, dependencies, validation commands, and review gates.
-5. Invoke `pi-subagent-driven-development` to execute the plan with child Pi agents where useful.
-6. Invoke `pi-finishing-development-branch` for final validation, diff review, branch/worktree summary, known issues, and next actions.
+5. If implementation execution is authorized by explicit user request or the plan workflow's execution gate, invoke `pi-subagent-driven-development` to execute the plan with child Pi agents where useful.
+6. After authorized execution completes, invoke `pi-finishing-development-branch` for final validation, diff review, branch/worktree summary, known issues, and next actions.
+
+If only direct brainstorming handoff is authorized, stop after the planning workflow produces the plan and requests whatever approval or execution instruction that workflow requires.
 
 Keep parent work focused on orchestration, safety decisions, integration, and user-facing judgment.
 
@@ -50,9 +56,10 @@ Before using the simplified path, record a short rationale covering:
 
 Even on the simplified path:
 
-- the approved design and explicit implementation request are still required;
+- the approved design and either an explicit implementation request or direct approved-spec handoff from brainstorming are still required;
+- direct approved-spec handoff alone authorizes only the planning portion of the simplified path, not implementation execution;
 - repository instructions and local status must still be checked;
-- a dedicated git worktree branch is still required before edits in a git repository;
+- a dedicated git worktree branch is still required before repository edits in a git repository when repository rules require it;
 - user changes must still be preserved;
 - final diff review, validation, and handoff are still required.
 
@@ -78,7 +85,7 @@ If a child reports `NEEDS_CONTEXT` or `BLOCKED`, clarify, split, reroute, or ask
 - `pi-subagent-driven-development` owns plan execution with child implementers, spec reviewers, code-quality reviewers, validation analysts, explicit status handling, and parent inspection between gates.
 - `pi-finishing-development-branch` owns final validation, diff review, handoff summary, and next-action reporting.
 
-Do not copy those detailed workflows here. If their instructions conflict with the safety gates in this coordinator, the stricter safety gate applies.
+Do not copy those detailed workflows here. If their instructions conflict with the safety gates in this coordinator, the stricter safety gate applies. In all cases, planning may follow written-spec approval, but implementation code may not begin before the plan and execution gates allow it.
 
 ## Final Handoff
 
