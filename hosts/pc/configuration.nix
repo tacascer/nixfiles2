@@ -18,6 +18,7 @@
     flake.nixosModules.podman
     flake.nixosModules.limine
     flake.nixosModules.tmux
+    flake.nixosModules.zellij
     flake.nixosModules.yazi
     flake.nixosModules.discord
     flake.nixosModules.firefox
