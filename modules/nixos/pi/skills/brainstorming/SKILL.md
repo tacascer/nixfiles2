@@ -1,11 +1,11 @@
 ---
 name: brainstorming
-description: "Mandatory before any creative, design-sensitive, behavioral, refactoring, configuration, Pi workflow, or NixOS change. Produces an approved written spec/design before planning or implementation; even simple work needs this design gate."
+description: "Mandatory before any creative, design-sensitive, behavioral, refactoring, configuration, Pi workflow, or NixOS change. Produces an approved written spec/design before handing off to the post-brainstorming implementation workflow; even simple work needs this design gate."
 ---
 
 # Brainstorming
 
-Use this skill to turn a rough request into an approved written spec/design before implementation planning. This is a Pi-native adaptation of the Superpowers brainstorming workflow.
+Use this skill to turn a rough request into an approved written spec/design before handing off to the post-brainstorming implementation workflow. This is a Pi-native adaptation of the Superpowers brainstorming workflow.
 
 ## Mandatory Trigger
 
@@ -17,7 +17,7 @@ Anti-pattern: **"This is too simple to need a design."** Even small or obvious c
 
 Do not write implementation code, scaffold implementation files, edit existing behavior, or run mutating implementation commands while using this skill. Reading files and inspecting project state are allowed.
 
-A spec/design must be explored, discussed, written, self-reviewed, presented for written-spec review, and explicitly approved by the user before implementation planning. After written spec approval, invoke or hand off to `pi-writing-plans`; do not start implementation code.
+A spec/design must be explored, discussed, written, self-reviewed, presented for written-spec review, and explicitly approved by the user before any post-brainstorming planning or implementation workflow begins. After written spec approval, invoke or hand off to `post-brainstorming-implementation`; do not start implementation code from brainstorming itself.
 
 For changes in a git repository, remember the repository worktree safety rule for the later planning/implementation phase: before repository edits for planning or implementation, create and work from a dedicated `git worktree` branch when required by repository instructions. Brainstorming may inspect the current checkout; implementation must happen in the dedicated worktree.
 
@@ -29,7 +29,7 @@ Brainstorming produces a **spec/design document**. It explains what should be bu
 
 Planning produces a separate **implementation plan**. It converts the approved spec into ordered engineering tasks, exact file boundaries, dependencies, validation commands, review gates, and Pi subagent execution guidance.
 
-Do not blur these artifacts. Brainstorming stops at an approved written spec and hands off to planning; planning must happen before implementation code.
+Do not blur these artifacts. Brainstorming stops at an approved written spec and hands off to `post-brainstorming-implementation`, which routes through planning before any implementation code begins.
 
 ## Required Checklist
 
@@ -45,7 +45,7 @@ Complete these stages in order:
 6. **Write `/tmp` spec/design doc** — save the selected design under `/tmp/pi-designs/` outside the tracked worktree by default.
 7. **Self-review spec/design** — reread the written file and fix placeholders, contradictions, ambiguity, scope creep, missing validation expectations, and premature implementation details.
 8. **User reviews written spec/design** — present the path and concise summary; ask whether the user approves the written spec or wants changes.
-9. **Transition to implementation planning** — after written spec approval, invoke or hand off to `pi-writing-plans`; do not start implementation code.
+9. **Transition to post-brainstorming implementation workflow** — after written spec approval, invoke or hand off to `post-brainstorming-implementation`; do not start implementation code from brainstorming itself.
 
 ## Context Exploration with Child Pi Subagents
 
@@ -122,7 +122,7 @@ Size the spec/design to the complexity of the work. Cover the relevant subset of
 - migration or compatibility concerns
 - validation/testing strategy
 - high-level implementation sequence
-- explicit next-step trigger for implementation planning
+- explicit next-step trigger for the post-brainstorming implementation workflow
 
 The spec/design must be specific enough that a later implementation plan can derive file boundaries, acceptance criteria, and validation commands from it.
 
@@ -149,7 +149,7 @@ In the Pi conversation, do not dump the full spec/design document. Present only:
 - notable risks or open decisions, if any
 - a clear question asking whether the user approves the written spec/design or wants changes
 
-If the user approves, acknowledge approval and invoke or hand off to `pi-writing-plans`. Do not start implementation code.
+If the user approves, acknowledge approval and invoke or hand off to `post-brainstorming-implementation`. Do not start implementation code from brainstorming itself; the coordinator owns planning and any later implementation execution gates.
 
 If the user requests changes, update the same `/tmp` design file, rerun self-review, and ask for written-spec approval again.
 
@@ -161,5 +161,5 @@ If the user requests changes, update the same `/tmp` design file, rerun self-rev
 - Prefer pi-subagents for read-only exploration and optional design/spec review when available.
 - Spawn child Pi instances in visual mode when supported by the current tooling and user preference.
 - Read an explicit final report/status from every child before relying on child findings.
-- Do not use implementation children, edit implementation files, or run mutating implementation commands before written spec approval, planning, and a later implementation execution gate.
+- Do not use implementation children, edit implementation files, or run mutating implementation commands from brainstorming itself. After written spec approval, hand off to `post-brainstorming-implementation`, which owns planning and any later implementation execution gates.
 - Keep design artifacts under `/tmp/pi-designs/`, not tracked project docs, unless the user explicitly asks otherwise.
