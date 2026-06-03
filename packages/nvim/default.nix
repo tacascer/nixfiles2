@@ -785,6 +785,7 @@
               '';
             };
             go.enable = true;
+            haskell.enable = true;
             html.enable = true;
             css.enable = true;
             sql.enable = true;
