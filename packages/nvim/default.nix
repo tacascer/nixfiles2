@@ -610,6 +610,32 @@
               desc = "Buffer explorer";
             }
 
+            # --- Terminal ---
+            {
+              key = "<C-/>";
+              mode = "n";
+              action = "<cmd>ToggleTerm direction=float<CR>";
+              desc = "Toggle floating terminal";
+            }
+            {
+              key = "<C-_>";
+              mode = "n";
+              action = "<cmd>ToggleTerm direction=float<CR>";
+              desc = "Toggle floating terminal (fallback)";
+            }
+            {
+              key = "<leader>ft";
+              mode = "n";
+              action = "<cmd>ToggleTerm direction=float<CR>";
+              desc = "Terminal (float)";
+            }
+            {
+              key = "<leader>fT";
+              mode = "n";
+              action = "<cmd>ToggleTerm direction=horizontal<CR>";
+              desc = "Terminal (horizontal)";
+            }
+
             # --- Git ---
             {
               key = "<leader>gg";
