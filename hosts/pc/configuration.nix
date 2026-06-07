@@ -23,6 +23,7 @@
     flake.nixosModules.discord
     flake.nixosModules.firefox
     flake.nixosModules.obsidian
+    flake.nixosModules.signal
     flake.nixosModules.opencode
     flake.nixosModules.claude-code
     flake.nixosModules.pi
