@@ -22,7 +22,7 @@
     flake.nixosModules."1password"
     flake.nixosModules.node
     flake.nixosModules.alacritty
-    flake.nixosModules.podman
+    flake.nixosModules.docker
     flake.nixosModules.tmux
     flake.nixosModules.zellij
     flake.nixosModules.yazi
