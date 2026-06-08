@@ -55,8 +55,8 @@ in
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
-        "npm:@juicesharp/rpiv-todo@1.17.1"
-        "npm:@juicesharp/rpiv-btw@1.17.1"
+        "npm:@juicesharp/rpiv-todo@1.18.2"
+        "npm:@juicesharp/rpiv-btw@1.18.2"
         "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
         "npm:pi-web-access@0.10.7"
         "npm:@samfp/pi-memory@1.3.4"
