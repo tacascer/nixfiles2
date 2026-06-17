@@ -59,7 +59,7 @@ in
         "npm:@juicesharp/rpiv-btw@1.18.2"
         "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
         "npm:pi-web-access@0.10.7"
-        "npm:@samfp/pi-memory@1.3.4"
+        "npm:pi-memory@0.3.14"
         "npm:@tintinweb/pi-subagents@0.10.0"
         "npm:context-mode@1.0.162"
       ];
@@ -88,10 +88,12 @@ in
       ".pi/agent/skills/dispatching-parallel-agents".source = ./skills/dispatching-parallel-agents;
       ".pi/agent/skills/executing-plans".source = ./skills/executing-plans;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
-      ".pi/agent/skills/post-brainstorming-implementation".source = ./skills/post-brainstorming-implementation;
+      ".pi/agent/skills/post-brainstorming-implementation".source =
+        ./skills/post-brainstorming-implementation;
       ".pi/agent/skills/pi-writing-plans".source = ./skills/pi-writing-plans;
       ".pi/agent/skills/pi-subagent-driven-development".source = ./skills/pi-subagent-driven-development;
-      ".pi/agent/skills/pi-finishing-development-branch".source = ./skills/pi-finishing-development-branch;
+      ".pi/agent/skills/pi-finishing-development-branch".source =
+        ./skills/pi-finishing-development-branch;
       ".pi/agent/skills/child-pi-explorer".source = ./skills/child-pi-explorer;
       ".pi/agent/skills/child-pi-implementer".source = ./skills/child-pi-implementer;
       ".pi/agent/skills/child-pi-spec-reviewer".source = ./skills/child-pi-spec-reviewer;
