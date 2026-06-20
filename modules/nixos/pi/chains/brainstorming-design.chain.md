@@ -35,7 +35,7 @@ Original request:
 Scout context:
 {outputs.context}
 
-Stay read-only. Identify assumptions, missing user decisions, and wording that might accidentally bypass the written-spec approval gate.
+Stay read-only. Do not edit, modify, write, delete, create, patch, apply, or otherwise change files. Identify assumptions, missing user decisions, and wording that might accidentally bypass the written-spec approval gate.
 
 Your output must include:
 
@@ -61,7 +61,7 @@ Scout context:
 Gate review:
 {outputs.gate_review}
 
-Stay read-only. Do not create an implementation plan, do not instruct any child to mutate repository files, and do not authorize implementation.
+Stay read-only. Do not edit, modify, write, delete, create, patch, apply, or otherwise change files. Do not create an implementation plan, do not instruct any child to mutate repository files, and do not authorize implementation.
 
 Your final handoff must be parent-facing and include these sections:
 
