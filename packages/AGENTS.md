@@ -25,6 +25,7 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
 - `noctalia`
 - `nvim`
 - `omx`
+- `qmd`
 
 ## Platform Gating
 - Keep the systems matrix explicit: `x86_64-linux`, `aarch64-linux`, `aarch64-darwin`.
