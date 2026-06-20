@@ -7,13 +7,15 @@ description: Slash-command wrapper around the saved brainstorming-design chain f
 
 Use this skill as a thin wrapper for the saved `brainstorming-design` chain before implementation planning or execution has been approved.
 
+Pi skill commands do not expose a separate named request parameter. When this skill is invoked, treat the skill-command arguments appended as `User: <args>` as the chain task. If the invocation has no appended arguments, use the current user request that caused the skill to load as the chain task.
+
 When chain slash commands are available in the current Pi harness, run or request:
 
 ```text
-/run-chain brainstorming-design -- <user args>
+/run-chain brainstorming-design -- <chain task>
 ```
 
-Pass through the user's arguments unchanged unless a brief clarification is required to form the chain request.
+Use the exact chain task from the invocation/current request unless a brief clarification is required to form a meaningful read-only design request.
 
 ## Safe Fallback
 
