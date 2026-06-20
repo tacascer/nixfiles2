@@ -1,14 +1,7 @@
 {
   "name": "brainstorming-implement",
-  "description": "Approved-spec implementation workflow: gate approval, plan concretely, review for placeholders, fan out isolated implementers, then review spec compliance and code quality.",
+  "description": "Approved-spec implementation workflow: plan concretely, review for placeholders, fan out isolated implementers, then review spec compliance and code quality.",
   "chain": [
-    {
-      "agent": "oracle",
-      "phase": "Approval verification",
-      "label": "Check approved spec gate",
-      "as": "approval_check",
-      "task": "Read-only task: verify whether this request clearly provides an explicitly approved brainstorming spec/design path and a post-approval implementation request.\n\nOriginal request:\n{task}\n\nRequired gate: the request must include an approved written spec/design path, normally under `/tmp/pi-designs/`, and must state or imply that the spec has been approved. If approval or the spec path is missing, report that later steps must stop. Do not edit files, create implementation changes, run mutating commands, or begin implementation.\n\nExplicit non-bypass rule: this chain cannot approve its own spec, cannot replace user written-spec approval, and cannot authorize work outside the approved spec.\n\nYour output must include:\n\n- `Spec path`: the explicit approved spec/design path, or `Missing`.\n- `Approval status`: whether explicit approval is present, missing, or ambiguous.\n- `Blocking issues`: any missing context that prevents safe handoff.\n- `Gate result`: `PASS` only when both the path and approval are clear; otherwise `STOP`."
-    },
     {
       "agent": "planner",
       "phase": "Planning",
@@ -17,7 +10,7 @@
       "output": "brainstorming-implement/implementation-plan.md",
       "outputMode": "file-only",
       "progress": true,
-      "task": "Create a concrete implementation plan for the approved spec.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nIf `Gate result` is not `PASS`, do not plan implementation. Return `STOP` with the missing approval/spec details.\n\nIf the gate passes, read the approved spec path completely, inspect repository instructions and relevant project context, and produce an implementation-ready plan. The plan must be specific enough for independent implementers to execute without inventing missing scope.\n\nYour plan must include:\n\n- Approved spec path and the exact approved scope.\n- Worktree-safety requirements before mutation.\n- Files/modules likely to change and why.\n- Step-by-step implementation tasks with concrete expected edits.\n- Validation commands/checks to run.\n- Explicit non-goals and out-of-scope changes.\n- Assumptions, decisions already settled by the spec, and any blockers that still require parent/user clarification.\n\nDo not modify repository files."
+      "task": "Create a concrete implementation plan for the approved spec.\n\nOriginal request:\n{task}\n\nRead the approved spec path completely, inspect repository instructions and relevant project context, and produce an implementation-ready plan. The plan must be specific enough for independent implementers to execute without inventing missing scope.\n\nYour plan must include:\n\n- Approved spec path and the exact approved scope.\n- Worktree-safety requirements before mutation.\n- Files/modules likely to change and why.\n- Step-by-step implementation tasks with concrete expected edits.\n- Validation commands/checks to run.\n- Explicit non-goals and out-of-scope changes.\n- Assumptions, decisions already settled by the spec, and any blockers that still require parent/user clarification.\n\nDo not modify repository files."
     },
     {
       "agent": "reviewer",
@@ -26,7 +19,7 @@
       "as": "plan_placeholder_review",
       "output": "brainstorming-implement/plan-placeholder-review.md",
       "outputMode": "file-only",
-      "task": "Review the implementation plan for placeholders, vague instructions, invented scope, missing file targets, unresolved decisions, and any language that could let implementers proceed without concrete guidance.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nIf the approval gate did not pass, confirm later steps must stop. If the plan contains placeholders such as TODO/TBD/fill in/decide later, ambiguous acceptance criteria, or missing approved-scope details, return `STOP` and list exact fixes required.\n\nIf the plan is concrete, return `PASS` and summarize the implementation contract that workers must follow.\n\nDo not modify repository files."
+      "task": "Review the implementation plan for placeholders, vague instructions, invented scope, missing file targets, unresolved decisions, and any language that could let implementers proceed without concrete guidance.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nIf the plan contains placeholders such as TODO/TBD/fill in/decide later, ambiguous acceptance criteria, or missing approved-scope details, return `STOP` and list exact fixes required.\n\nIf the plan is concrete, return `PASS` and summarize the implementation contract that workers must follow.\n\nDo not modify repository files."
     },
     {
       "parallel": [
@@ -38,7 +31,7 @@
           "output": "brainstorming-implement/implementation-a.md",
           "outputMode": "file-only",
           "progress": true,
-          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the approval gate is not `PASS` or the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
+          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
         },
         {
           "agent": "worker",
@@ -48,7 +41,7 @@
           "output": "brainstorming-implement/implementation-b.md",
           "outputMode": "file-only",
           "progress": true,
-          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the approval gate is not `PASS` or the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
+          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
         },
         {
           "agent": "worker",
@@ -58,7 +51,7 @@
           "output": "brainstorming-implement/implementation-c.md",
           "outputMode": "file-only",
           "progress": true,
-          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the approval gate is not `PASS` or the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
+          "task": "Implement the approved spec from the concrete plan in an isolated worktree.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nStop immediately without editing if the placeholder review is not `PASS`. Otherwise, implement only the approved scope. You are one independent implementation candidate; do not coordinate with other implementers. Do not expand scope beyond the spec or plan. Run the focused validation from the plan where possible.\n\nReport changed files, validation commands and results, the worktree/branch used, any failures, and remaining risks."
         }
       ],
       "concurrency": 3,
@@ -73,7 +66,7 @@
           "as": "spec_compliance_review",
           "output": "brainstorming-implement/spec-compliance-review.md",
           "outputMode": "file-only",
-          "task": "Review the parallel implementation results for compliance with the approved spec and concrete plan.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nImplementation A:\n{outputs.implementation_a}\n\nImplementation B:\n{outputs.implementation_b}\n\nImplementation C:\n{outputs.implementation_c}\n\nDo not modify repository files. Compare each implementation against the approved spec and plan. Identify missing requirements, scope creep, incorrect behavior, validation gaps, and which implementation, if any, is safest to continue from. Return blockers first, then non-blocking findings."
+          "task": "Review the parallel implementation results for compliance with the approved spec and concrete plan.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nImplementation A:\n{outputs.implementation_a}\n\nImplementation B:\n{outputs.implementation_b}\n\nImplementation C:\n{outputs.implementation_c}\n\nDo not modify repository files. Compare each implementation against the approved spec and plan. Identify missing requirements, scope creep, incorrect behavior, validation gaps, and which implementation, if any, is safest to continue from. Return blockers first, then non-blocking findings."
         },
         {
           "agent": "reviewer",
@@ -82,7 +75,7 @@
           "as": "code_quality_review",
           "output": "brainstorming-implement/code-quality-review.md",
           "outputMode": "file-only",
-          "task": "Review the parallel implementation results for code quality, maintainability, integration risk, simplicity, test quality, and consistency with repository conventions.\n\nOriginal request:\n{task}\n\nApproval check:\n{outputs.approval_check}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nImplementation A:\n{outputs.implementation_a}\n\nImplementation B:\n{outputs.implementation_b}\n\nImplementation C:\n{outputs.implementation_c}\n\nDo not modify repository files. Compare the implementation candidates and call out concrete risks with evidence from worker reports or diffs. Recommend which candidate, if any, should be selected or revised. Return blockers first, then non-blocking findings."
+          "task": "Review the parallel implementation results for code quality, maintainability, integration risk, simplicity, test quality, and consistency with repository conventions.\n\nOriginal request:\n{task}\n\nImplementation plan:\n{outputs.implementation_plan}\n\nPlaceholder review:\n{outputs.plan_placeholder_review}\n\nImplementation A:\n{outputs.implementation_a}\n\nImplementation B:\n{outputs.implementation_b}\n\nImplementation C:\n{outputs.implementation_c}\n\nDo not modify repository files. Compare the implementation candidates and call out concrete risks with evidence from worker reports or diffs. Recommend which candidate, if any, should be selected or revised. Return blockers first, then non-blocking findings."
         }
       ],
       "concurrency": 2
