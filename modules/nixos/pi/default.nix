@@ -60,7 +60,7 @@ in
         "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
         "npm:pi-web-access@0.10.7"
         "npm:pi-memory@0.3.14"
-        "npm:@tintinweb/pi-subagents@0.10.0"
+        "npm:pi-subagents@0.29.0"
         "npm:context-mode@1.0.162"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
@@ -84,7 +84,11 @@ in
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
       ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
+      ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
+      ".pi/agent/chains/brainstorming-implement.chain.md".source = ./chains/brainstorming-implement.chain.md;
       ".pi/agent/skills/brainstorming".source = ./skills/brainstorming;
+      ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
+      ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
       ".pi/agent/skills/dispatching-parallel-agents".source = ./skills/dispatching-parallel-agents;
       ".pi/agent/skills/executing-plans".source = ./skills/executing-plans;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
