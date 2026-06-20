@@ -85,8 +85,8 @@ in
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
       ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
       ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
-      ".pi/agent/chains/brainstorming-implement.chain.md".source =
-        ./chains/brainstorming-implement.chain.md;
+      ".pi/agent/chains/brainstorming-implement.chain.json".source =
+        ./chains/brainstorming-implement.chain.json;
       ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
       ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
