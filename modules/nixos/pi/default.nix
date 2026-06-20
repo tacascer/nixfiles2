@@ -86,11 +86,8 @@ in
       ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
       ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
       ".pi/agent/chains/brainstorming-implement.chain.md".source = ./chains/brainstorming-implement.chain.md;
-      ".pi/agent/skills/brainstorming".source = ./skills/brainstorming;
       ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
       ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
-      ".pi/agent/skills/dispatching-parallel-agents".source = ./skills/dispatching-parallel-agents;
-      ".pi/agent/skills/executing-plans".source = ./skills/executing-plans;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
       ".pi/agent/skills/post-brainstorming-implementation".source =
         ./skills/post-brainstorming-implementation;
@@ -103,14 +100,6 @@ in
       ".pi/agent/skills/child-pi-spec-reviewer".source = ./skills/child-pi-spec-reviewer;
       ".pi/agent/skills/child-pi-code-quality-reviewer".source = ./skills/child-pi-code-quality-reviewer;
       ".pi/agent/skills/child-pi-validation-analyst".source = ./skills/child-pi-validation-analyst;
-      ".pi/agent/skills/receiving-code-review".source = ./skills/receiving-code-review;
-      ".pi/agent/skills/requesting-code-review".source = ./skills/requesting-code-review;
-      ".pi/agent/skills/systematic-debugging".source = ./skills/systematic-debugging;
-      ".pi/agent/skills/test-driven-development".source = ./skills/test-driven-development;
-      ".pi/agent/skills/using-git-worktrees".source = ./skills/using-git-worktrees;
-      ".pi/agent/skills/using-superpowers".source = ./skills/using-superpowers;
-      ".pi/agent/skills/verification-before-completion".source = ./skills/verification-before-completion;
-      ".pi/agent/skills/writing-skills".source = ./skills/writing-skills;
     };
   };
 }
