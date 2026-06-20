@@ -31,6 +31,7 @@
     flake.nixosModules.sudo
     flake.nixosModules.nix-maintenance
     flake.nixosModules.fastfetch
+    flake.nixosModules.qmd
     flake.nixosModules.dev-tools
   ];
 

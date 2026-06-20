@@ -14,6 +14,10 @@
       url = "github:Yeachan-Heo/oh-my-codex/56c93fd3daed9f6043f0bbb65476d355d47083c5";
       flake = false;
     };
+    qmd = {
+      url = "github:tobi/qmd/v2.5.3";
+      flake = false;
+    };
     tmux-nerd-font-window-name = {
       url = "github:joshmedeski/tmux-nerd-font-window-name";
       inputs.nixpkgs.follows = "nixpkgs";
