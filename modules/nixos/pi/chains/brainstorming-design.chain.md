@@ -1,33 +1,33 @@
 ---
 name: brainstorming-design
-description: Read-only pre-approval design assistance that explores context, frames decisions, and preserves the parent-led written-spec approval gate.
+description: Read-only pre-approval design assistance that scouts context, researches the user's request, and plans clarifying questions while preserving the parent-led written-spec approval gate.
 ---
 
 ## scout
 phase: Pre-approval design
-label: Read-only context scan
+label: Read-only request and context scan
 as: context
 
-Read-only task: explore context for this rough request without changing files or running mutating commands:
+Read-only task: explore the immediate context for this rough user request without changing files or running mutating commands:
 
 {task}
 
-Report relevant existing conventions, likely files or modules to inspect later, constraints, risks, unknowns, missing decisions, and success criteria.
+Focus on understanding what the user is asking for and what local context may matter. Report:
 
-Also include:
-
-- `Prioritized clarifying questions`: ordered by the decisions most likely to affect design direction.
-- `Recommended next user-facing question`: exactly one concise question for the parent to ask if more user input is needed; otherwise state `None`.
-- `Candidate design sections`: digestible sections or section groups the parent could later present to the user for validation.
+- `Request summary`: concise restatement of the user's request.
+- `Relevant local context`: existing conventions, likely files/modules/docs to inspect, and any repo-specific constraints.
+- `Initial constraints and risks`: constraints, risks, unknowns, and success criteria apparent from the request or repository context.
+- `Research directions`: concrete topics, files, commands, or documentation areas the researcher should examine next.
+- `Initial question candidates`: possible clarifying questions, ordered by expected impact on the eventual design direction.
 
 Do not edit, scaffold, install, format, apply, or otherwise mutate repository or Pi configuration files. This chain is only design assistance before written-spec approval. Subagents cannot replace the parent/user interaction or approve the design themselves.
 
-## oracle
+## researcher
 phase: Pre-approval design
-label: Gate, unknowns, and presentation review
-as: gate_review
+label: Read-only request research
+as: research
 
-Review the request and the scout context for design risks, missing decisions, and gate compliance.
+Read-only task: research the user's request using the scout findings. Do not change files or run mutating commands.
 
 Original request:
 {task}
@@ -35,22 +35,24 @@ Original request:
 Scout context:
 {outputs.context}
 
-Stay read-only. Do not edit, modify, write, delete, create, patch, apply, or otherwise change files. Identify assumptions, missing user decisions, and wording that might accidentally bypass the written-spec approval gate.
+Investigate the request enough to help the parent ask high-value questions before any design/spec is written. Prefer repository files, project documentation, existing chain/skill conventions, and other authoritative local sources. Use external research only when the request requires it.
 
 Your output must include:
 
-- `Missing decisions / unknowns`: specific items that need parent or user resolution.
-- `Prioritized clarifying questions`: ordered list, highest-impact first.
-- `Recommended next user-facing question`: exactly one concise question for the parent to ask when more user input is needed; otherwise state `None`.
-- `Section presentation guidance`: digestible design sections and a validation prompt for each section, written for the parent to present to the user.
+- `Research summary`: what you learned that materially affects the request.
+- `Evidence and references`: relevant files, modules, docs, conventions, or external references consulted.
+- `Decision points`: choices the user or parent must make before a design can be finalized.
+- `Assumptions to verify`: assumptions that should not be silently baked into the design.
+- `Question inputs for planner`: candidate clarifying questions, grouped by topic and ordered by likely impact.
+- `Risks and constraints`: items the parent should keep visible while questioning the user.
 
-Explicitly remind the parent agent that child/subagent output is advisory only: the parent must ask the user any needed questions, present sections for validation, write the final `/tmp/pi-designs/` design/spec, and obtain explicit user approval before implementation planning or repository changes begin.
+Stay read-only. Do not edit, modify, write, delete, create, patch, apply, or otherwise change files. Explicitly avoid creating an implementation plan or authorizing implementation.
 
 ## planner
 phase: Pre-approval design
-label: Design options and parent handoff
+label: Clarifying question plan and parent handoff
 
-Using the original request, scout context, and oracle review, propose 2-3 high-level design approaches with trade-offs and one recommendation.
+Using the original request, scout context, and researcher findings, plan the questions the parent should ask the user about the request.
 
 Original request:
 {task}
@@ -58,17 +60,17 @@ Original request:
 Scout context:
 {outputs.context}
 
-Gate review:
-{outputs.gate_review}
+Research findings:
+{outputs.research}
 
 Stay read-only. Do not edit, modify, write, delete, create, patch, apply, or otherwise change files. Do not create an implementation plan, do not instruct any child to mutate repository files, and do not authorize implementation.
 
 Your final handoff must be parent-facing and include these sections:
 
-1. `Unknowns and missing decisions`: concise list.
-2. `Prioritized clarifying questions`: ordered list.
-3. `Recommended next user-facing question`: exactly one question when more user input is needed; otherwise `None`.
-4. `Digestible design sections`: proposed sections or section groups the parent can present one at a time.
-5. `Validation prompts`: one prompt per design section for the parent to use when asking the user to confirm or correct the section.
-6. `Recommended approach`: the single recommended high-level direction and why.
-7. `Approval gate reminder`: state that subagents cannot obtain approval or replace parent/user interaction; the parent must present questions/sections, write the `/tmp/pi-designs/` spec, self-review it, and obtain explicit approval before any planning or implementation handoff.
+1. `Question strategy`: the overall approach for resolving ambiguity with the user.
+2. `Prioritized user questions`: ordered list of concrete questions, highest-impact first, with a short reason for each.
+3. `Recommended next user-facing question`: exactly one concise question for the parent to ask first; if no more input is needed, state `None` and explain why.
+4. `Question grouping`: digestible groups of related questions the parent can ask in separate turns if needed.
+5. `Expected answer impact`: how likely answers would affect the eventual written design/spec.
+6. `Known constraints and assumptions`: concise list of constraints and assumptions to confirm or preserve.
+7. `Approval gate reminder`: state that subagents cannot obtain approval or replace parent/user interaction; the parent must ask the user any needed questions, present any later design sections, write the `/tmp/pi-designs/` spec, self-review it, and obtain explicit approval before any planning or implementation handoff.
