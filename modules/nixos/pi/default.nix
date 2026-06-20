@@ -27,12 +27,6 @@ let
   };
 
   appendSystemPrompt = ''
-    ## Repository worktree safety
-
-    Before making any code changes in a git repository, create and work from a
-    dedicated `git worktree` branch instead of editing the main checkout
-    directly.
-
     ## Local delegation and context isolation preference
 
     When work can be parallelized, delegated, run in the background, or isolated
@@ -83,7 +77,6 @@ in
       ".pi/agent/settings.json".text = builtins.toJSON (defaultSettings // cfg.settings);
       ".pi/agent/APPEND_SYSTEM.md".text = appendSystemPrompt;
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
-      ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
       ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
       ".pi/agent/chains/brainstorming-implement.chain.json".source =
         ./chains/brainstorming-implement.chain.json;
