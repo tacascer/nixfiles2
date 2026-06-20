@@ -85,21 +85,11 @@ in
       ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
       ".pi/agent/extensions/git-worktree-session.ts".source = ./extensions/git-worktree-session.ts;
       ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
-      ".pi/agent/chains/brainstorming-implement.chain.md".source = ./chains/brainstorming-implement.chain.md;
+      ".pi/agent/chains/brainstorming-implement.chain.md".source =
+        ./chains/brainstorming-implement.chain.md;
       ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
       ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
-      ".pi/agent/skills/post-brainstorming-implementation".source =
-        ./skills/post-brainstorming-implementation;
-      ".pi/agent/skills/pi-writing-plans".source = ./skills/pi-writing-plans;
-      ".pi/agent/skills/pi-subagent-driven-development".source = ./skills/pi-subagent-driven-development;
-      ".pi/agent/skills/pi-finishing-development-branch".source =
-        ./skills/pi-finishing-development-branch;
-      ".pi/agent/skills/child-pi-explorer".source = ./skills/child-pi-explorer;
-      ".pi/agent/skills/child-pi-implementer".source = ./skills/child-pi-implementer;
-      ".pi/agent/skills/child-pi-spec-reviewer".source = ./skills/child-pi-spec-reviewer;
-      ".pi/agent/skills/child-pi-code-quality-reviewer".source = ./skills/child-pi-code-quality-reviewer;
-      ".pi/agent/skills/child-pi-validation-analyst".source = ./skills/child-pi-validation-analyst;
     };
   };
 }
