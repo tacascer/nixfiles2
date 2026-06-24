@@ -49,13 +49,13 @@ in
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
-        "npm:@juicesharp/rpiv-todo@1.18.2"
-        "npm:@juicesharp/rpiv-btw@1.18.2"
+        "npm:@juicesharp/rpiv-todo@1.20.0"
+        "npm:@juicesharp/rpiv-btw@1.20.0"
         "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
-        "npm:pi-web-access@0.10.7"
+        "npm:pi-web-access@0.12.0"
         "npm:pi-memory@0.3.14"
-        "npm:pi-subagents@0.29.0"
-        "npm:context-mode@1.0.162"
+        "npm:pi-subagents@0.31.0"
+        "npm:context-mode@1.0.166"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
     };
