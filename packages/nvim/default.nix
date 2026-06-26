@@ -810,6 +810,7 @@
                 },
               '';
             };
+            zig.enable = true;
             go.enable = true;
             haskell.enable = true;
             html.enable = true;
