@@ -24,4 +24,6 @@ in
       nrbsu = "sudo nix flake update --flake ${cfg.flakeDir} && sudo nixos-rebuild switch --flake ${cfg.flakeDir}";
     };
   };
+
+  config.services.envfs.enable = true;
 }
