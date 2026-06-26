@@ -25,5 +25,6 @@ in
     };
   };
 
+  # enable /bin/bash compatibility
   config.services.envfs.enable = true;
 }
