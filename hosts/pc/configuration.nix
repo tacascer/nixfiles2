@@ -10,6 +10,7 @@
     flake.nixosModules.fuzzel
     flake.nixosModules.git
     flake.nixosModules.nvim
+    flake.nixosModules.helix
     flake.nixosModules.bash
     flake.nixosModules."home-manager"
     flake.nixosModules."1password"

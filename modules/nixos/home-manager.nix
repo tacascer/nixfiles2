@@ -1,4 +1,9 @@
-{ inputs, config, lib, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.custom.homeManager;
 in
@@ -33,8 +38,8 @@ in
     home-manager.users.${cfg.username} = {
       home.stateVersion = cfg.stateVersion;
       home.sessionVariables = {
-        EDITOR = "vim";
-        VISUAL = "vim";
+        EDITOR = lib.mkDefault "vim";
+        VISUAL = lib.mkDefault "vim";
       };
       programs.home-manager.enable = true;
     };
