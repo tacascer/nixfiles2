@@ -19,6 +19,7 @@
     lazydocker
     lazygit
     nixd
+    fd
     rust-analyzer
     rustc
     util-linux
