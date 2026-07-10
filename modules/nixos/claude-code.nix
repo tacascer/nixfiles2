@@ -9,9 +9,14 @@
 let
   llmAgentsPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   claudeCodePackage = llmAgentsPackages.claude-code;
-  claudePluginsPackage = llmAgentsPackages.claude-plugins;
+  claudePluginsOfficial = pkgs.fetchFromGitHub {
+    owner = "anthropics";
+    repo = "claude-plugins-official";
+    rev = "119f4ebf21f6b932627e26824a7cae073c441fea";
+    hash = "sha256-xW0jueSpMcPp7XGLWHVFsusapKnlFCrz6kRTtWPhAVc=";
+  };
   ohMyClaudecodePackage = llmAgentsPackages.oh-my-claudecode;
-  claudeCodeMdManagementPlugin = "${claudePluginsPackage}/plugins/claude-md-management";
+  claudeCodeMdManagementPlugin = "${claudePluginsOfficial}/plugins/claude-md-management";
   claudeCodeOhMyClaudecodePlugin = "${ohMyClaudecodePackage}/lib/node_modules/oh-my-claude-sisyphus";
   claudeCodeStatusLineCommand = "${lib.getExe pkgs.nodejs} ${ohMyClaudecodePackage}/lib/node_modules/oh-my-claude-sisyphus/dist/hud/index.js";
 in
