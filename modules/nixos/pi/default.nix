@@ -13,8 +13,13 @@ let
 
   defaultSettings = {
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.5";
+    defaultModel = "gpt-5.6-sol";
     defaultThinkingLevel = "medium";
+    enabledModels = [
+      "gpt-5.6-sol"
+      "gpt-5.6-terra"
+      "gpt-5.6-luna"
+    ];
     enableSkillCommands = true;
 
     # Make Pi package installs use the Nix-provided npm instead of relying on a
