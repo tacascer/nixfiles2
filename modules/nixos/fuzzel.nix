@@ -9,7 +9,7 @@ in
       inherit pkgs;
       settings = {
         main = {
-          font = "JetBrainsMono Nerd Font:size=13";
+          font = "Hack Nerd Font:size=13";
           prompt = ''"  "'';
           width = 80;
           horizontal-pad = 24;
@@ -40,6 +40,6 @@ in
     })
   ];
   fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.hack
   ];
 }

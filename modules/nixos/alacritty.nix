@@ -14,7 +14,7 @@ in
           y = 8;
         };
         font = {
-          normal.family = "JetBrainsMono Nerd Font";
+          normal.family = "Hack Nerd Font";
           size = 12;
         };
         hints.enabled = [
@@ -64,6 +64,6 @@ in
     })
   ];
   fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.hack
   ];
 }
