@@ -18,6 +18,7 @@ inputs.wrapper-modules.wrappers.git.wrap {
         .omc/
         .worktrees/
         .sisyphus/
+        .pi-subagents/
       ''
     );
     user = {
