@@ -766,6 +766,18 @@
             otter-nvim.enable = true;
             nvim-docs-view.enable = true;
             presets.harper.enable = true;
+
+            servers."rust-analyzer".settings."rust-analyzer".files.excludeDirs = [
+              ".direnv"
+              ".git"
+              ".worktrees"
+              "bazel-bin"
+              "bazel-out"
+              "bazel-testlogs"
+              "bazel-bazel-repo"
+              "node_modules"
+              "target"
+            ];
           };
 
           debugger = {
@@ -790,26 +802,7 @@
             markdown.enable = true;
             typescript.enable = true;
             kotlin.enable = true;
-            rust = {
-              enable = true;
-              lsp.opts = ''
-                ['rust-analyzer'] = {
-                  files = {
-                    excludeDirs = {
-                      ".direnv",
-                      ".git",
-                      ".worktrees",
-                      "bazel-bin",
-                      "bazel-out",
-                      "bazel-testlogs",
-                      "bazel-bazel-repo",
-                      "node_modules",
-                      "target",
-                    },
-                  },
-                },
-              '';
-            };
+            rust.enable = true;
             zig.enable = true;
             go.enable = true;
             haskell.enable = true;
