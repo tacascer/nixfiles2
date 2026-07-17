@@ -37,11 +37,11 @@ in
       type = lib.types.listOf lib.types.str;
       default = [
         "npm:@juicesharp/rpiv-todo@1.20.0"
-        "npm:@juicesharp/rpiv-btw@1.20.0"
+        # "npm:@juicesharp/rpiv-btw@1.20.0"
         "git:github.com/juicesharp/rpiv-ask-user-question@8dfafc868a412e3cc63f06773b0fbc8c066d5f9f"
         "npm:pi-web-access@0.13.0"
         "npm:pi-memory@0.3.14"
-        "npm:pi-subagents@0.33.1"
+        # "npm:pi-subagents@0.33.1"
         "npm:context-mode@1.0.169"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
@@ -62,12 +62,12 @@ in
 
     home-manager.users.${username}.home.file = {
       ".pi/agent/settings.json".text = builtins.toJSON (defaultSettings // cfg.settings);
-      ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
-      ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
-      ".pi/agent/chains/brainstorming-implement.chain.json".source =
-        ./chains/brainstorming-implement.chain.json;
-      ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
-      ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
+      # ".pi/agent/extensions/git-checkpoint.ts".source = ./extensions/git-checkpoint.ts;
+      # ".pi/agent/chains/brainstorming-design.chain.md".source = ./chains/brainstorming-design.chain.md;
+      # ".pi/agent/chains/brainstorming-implement.chain.json".source =
+      #   ./chains/brainstorming-implement.chain.json;
+      # ".pi/agent/skills/brainstorming-design".source = ./skills/brainstorming-design;
+      # ".pi/agent/skills/brainstorming-implement".source = ./skills/brainstorming-implement;
       ".pi/agent/skills/nixos-pi-declarative".source = ./skills/nixos-pi-declarative;
     };
   };
