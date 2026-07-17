@@ -42,7 +42,7 @@ in
         "npm:pi-web-access@0.13.0"
         "npm:pi-memory@0.3.14"
         # "npm:pi-subagents@0.33.1"
-        "npm:context-mode@1.0.169"
+        # "npm:context-mode@1.0.169"
       ];
       description = "Pi packages to load declaratively from generated settings.json.";
     };
