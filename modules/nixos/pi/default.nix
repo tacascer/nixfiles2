@@ -14,7 +14,7 @@ let
   defaultSettings = {
     defaultProvider = "openai-codex";
     defaultModel = "gpt-5.6-sol";
-    defaultThinkingLevel = "medium";
+    defaultThinkingLevel = "high";
     enabledModels = [
       "gpt-5.6-sol"
       "gpt-5.6-terra"
