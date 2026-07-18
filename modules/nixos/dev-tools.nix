@@ -22,6 +22,7 @@
     fd
     rust-analyzer
     rustc
+    ripgrep
     util-linux
     yaml-language-server
   ];
