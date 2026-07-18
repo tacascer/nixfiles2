@@ -71,7 +71,7 @@ else
         window-rules = [
           {
             matches = [ { app-id = "Alacritty"; } ];
-            opacity = 0.85;
+            opacity = 0.95;
             draw-border-with-background = false;
           }
         ];
