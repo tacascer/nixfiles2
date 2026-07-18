@@ -1,4 +1,9 @@
-{ flake, pkgs, ... }:
+{
+  flake,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -37,7 +42,7 @@
 
   custom.bash.flakeDir = "~/myNixOS";
 
-  custom.niri.wallpaper = "/home/tacascer/myNixOS/wallpapers/wallpaper.jpg";
+  custom.niri.wallpaper = inputs.wallpkgs.wallpapers."tokyo-night"."tokyo_night-04".path;
 
   custom.sudo.username = "tacascer";
 

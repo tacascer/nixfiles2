@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    wallpkgs.url = "github:NotAShelf/wallpkgs";
     nvf.url = "github:notashelf/nvf";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-colors.url = "github:misterio77/nix-colors";
