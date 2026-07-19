@@ -74,7 +74,7 @@ For Codex automation, use `codex --yolo` rather than a separate `codex-yolo` pac
 - Tool wrappers still use `wrapper-modules` when appropriate; wrapper settings remain Nix attrsets, not raw dotfile syntax.
 - Neovim is still built with `nvf`.
 - Niri settings are managed through `niri-flake`, while DankMaterialShell uses its Home Manager module and starts only with `niri.service`.
-- The repository-managed `swaybg` service owns the Niri wallpaper; DMS wallpaper surfaces stay disabled.
+- DankMaterialShell owns the declarative wallpaper, renders it on every output, and derives the active dynamic theme from it through Matugen; do not add a separate wallpaper service.
 - Hardware configs stay host-local under `hosts/<name>/hardware-configuration.nix`; they are not reusable module exports.
 - Reusable module files live in `modules/nixos/`; package builders live in `packages/`.
 - Canonical package names must be used in new code and docs.

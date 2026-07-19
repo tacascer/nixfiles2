@@ -6,7 +6,6 @@
   ...
 }:
 let
-  cfg = config.custom.niri;
   system = pkgs.stdenv.hostPlatform.system;
   has1Password = system == "x86_64-linux";
 
@@ -16,14 +15,6 @@ let
   };
 in
 {
-  options.custom.niri = {
-    wallpaper = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Absolute path to wallpaper image. When set, swaybg is used to display it.";
-    };
-  };
-
   config = {
     programs.niri = {
       enable = true;
@@ -117,15 +108,5 @@ in
           };
         };
       };
-
-    systemd.user.services.swaybg = lib.mkIf (cfg.wallpaper != null) {
-      description = "Wallpaper daemon";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig = {
-        ExecStart = "${lib.getExe pkgs.swaybg} -i ${cfg.wallpaper} -m fill";
-        Restart = "on-failure";
-      };
-    };
   };
 }

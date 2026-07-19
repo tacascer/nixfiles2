@@ -18,7 +18,7 @@ A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop
 | Directory | Purpose |
 |-----------|---------|
 | `modules/` | All NixOS modules — auto-discovered by import-tree (see `modules/AGENTS.md`) |
-| `wallpapers/` | Desktop wallpaper images used by niri via swaybg |
+| `wallpapers/` | Desktop wallpaper images managed and rendered by DankMaterialShell |
 
 ## For AI Agents
 

@@ -1,7 +1,20 @@
 { inputs, ... }:
-{ config, pkgs, ... }:
 {
-  home-manager.users.${config.custom.homeManager.username} = {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  cfg = config.custom.dms;
+in
+{
+  options.custom.dms.wallpaper = lib.mkOption {
+    type = lib.types.str;
+    description = "Absolute path to the wallpaper image managed by DankMaterialShell.";
+  };
+
+  config.home-manager.users.${config.custom.homeManager.username} = {
     imports = [ inputs.dms.homeModules.dank-material-shell ];
 
     programs.dank-material-shell = {
@@ -13,7 +26,16 @@
         target = "niri.service";
       };
 
-      settings.screenPreferences.wallpaper = [ ];
+      enableDynamicTheming = true;
+
+      settings = {
+        currentThemeName = "dynamic";
+        currentThemeCategory = "dynamic";
+        screenPreferences.wallpaper = [ "all" ];
+        wallpaperFillMode = "Fill";
+      };
+
+      session.wallpaperPath = cfg.wallpaper;
     };
   };
 }

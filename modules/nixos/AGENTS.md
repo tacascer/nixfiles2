@@ -23,7 +23,7 @@ Reusable Blueprint-native NixOS modules. Files in this tree back `flake.nixosMod
 - Hosts import modules from this tree via `flake.nixosModules.<name>`
 - Package-producing families are expected under `packages/`
 - `niri/` uses niri-flake for declarative Home Manager settings
-- `dms.nix` uses the DankMaterialShell Home Manager module and scopes its service to Niri
+- `dms.nix` uses the DankMaterialShell Home Manager module, scopes its service to Niri, and declaratively owns wallpaper rendering and dynamic theming
 
 ### External
 - `wrapper-modules` for wrapped CLI/desktop tools

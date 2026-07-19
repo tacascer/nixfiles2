@@ -43,7 +43,7 @@
 
   custom.bash.flakeDir = "~/myNixOS";
 
-  custom.niri.wallpaper = inputs.wallpkgs.wallpapers."tokyo-night"."tokyo_night-04".path;
+  custom.dms.wallpaper = inputs.wallpkgs.wallpapers."tokyo-night"."tokyo_night-04".path;
 
   custom.sudo.username = "tacascer";
 

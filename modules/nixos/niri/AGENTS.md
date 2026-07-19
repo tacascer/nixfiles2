@@ -15,7 +15,7 @@ Niri window-manager module surface for the Blueprint layout. DankMaterialShell i
 - Keep Niri settings under Home Manager's `programs.niri.settings`; do not write raw KDL.
 - Keep keybindings declarative in `default.nix` using `config.lib.niri.actions`.
 - Start DMS through its `niri.service`-scoped user service, not `spawn-at-startup` and not DMS's Niri Home Manager module.
-- Preserve `custom.niri.wallpaper` and the repository-managed `swaybg` user service.
+- Keep wallpaper ownership out of this module; `modules/nixos/dms.nix` renders the declarative wallpaper and derives the dynamic theme.
 
 ## Common Patterns
 - Build keybind actions with `config.lib.niri.actions` from niri-flake.
@@ -26,4 +26,4 @@ Niri window-manager module surface for the Blueprint layout. DankMaterialShell i
 - Parse-check modified files.
 - Validate the generated KDL with `niri validate`.
 - Rebuild on a Linux host and verify Niri and DMS start cleanly.
-- Verify the DMS launcher, lock screen, and the `swaybg` wallpaper.
+- Verify the DMS launcher, lock screen, wallpaper on every output, and wallpaper-derived dynamic theme; no separate wallpaper service should run.
