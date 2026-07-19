@@ -29,6 +29,7 @@
     flake.nixosModules.yazi
     flake.nixosModules.firefox
     flake.nixosModules.obsidian
+    flake.nixosModules."proton-vpn"
     flake.nixosModules.signal
     flake.nixosModules.opencode
     flake.nixosModules.claude-code
