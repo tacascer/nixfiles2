@@ -15,15 +15,16 @@ in
   };
 
   config.home-manager.users.${config.custom.homeManager.username} = {
-    imports = [ inputs.dms.homeModules.dank-material-shell ];
+    imports = [
+      inputs.dms.homeModules.dank-material-shell
+      inputs.dms.homeModules.niri
+    ];
 
     programs.dank-material-shell = {
       enable = true;
       package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-      systemd = {
-        enable = true;
-        target = "niri.service";
+      niri = {
+        enableSpawn = true;
       };
 
       enableDynamicTheming = true;
