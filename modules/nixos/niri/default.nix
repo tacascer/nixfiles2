@@ -58,21 +58,6 @@ in
               hide-after-inactive-ms = 3000;
             };
 
-            layout = {
-              gaps = 10;
-              preset-column-widths = [
-                { proportion = 0.33; }
-                { proportion = 0.5; }
-                { proportion = 0.67; }
-                { proportion = 1.0; }
-              ];
-              focus-ring = {
-                width = 4;
-                active.color = "#7fc8ff";
-                inactive.color = "#505050";
-              };
-            };
-
             window-rules = [
               {
                 matches = [ { app-id = "Alacritty"; } ];
