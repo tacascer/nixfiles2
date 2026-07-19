@@ -15,7 +15,7 @@
     flake.nixosModules."chinese-input"
     flake.nixosModules.keyboard
     flake.nixosModules.niri
-    flake.nixosModules.fuzzel
+    flake.nixosModules.dms
     flake.nixosModules.git
     flake.nixosModules.nvim
     flake.nixosModules.helix

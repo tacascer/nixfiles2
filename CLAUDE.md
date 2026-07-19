@@ -61,10 +61,9 @@ Canonical package outputs are:
 - `codex`
 - `fastfetch`
 - `git`
-- `hotkey-cheatsheet`
-- `noctalia`
 - `nvim`
 - `omx`
+- `qmd`
 
 Legacy camel-cased `my*` outputs were replaced by these canonical hyphenated package names during the Blueprint migration. New code and docs should only use the canonical names listed above.
 
@@ -74,6 +73,8 @@ For Codex automation, use `codex --yolo` rather than a separate `codex-yolo` pac
 
 - Tool wrappers still use `wrapper-modules` when appropriate; wrapper settings remain Nix attrsets, not raw dotfile syntax.
 - Neovim is still built with `nvf`.
+- Niri settings are managed through `niri-flake`, while DankMaterialShell uses its Home Manager module and starts only with `niri.service`.
+- The repository-managed `swaybg` service owns the Niri wallpaper; DMS wallpaper surfaces stay disabled.
 - Hardware configs stay host-local under `hosts/<name>/hardware-configuration.nix`; they are not reusable module exports.
 - Reusable module files live in `modules/nixos/`; package builders live in `packages/`.
 - Canonical package names must be used in new code and docs.
@@ -86,4 +87,4 @@ The systems matrix remains explicit:
 - `aarch64-linux`
 - `aarch64-darwin`
 
-Linux-only package families must be omitted entirely from unsupported systems instead of being exposed and failing during evaluation. In particular, `hotkey-cheatsheet` must be absent from `packages.aarch64-darwin`.
+Linux-only package families must be omitted entirely from unsupported systems instead of being exposed and failing during evaluation.
