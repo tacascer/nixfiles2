@@ -9,7 +9,7 @@ in
       inherit pkgs;
       settings = {
         main = {
-          font = "Hack Nerd Font:size=13";
+          font = "${config.custom.font.family}:size=13";
           prompt = ''"  "'';
           width = 80;
           horizontal-pad = 24;
@@ -38,8 +38,5 @@ in
         };
       };
     })
-  ];
-  fonts.packages = [
-    pkgs.nerd-fonts.hack
   ];
 }

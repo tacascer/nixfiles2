@@ -9,6 +9,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     flake.nixosModules.colors
+    flake.nixosModules.fonts
     flake.nixosModules."chinese-input"
     flake.nixosModules.keyboard
     flake.nixosModules.niri

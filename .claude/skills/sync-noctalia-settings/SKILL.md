@@ -7,7 +7,7 @@ description: Use when the user wants to sync, export, or update noctalia shell s
 
 ## Overview
 
-Exports live noctalia-shell settings via IPC and writes them to `modules/features/noctalia.json`, which the Nix wrapper reads at build time.
+Exports live noctalia-shell settings via IPC and writes them to `packages/noctalia/noctalia.json`, which the Nix wrapper reads at build time.
 
 ## Steps
 
@@ -19,9 +19,11 @@ nix run nixpkgs#noctalia-shell ipc call state all | \
     process.stdin.on('data', c => chunks.push(c));
     process.stdin.on('end', () => {
       const data = JSON.parse(Buffer.concat(chunks).toString());
+      data.settings.ui.fontDefault = 'sans-serif';
+      data.settings.ui.fontFixed = 'monospace';
       process.stdout.write(JSON.stringify({ settings: data.settings }, null, 2) + '\n');
     });
-  " > modules/features/noctalia.json
+  " > packages/noctalia/noctalia.json
 ```
 
 2. Verify the flake still evaluates:
@@ -32,5 +34,6 @@ nix flake check
 ## Important
 
 - **Only keep `settings`, never `state`** — state contains runtime data (wallpaper paths, display info, performance mode) that changes per session.
-- The `noctalia.nix` module reads this JSON via `builtins.fromJSON (builtins.readFile ./noctalia.json)` and passes `.settings` to the wrapper.
+- Keep `ui.fontDefault` and `ui.fontFixed` on the generic Fontconfig aliases so they follow `custom.font`.
+- `packages/noctalia/default.nix` reads this JSON via `builtins.fromJSON (builtins.readFile ./noctalia.json)` and passes `.settings` to the wrapper.
 - `node` is available on the system; `python3` and `jq` are not.
