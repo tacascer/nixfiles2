@@ -45,6 +45,28 @@
 
   custom.dms.wallpaper = inputs.wallpkgs.wallpapers."tokyo-night"."tokyo_night-04".path;
 
+  home-manager.users.tacascer.programs.niri.settings.outputs = {
+    "DP-1".position = {
+      x = 0;
+      y = 0;
+    };
+    "DP-2" = {
+      mode = {
+        width = 2560;
+        height = 1440;
+        refresh = 164.835;
+      };
+      position = {
+        x = 2560;
+        y = 0;
+      };
+    };
+    "HDMI-A-1".position = {
+      x = 5120;
+      y = 0;
+    };
+  };
+
   custom.sudo.username = "tacascer";
 
   nix.settings.experimental-features = [

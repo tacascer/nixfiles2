@@ -30,12 +30,6 @@ in
         programs.niri = {
           package = pkgs.niri;
           settings = {
-            outputs."DP-2".mode = {
-              width = 2560;
-              height = 1440;
-              refresh = 164.835;
-            };
-
             spawn-at-startup = lib.optional has1Password {
               argv = [ "${unfreePkgs._1password-gui}/bin/1password" ];
             };
