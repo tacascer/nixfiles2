@@ -14,7 +14,7 @@ in
           y = 8;
         };
         font = {
-          normal.family = "Hack Nerd Font";
+          normal.family = config.custom.font.family;
           size = 12;
         };
         hints.enabled = [
@@ -62,8 +62,5 @@ in
         };
       };
     })
-  ];
-  fonts.packages = [
-    pkgs.nerd-fonts.hack
   ];
 }

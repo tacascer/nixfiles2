@@ -251,7 +251,7 @@
       "reverseScroll": false
     },
     "ui": {
-      "fontDefault": "Noto Sans",
+      "fontDefault": "sans-serif",
       "fontFixed": "monospace",
       "fontDefaultScale": 1,
       "fontFixedScale": 1,
