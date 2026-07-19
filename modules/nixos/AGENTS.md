@@ -22,12 +22,13 @@ Reusable Blueprint-native NixOS modules. Files in this tree back `flake.nixosMod
 ### Internal
 - Hosts import modules from this tree via `flake.nixosModules.<name>`
 - Package-producing families are expected under `packages/`
-- `niri/` depends on package outputs such as `niri`, `noctalia`, and `hotkey-cheatsheet`
+- `niri/` uses niri-flake for Home Manager settings and package outputs such as `noctalia` and `hotkey-cheatsheet`
 
 ### External
 - `wrapper-modules` for wrapped CLI/desktop tools
 - `nvf` for Neovim packaging/configuration
 - `nix-colors` for theme data
+- `niri-flake` for typed Niri Home Manager settings and KDL generation
 - `nixos-hardware` only from host configs, not reusable modules
 
 ## Testing Requirements

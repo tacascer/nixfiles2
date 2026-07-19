@@ -1,7 +1,5 @@
 {
   pkgs,
-  inputs,
-  system,
   perSystem,
   ...
 }:
@@ -14,18 +12,9 @@ if pkgs.stdenv.hostPlatform.isDarwin then
   } "mkdir -p $out"
 else
   let
-    unfreePkgs = import inputs.nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-
-    shortcuts = import ../niri/shortcuts.nix {
-      inherit
-        pkgs
-        lib
-        perSystem
-        unfreePkgs
-        ;
+    shortcuts = import ./shortcuts.nix {
+      inherit pkgs lib;
+      packages = perSystem.self;
     };
   in
   shortcuts.hotkeyCheatsheet.overrideAttrs (old: {

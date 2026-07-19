@@ -62,7 +62,6 @@ Canonical package outputs are:
 - `fastfetch`
 - `git`
 - `hotkey-cheatsheet`
-- `niri`
 - `noctalia`
 - `nvim`
 - `omx`
@@ -87,4 +86,4 @@ The systems matrix remains explicit:
 - `aarch64-linux`
 - `aarch64-darwin`
 
-Linux-only package families must be omitted entirely from unsupported systems instead of being exposed and failing during evaluation. In particular, `niri` and `hotkey-cheatsheet` must be absent from `packages.aarch64-darwin`.
+Linux-only package families must be omitted entirely from unsupported systems instead of being exposed and failing during evaluation. In particular, `hotkey-cheatsheet` must be absent from `packages.aarch64-darwin`.
