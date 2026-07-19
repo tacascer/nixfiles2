@@ -34,6 +34,7 @@ in
         currentThemeCategory = "dynamic";
         screenPreferences.wallpaper = [ "all" ];
         wallpaperFillMode = "Fill";
+        useAutoLocation = true;
       };
 
       session.wallpaperPath = cfg.wallpaper;
