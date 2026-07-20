@@ -61,9 +61,16 @@
         y = 0;
       };
     };
-    "HDMI-A-1".position = {
-      x = 5120;
-      y = 0;
+    "HDMI-A-1" = {
+      position = {
+        x = 5120;
+        y = 0;
+      };
+      mode = {
+        width = 3840;
+        height = 2160;
+        refresh = 60.0;
+      };
     };
   };
 
