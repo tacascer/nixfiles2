@@ -15,7 +15,6 @@
     flake.nixosModules.niri
     flake.nixosModules.dms
     flake.nixosModules.git
-    flake.nixosModules.nvim
     flake.nixosModules.helix
     flake.nixosModules.bash
     flake.nixosModules."home-manager"
