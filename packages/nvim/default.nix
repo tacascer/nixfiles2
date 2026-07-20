@@ -8,8 +8,8 @@
         config.vim = {
           theme = {
             enable = true;
-            name = "tokyonight";
-            style = "storm";
+            name = "gruvbox";
+            style = "dark";
           };
           viAlias = true;
           vimAlias = true;

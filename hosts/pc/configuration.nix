@@ -43,7 +43,7 @@
 
   custom.bash.flakeDir = "~/myNixOS";
 
-  custom.dms.wallpaper = inputs.wallpkgs.wallpapers."tokyo-night"."tokyo_night-04".path;
+  custom.dms.wallpaper = inputs.wallpkgs.wallpapers.gruvbox.cafe.path;
 
   home-manager.users.tacascer.programs.niri.settings.outputs = {
     "DP-1".position = {

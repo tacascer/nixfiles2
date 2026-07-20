@@ -5,7 +5,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = "tokyonight_storm";
+      theme = "gruvbox";
       editor = {
         auto-format = true;
         bufferline = "multiple";
