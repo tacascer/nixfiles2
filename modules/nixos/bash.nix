@@ -10,7 +10,10 @@ in
     };
   };
 
-  config.programs.starship.enable = true;
+  config.programs.starship = {
+    enable = true;
+    presets = [ "gruvbox-rainbow" ];
+  };
 
   config.programs.bash = {
     completion.enable = true;
