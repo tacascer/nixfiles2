@@ -1,7 +1,4 @@
-{ flake, ... }:
-{ pkgs, ... }:
+{ flake, config, ... }:
 {
-  environment.systemPackages = [
-    flake.packages.${pkgs.stdenv.hostPlatform.system}.git
-  ];
+  home-manager.users.${config.custom.homeManager.username}.imports = [ flake.homeModules.git ];
 }

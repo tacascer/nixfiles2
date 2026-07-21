@@ -16,7 +16,6 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
 - `claude-code`
 - `codex`
 - `fastfetch`
-- `git`
 - `nvim`
 - `omx`
 - `qmd`

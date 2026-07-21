@@ -60,7 +60,6 @@ Canonical package outputs are:
 - `claude-code`
 - `codex`
 - `fastfetch`
-- `git`
 - `nvim`
 - `omx`
 - `qmd`
