@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A Blueprint-native NixOS flake for two Linux hosts (`framework`, `pc`) owned by `tacascer`. Both hosts share reusable NixOS modules from `modules/nixos/`, consume same-flake packages from `packages/`, and preserve the existing desktop/tooling behavior.
+A Blueprint-native NixOS flake for two Linux hosts (`framework`, `pc`) owned by `tacascer`. Both hosts share reusable NixOS modules from `modules/nixos/`, Home Manager modules from `modules/home/`, and same-flake packages from `packages/` while preserving the existing desktop/tooling behavior.
 
 ## Common Commands
 
@@ -33,6 +33,7 @@ The flake is organized around Blueprint's standard folder structure:
 
 - `hosts/` — host-local NixOS configurations
 - `modules/nixos/` — reusable NixOS modules exported as `flake.nixosModules.<name>`
+- `modules/home/` — reusable Home Manager modules exported as `flake.homeModules.<name>`
 - `packages/` — same-flake package builders exported as `flake.packages.<system>.<pname>`
 - `formatter.nix` — default formatter surface
 - `flake.nix` — thin Blueprint entrypoint plus input declarations
@@ -59,7 +60,6 @@ Canonical package outputs are:
 
 - `claude-code`
 - `codex`
-- `fastfetch`
 - `nvim`
 - `omx`
 - `qmd`
@@ -70,12 +70,12 @@ For Codex automation, use `codex --yolo` rather than a separate `codex-yolo` pac
 
 ## Key Conventions
 
-- Tool wrappers still use `wrapper-modules` when appropriate; wrapper settings remain Nix attrsets, not raw dotfile syntax.
+- User programs should use native Home Manager modules when available; keep settings as Nix attrsets rather than unmanaged dotfiles.
 - Neovim is still built with `nvf`.
 - Niri settings are managed through `niri-flake`, while DankMaterialShell uses its Home Manager module and starts only with `niri.service`.
 - DankMaterialShell owns the declarative wallpaper, renders it on every output, and derives the active dynamic theme from it through Matugen; do not add a separate wallpaper service.
 - Hardware configs stay host-local under `hosts/<name>/hardware-configuration.nix`; they are not reusable module exports.
-- Reusable module files live in `modules/nixos/`; package builders live in `packages/`.
+- Reusable NixOS modules live in `modules/nixos/`, Home Manager modules in `modules/home/`, and package builders in `packages/`.
 - Canonical package names must be used in new code and docs.
 
 ## Platform Gating

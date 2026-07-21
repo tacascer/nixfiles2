@@ -1,9 +1,9 @@
-<!-- Generated: 2026-04-03 | Updated: 2026-05-22 -->
+<!-- Generated: 2026-04-03 | Updated: 2026-07-21 -->
 
 # myNixOS
 
 ## Purpose
-A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop) for user `tacascer`. Uses flake-parts with import-tree for automatic module discovery, wrapper-modules for declarative tool configuration, and nix-colors for centralized theming.
+A Blueprint-native NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop) for user `tacascer`. Uses Home Manager for declarative user programs and nix-colors for centralized theming.
 
 ## Key Files
 
@@ -17,7 +17,9 @@ A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop
 
 | Directory | Purpose |
 |-----------|---------|
-| `modules/` | All NixOS modules — auto-discovered by import-tree (see `modules/AGENTS.md`) |
+| `modules/nixos/` | Reusable NixOS modules exported by Blueprint |
+| `modules/home/` | Reusable Home Manager modules exported by Blueprint |
+| `packages/` | Same-flake package builders exported by Blueprint |
 | `wallpapers/` | Desktop wallpaper images managed and rendered by DankMaterialShell |
 
 ## For AI Agents
@@ -25,8 +27,8 @@ A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop
 ### Working In This Directory
 - Before making any code changes, create and work from a dedicated `git worktree` branch instead of editing the main checkout directly
 - This is a **Nix flake** — all configuration is declarative Nix expressions
-- Do NOT create dotfiles or config files; use `wrapper-modules` wrappers instead
-- All `.nix` files under `modules/` are auto-imported by `import-tree` — no manual registration in `flake.nix` needed
+- Do NOT create unmanaged dotfiles or mutable config files; use declarative NixOS or Home Manager modules
+- Blueprint automatically exports files in its standard module and package trees; no manual registration in `flake.nix` is needed
 - New feature modules must be added to each host's `configuration.nix` imports list
 
 ### Testing Requirements
@@ -35,18 +37,16 @@ A NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop
 - Use `nix flake show` to verify outputs are correctly defined
 
 ### Common Patterns
-- **Two-part module pattern**: `flake.nixosModules.<name>` (NixOS config) + `perSystem.packages.my<Name>` (wrapped package)
+- **Home Manager bridge pattern**: `flake.nixosModules.<name>` imports `flake.homeModules.<name>` for `config.custom.homeManager.username`
 - **Unfree packages**: modules needing unfree create their own `unfreePkgs` import of nixpkgs with `config.allowUnfree = true`
 - **Centralized theming**: modules access `config.custom.colorScheme.palette` (Base16 colors from nix-colors)
-- **Wrapper-modules**: `inputs.wrapper-modules.wrappers.<tool>.wrap { settings = { ... }; }` for tool configuration
 
 ## Dependencies
 
 ### External
 - `nixpkgs` (unstable) — package repository
-- `flake-parts` — flake organization framework
-- `import-tree` — automatic module discovery from directory tree
-- `wrapper-modules` (BirdeeHub/nix-wrapper-modules) — declarative tool wrapping
+- `blueprint` (numtide/blueprint) — flake organization and automatic output discovery
+- `home-manager` (nix-community/home-manager) — declarative user environment and program configuration
 - `nvf` (notashelf/nvf) — declarative neovim configuration
 - `nixos-hardware` — hardware-specific optimizations for Framework laptop
 - `nix-colors` (misterio77/nix-colors) — Base16 color scheme management

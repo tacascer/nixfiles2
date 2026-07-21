@@ -15,7 +15,6 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
 ## Canonical Package Names
 - `claude-code`
 - `codex`
-- `fastfetch`
 - `nvim`
 - `omx`
 - `qmd`

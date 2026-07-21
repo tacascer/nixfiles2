@@ -1,7 +1,10 @@
-{ flake, ... }:
-{ pkgs, ... }:
 {
-  environment.systemPackages = [
-    flake.packages.${pkgs.stdenv.hostPlatform.system}.fastfetch
+  flake,
+  config,
+  ...
+}:
+{
+  home-manager.users.${config.custom.homeManager.username}.imports = [
+    flake.homeModules.fastfetch
   ];
 }
