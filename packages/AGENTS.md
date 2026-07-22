@@ -7,16 +7,13 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
 
 ## Working In This Directory
 - One package family per directory or file.
-- Keep shared package helpers local to the package tree, for example `packages/codex/common.nix`.
+- Keep shared package helpers local to the package tree, for example `packages/qmd/common.nix`.
 - Canonical package names must be used for all public outputs.
 - Unsupported package families must be omitted from a system's attrset entirely.
-- Codex full-auto mode is invoked as `codex --yolo`; do not reintroduce a separate `codex-yolo` package output.
+- AI coding agents and companion tools owned by the pinned `llm-agents` input do not belong in this tree. Do not recreate Codex or OMX package outputs here.
 
 ## Canonical Package Names
-- `claude-code`
-- `codex`
 - `nvim`
-- `omx`
 - `qmd`
 
 ## Platform Gating

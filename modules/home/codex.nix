@@ -2,7 +2,9 @@
   config,
   lib,
   pkgs,
+  codexPackage,
   omxPackage,
+  omxPackageRoot,
   codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
@@ -28,56 +30,28 @@ let
     }) codexTrustedProjectsRelativeToHome
   );
 
-  omxHookCommand = "${pkgs.nodejs}/bin/node ${omxPackage}/lib/node_modules/oh-my-codex/dist/scripts/codex-native-hook.js";
-  omxScriptsPath = "${omxPackage}/lib/node_modules/oh-my-codex/dist";
+  omxHookCommand = "${pkgs.nodejs}/bin/node ${omxPackageRoot}/dist/scripts/codex-native-hook.js";
+  omxScriptsPath = "${omxPackageRoot}/dist";
+
+  defaultHook = {
+    hooks = [
+      {
+        type = "command";
+        command = omxHookCommand;
+      }
+    ];
+  };
 
   defaultHooks = {
     hooks = {
       SessionStart = [
-        {
-          matcher = "startup|resume";
-          hooks = [
-            {
-              type = "command";
-              command = omxHookCommand;
-            }
-          ];
-        }
+        (defaultHook // { matcher = "startup|resume|clear"; })
       ];
-      PreToolUse = [
-        {
-          matcher = "Bash";
-          hooks = [
-            {
-              type = "command";
-              command = omxHookCommand;
-              statusMessage = "Running OMX Bash preflight";
-            }
-          ];
-        }
-      ];
-      PostToolUse = [
-        {
-          hooks = [
-            {
-              type = "command";
-              command = omxHookCommand;
-              statusMessage = "Running OMX tool review";
-            }
-          ];
-        }
-      ];
-      UserPromptSubmit = [
-        {
-          hooks = [
-            {
-              type = "command";
-              command = omxHookCommand;
-              statusMessage = "Applying OMX prompt routing";
-            }
-          ];
-        }
-      ];
+      PreToolUse = [ defaultHook ];
+      PostToolUse = [ defaultHook ];
+      UserPromptSubmit = [ defaultHook ];
+      PreCompact = [ defaultHook ];
+      PostCompact = [ defaultHook ];
       Stop = [
         {
           hooks = [
@@ -98,7 +72,7 @@ in
 {
   programs.codex = {
     enable = true;
-    package = pkgs.codex;
+    package = codexPackage;
     settings = {
       notify = [
         "node"
@@ -119,7 +93,7 @@ in
         shell_tool = true;
         multi_agent = true;
         child_agents_md = true;
-        codex_hooks = true;
+        hooks = true;
       };
 
       history.persistence = "save-all";
@@ -178,7 +152,7 @@ in
         "total-output-tokens"
       ];
     };
-    context = builtins.readFile "${omxPackage}/lib/node_modules/oh-my-codex/templates/AGENTS.md";
+    context = builtins.readFile "${omxPackageRoot}/templates/AGENTS.md";
   };
 
   home.file.".codex/hooks.json".source = hooksFile;

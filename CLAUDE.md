@@ -56,17 +56,14 @@ Each host lives under `hosts/<name>/` and consists of:
 
 ## Package Naming
 
-Canonical package outputs are:
+Canonical same-flake package outputs are:
 
-- `claude-code`
-- `codex`
 - `nvim`
-- `omx`
 - `qmd`
 
-Legacy camel-cased `my*` outputs were replaced by these canonical hyphenated package names during the Blueprint migration. New code and docs should only use the canonical names listed above.
+AI coding agents and their companion tools, including Codex and OMX, come from the pinned `llm-agents` input. Consume them through `inputs.llm-agents.packages.${system}` in reusable modules instead of recreating same-flake package outputs. Codex and OMX must use the same pinned revision and update together with `nix flake update llm-agents`.
 
-For Codex automation, use `codex --yolo` rather than a separate `codex-yolo` package/output.
+For Codex automation, use `codex --yolo` rather than adding a separate package/output.
 
 ## Key Conventions
 

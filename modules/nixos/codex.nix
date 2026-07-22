@@ -1,13 +1,17 @@
 {
   flake,
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 let
   cfg = config.custom.codex;
-  omxPackage = flake.packages.${pkgs.stdenv.hostPlatform.system}.omx;
+  llmAgentsPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  codexPackage = llmAgentsPackages.codex;
+  omxPackage = llmAgentsPackages.oh-my-codex;
+  omxPackageRoot = "${omxPackage}/share/oh-my-codex";
 in
 {
   options.custom.codex.trustedProjectsRelativeToHome = lib.mkOption {
@@ -27,7 +31,7 @@ in
 
   config = {
     home-manager.extraSpecialArgs = {
-      inherit omxPackage;
+      inherit codexPackage omxPackage omxPackageRoot;
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };
 
