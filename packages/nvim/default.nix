@@ -6,11 +6,6 @@
       { pkgs, ... }:
       {
         config.vim = {
-          theme = {
-            enable = true;
-            name = "gruvbox";
-            style = "dark";
-          };
           viAlias = true;
           vimAlias = true;
 

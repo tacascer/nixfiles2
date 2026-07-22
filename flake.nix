@@ -5,6 +5,8 @@
     blueprint.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
     niri.url = "github:epireyn/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     dms.url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -13,7 +15,6 @@
     wallpkgs.url = "github:NotAShelf/wallpkgs";
     nvf.url = "github:notashelf/nvf";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nix-colors.url = "github:misterio77/nix-colors";
     omx = {
       url = "github:Yeachan-Heo/oh-my-codex/56c93fd3daed9f6043f0bbb65476d355d47083c5";
       flake = false;

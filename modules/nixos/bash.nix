@@ -1,6 +1,10 @@
 { config, lib, ... }:
 let
   cfg = config.custom.bash;
+  starshipPresets = {
+    gruvbox = "gruvbox-rainbow";
+    tokyo-night-storm = "tokyo-night";
+  };
 in
 {
   options.custom.bash = {
@@ -12,7 +16,7 @@ in
 
   config.programs.starship = {
     enable = true;
-    presets = [ "gruvbox-rainbow" ];
+    presets = [ starshipPresets.${config.custom.theme} ];
   };
 
   config.programs.bash = {

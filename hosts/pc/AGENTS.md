@@ -14,7 +14,7 @@ Blueprint-native NixOS configuration for the desktop PC host.
 ## Working In This Directory
 - Preserve the PC host's latest-kernel boot choice as implemented by the shared boot stack.
 - This host does not use `nixos-hardware`.
-- Preserve current `custom.*` values such as the DMS-managed wallpaper, flake dir, sudo username, and Limine Windows entry.
+- Preserve current host values such as the flake dir, sudo username, and Limine Windows entry; theme and wallpaper selection belong to the shared `custom.theme` module.
 
 ## Testing Requirements
 - Rebuild with `sudo nixos-rebuild switch --flake ~/myNixOS#pc`.

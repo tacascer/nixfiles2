@@ -5,7 +5,6 @@
     defaultEditor = true;
 
     settings = {
-      theme = "gruvbox";
       editor = {
         auto-format = true;
         bufferline = "multiple";

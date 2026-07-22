@@ -8,8 +8,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    flake.nixosModules.colors
-    flake.nixosModules.fonts
+    flake.nixosModules.theme
     flake.nixosModules."chinese-input"
     flake.nixosModules.keyboard
     flake.nixosModules.niri
@@ -42,8 +41,6 @@
   ];
 
   custom.bash.flakeDir = "~/myNixOS";
-
-  custom.dms.wallpaper = inputs.wallpkgs.wallpapers.gruvbox.cafe.path;
 
   home-manager.users.tacascer.programs.niri.settings.outputs = {
     "DP-1".position = {

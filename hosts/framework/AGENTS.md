@@ -14,7 +14,7 @@ Blueprint-native NixOS configuration for the Framework 13 (7040 AMD) laptop.
 ## Working In This Directory
 - Preserve `inputs.nixos-hardware.nixosModules.framework-13-7040-amd` in the host imports.
 - Keep hardware-specific settings local to this host.
-- Preserve current `custom.*` host values such as the DMS-managed wallpaper, flake dir, and sudo username.
+- Preserve current host values such as the flake dir and sudo username; theme and wallpaper selection belong to the shared `custom.theme` module.
 
 ## Testing Requirements
 - Rebuild with `sudo nixos-rebuild switch --flake ~/myNixOS#framework`.

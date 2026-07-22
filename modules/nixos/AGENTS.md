@@ -24,12 +24,14 @@ Reusable Blueprint-native NixOS modules. Files in this tree back `flake.nixosMod
 - Hosts import modules from this tree via `flake.nixosModules.<name>`
 - Package-producing families are expected under `packages/`
 - `niri/` uses niri-flake for declarative Home Manager settings
-- `dms.nix` uses the DankMaterialShell Home Manager module, scopes its service to Niri, and declaratively owns wallpaper rendering and dynamic theming
+- `theme.nix` owns system-wide Stylix schemes, fonts, wallpaper selection, and centralized integration glue
+- `dms.nix` uses the DankMaterialShell Home Manager module to render the Stylix wallpaper under Niri with Matugen disabled
 
 ### External
 - `home-manager` for declarative user programs and generated configuration
 - `nvf` for Neovim packaging/configuration
-- `nix-colors` for theme data
+- `stylix` for centralized themes, fonts, wallpapers, and supported application styling
+- `wallpkgs` for wallpaper sources selected by `custom.theme`
 - `niri-flake` for typed Niri Home Manager settings and KDL generation
 - `DankMaterialShell` for the Niri desktop shell, launcher, and lock screen
 - `nixos-hardware` only from host configs, not reusable modules

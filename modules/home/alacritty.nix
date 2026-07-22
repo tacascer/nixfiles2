@@ -1,8 +1,7 @@
-{ lib, ... }:
+{ ... }:
 {
   programs.alacritty = {
     enable = true;
-    theme = lib.mkDefault "gruvbox_dark";
 
     settings = {
       window = {
@@ -11,11 +10,6 @@
           x = 8;
           y = 8;
         };
-      };
-
-      font = {
-        normal.family = lib.mkDefault "Hack Nerd Font";
-        size = 12;
       };
 
       hints.enabled = [

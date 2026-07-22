@@ -1,9 +1,9 @@
-<!-- Generated: 2026-04-03 | Updated: 2026-07-21 -->
+<!-- Generated: 2026-04-03 | Updated: 2026-07-22 -->
 
 # myNixOS
 
 ## Purpose
-A Blueprint-native NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop) for user `tacascer`. Uses Home Manager for declarative user programs and nix-colors for centralized theming.
+A Blueprint-native NixOS flake configuration managing two hosts (`framework` laptop, `pc` desktop) for user `tacascer`. Uses Home Manager for declarative user programs and Stylix for centralized themes, fonts, and wallpapers.
 
 ## Key Files
 
@@ -20,7 +20,6 @@ A Blueprint-native NixOS flake configuration managing two hosts (`framework` lap
 | `modules/nixos/` | Reusable NixOS modules exported by Blueprint |
 | `modules/home/` | Reusable Home Manager modules exported by Blueprint |
 | `packages/` | Same-flake package builders exported by Blueprint |
-| `wallpapers/` | Desktop wallpaper images managed and rendered by DankMaterialShell |
 
 ## For AI Agents
 
@@ -39,7 +38,8 @@ A Blueprint-native NixOS flake configuration managing two hosts (`framework` lap
 ### Common Patterns
 - **Home Manager bridge pattern**: `flake.nixosModules.<name>` imports `flake.homeModules.<name>` for `config.custom.homeManager.username`
 - **Unfree packages**: modules needing unfree create their own `unfreePkgs` import of nixpkgs with `config.allowUnfree = true`
-- **Centralized theming**: modules access `config.custom.colorScheme.palette` (Base16 colors from nix-colors)
+- **Centralized theming**: select `custom.theme` in `modules/nixos/theme.nix`; application modules must not choose themes or hardcode color schemes
+- **Starship exception**: `modules/nixos/bash.nix` maps `custom.theme` to matching native Starship presets instead of applying Stylix colors
 
 ## Dependencies
 
@@ -49,6 +49,7 @@ A Blueprint-native NixOS flake configuration managing two hosts (`framework` lap
 - `home-manager` (nix-community/home-manager) — declarative user environment and program configuration
 - `nvf` (notashelf/nvf) — declarative neovim configuration
 - `nixos-hardware` — hardware-specific optimizations for Framework laptop
-- `nix-colors` (misterio77/nix-colors) — Base16 color scheme management
+- `stylix` (nix-community/stylix) — centralized color schemes, fonts, wallpapers, and application styling
+- `wallpkgs` (NotAShelf/wallpkgs) — wallpaper sources selected by `custom.theme`
 
 <!-- MANUAL: -->

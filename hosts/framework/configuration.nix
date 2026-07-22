@@ -10,8 +10,7 @@
     ./hardware-configuration.nix
     # Include the nixos-hardware module
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    flake.nixosModules.colors
-    flake.nixosModules.fonts
+    flake.nixosModules.theme
     flake.nixosModules."chinese-input"
     flake.nixosModules.keyboard
     flake.nixosModules.niri
@@ -44,8 +43,6 @@
   ];
 
   custom.bash.flakeDir = "~/myNixOS";
-
-  custom.dms.wallpaper = inputs.wallpkgs.wallpapers.gruvbox.cafe.path;
 
   custom.sudo.username = "tacascer";
 
