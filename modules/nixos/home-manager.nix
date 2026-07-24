@@ -19,7 +19,7 @@ in
 
     stateVersion = lib.mkOption {
       type = lib.types.str;
-      default = "25.11";
+      default = "26.05";
       description = "Home Manager state version for the shared user configuration.";
     };
 
