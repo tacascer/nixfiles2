@@ -1,6 +1,10 @@
 {
-  programs.firefox = {
-    enable = true;
-    preferences."widget.use-xdg-desktop-portal.file-picker" = 1;
-  };
+  flake,
+  config,
+  ...
+}:
+{
+  config.home-manager.users.${config.custom.homeManager.username}.imports = [
+    flake.homeModules.firefox
+  ];
 }
