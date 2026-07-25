@@ -20,6 +20,14 @@ let
   };
 
   selectedTheme = themes.${config.custom.theme};
+  interFont = {
+    package = pkgs.inter;
+    name = "Inter";
+  };
+  robotoSlabFont = {
+    package = pkgs.roboto-slab;
+    name = "Roboto Slab";
+  };
   hackFont = {
     package = pkgs.nerd-fonts.hack;
     name = "Hack Nerd Font";
@@ -42,8 +50,8 @@ in
       imageScalingMode = "fill";
 
       fonts = {
-        serif = hackFont;
-        sansSerif = hackFont;
+        serif = robotoSlabFont;
+        sansSerif = interFont;
         monospace = hackFont;
       };
     };
