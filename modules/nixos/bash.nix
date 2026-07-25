@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  flake,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.custom.bash;
   starshipPresets = {
@@ -14,24 +19,30 @@ in
     };
   };
 
-  config.programs.starship = {
-    enable = true;
-    presets = [ starshipPresets.${config.custom.theme} ];
-  };
-
-  config.programs.bash = {
-    completion.enable = true;
-    interactiveShellInit = ''
-      if [ -r "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]; then
-        . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
-      fi
-    '';
-    shellAliases = {
-      nrbs = "sudo nixos-rebuild switch --flake ${cfg.flakeDir}";
-      nrbsu = "sudo nix flake update --flake ${cfg.flakeDir} && sudo nixos-rebuild switch --flake ${cfg.flakeDir}";
+  config = {
+    programs.bash = {
+      completion.enable = true;
+      interactiveShellInit = ''
+        if [ -r "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]; then
+          . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+        fi
+      '';
     };
-  };
 
-  # enable /bin/bash compatibility
-  config.services.envfs.enable = true;
+    programs.starship.enable = false;
+
+    home-manager.users.${config.custom.homeManager.username} = {
+      imports = [ flake.homeModules.bash ];
+
+      programs.bash.shellAliases = {
+        nrbs = "sudo nixos-rebuild switch --flake ${cfg.flakeDir}";
+        nrbsu = "sudo nix flake update --flake ${cfg.flakeDir} && sudo nixos-rebuild switch --flake ${cfg.flakeDir}";
+      };
+
+      programs.starship.presets = [ starshipPresets.${config.custom.theme} ];
+    };
+
+    # Enable /bin/bash compatibility.
+    services.envfs.enable = true;
+  };
 }
