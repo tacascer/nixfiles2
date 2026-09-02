@@ -10,7 +10,7 @@ Package builders and package-local helpers for Blueprint outputs under `flake.pa
 - Keep shared package helpers local to the package tree, for example `packages/qmd/common.nix`.
 - Canonical package names must be used for all public outputs.
 - Unsupported package families must be omitted from a system's attrset entirely.
-- AI coding agents and companion tools owned by the pinned `llm-agents` input do not belong in this tree. Do not recreate Codex or OMX package outputs here.
+- AI coding agents owned by the pinned `llm-agents` input do not belong in this tree. Do not recreate Codex package outputs here.
 
 ## Canonical Package Names
 - `nvim`

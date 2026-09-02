@@ -10,8 +10,6 @@ let
   cfg = config.custom.codex;
   llmAgentsPackages = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   codexPackage = llmAgentsPackages.codex;
-  omxPackage = llmAgentsPackages.oh-my-codex;
-  omxPackageRoot = "${omxPackage}/share/oh-my-codex";
 in
 {
   options.custom.codex.trustedProjectsRelativeToHome = lib.mkOption {
@@ -31,7 +29,7 @@ in
 
   config = {
     home-manager.extraSpecialArgs = {
-      inherit codexPackage omxPackage omxPackageRoot;
+      inherit codexPackage;
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };
 

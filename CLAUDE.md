@@ -61,7 +61,7 @@ Canonical same-flake package outputs are:
 - `nvim`
 - `qmd`
 
-AI coding agents and their companion tools, including Codex and OMX, come from the pinned `llm-agents` input. Consume them through `inputs.llm-agents.packages.${system}` in reusable modules instead of recreating same-flake package outputs. Codex and OMX must use the same pinned revision and update together with `nix flake update llm-agents`.
+AI coding agents, including Codex, come from the pinned `llm-agents` input. Consume them through `inputs.llm-agents.packages.${system}` in reusable modules instead of recreating same-flake package outputs. Update them with `nix flake update llm-agents`.
 
 For Codex automation, use `codex --yolo` rather than adding a separate package/output.
 

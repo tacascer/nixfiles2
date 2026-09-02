@@ -4,9 +4,7 @@
     enable = true;
 
     ignores = [
-      ".omc/"
       ".worktrees/"
-      ".sisyphus/"
       ".pi-subagents/"
     ];
 

@@ -2,8 +2,6 @@
   claudeCodePackage,
   claudeCodeClaudeMd,
   claudeCodeMdManagementPlugin,
-  claudeCodeOhMyClaudecodePlugin,
-  claudeCodeStatusLineCommand,
   ...
 }:
 {
@@ -12,26 +10,14 @@
     package = claudeCodePackage;
     context = claudeCodeClaudeMd;
     plugins = [
-      claudeCodeOhMyClaudecodePlugin
       claudeCodeMdManagementPlugin
     ];
     settings = {
       includeCoAuthoredBy = false;
       enabledPlugins = {
         "claude-md-management@claude-plugins-official" = true;
-        "oh-my-claudecode@omc" = true;
-      };
-      extraKnownMarketplaces = {
-        omc.source = {
-          source = "git";
-          url = "https://github.com/Yeachan-Heo/oh-my-claudecode.git";
-        };
       };
       skipDangerousModePermissionPrompt = true;
-      statusLine = {
-        type = "command";
-        command = claudeCodeStatusLineCommand;
-      };
     };
   };
 
