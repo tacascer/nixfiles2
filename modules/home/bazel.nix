@@ -11,6 +11,6 @@ let
 in
 {
   home.file.".bazelrc".text = ''
-    common --credential_helper=remote.buildbuddy.io=${buildBuddyCredentialHelper}/bin/bazel-buildbuddy-credential-helper
+    common --config=remote-linux --credential_helper=remote.buildbuddy.io=${buildBuddyCredentialHelper}/bin/bazel-buildbuddy-credential-helper
   '';
 }
