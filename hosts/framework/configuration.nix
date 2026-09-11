@@ -33,6 +33,7 @@
     flake.nixosModules.signal
     flake.nixosModules.opencode
     flake.nixosModules.claude-code
+    flake.nixosModules.codex
     flake.nixosModules.pi
     flake.nixosModules."spotify-player"
     flake.nixosModules.sudo

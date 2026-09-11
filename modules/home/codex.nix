@@ -2,6 +2,7 @@
   config,
   lib,
   codexPackage,
+  codexSuperpowersPlugin,
   codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
@@ -32,6 +33,7 @@ in
   programs.codex = {
     enable = true;
     package = codexPackage;
+    plugins = [ codexSuperpowersPlugin ];
     settings = {
       model_reasoning_effort = "medium";
       developer_instructions = "When writing git commits, use conventional commits.";
