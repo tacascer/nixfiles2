@@ -45,6 +45,8 @@ in
   config = {
     stylix = {
       enable = true;
+      # Plasma defaults to kde, which the Home Manager Qt target does not support.
+      targets.qt.platform = lib.mkForce "qtct";
       inherit (selectedTheme) base16Scheme polarity;
       image = selectedTheme.wallpaper;
       imageScalingMode = "fill";

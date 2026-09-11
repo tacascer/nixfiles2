@@ -9,9 +9,7 @@
     enable = true;
     package = claudeCodePackage;
     context = claudeCodeClaudeMd;
-    plugins = [
-      claudeCodeMdManagementPlugin
-    ];
+    plugins.claude-md-management = claudeCodeMdManagementPlugin;
     settings = {
       includeCoAuthoredBy = false;
       enabledPlugins = {
