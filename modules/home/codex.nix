@@ -39,7 +39,8 @@ in
       developer_instructions = "When writing git commits, use conventional commits.";
 
       approval_policy = "on-request";
-      model = "gpt-5.4";
+      approvals_reviewer = "auto_review";
+      model = "gpt-6";
       model_provider = "openai";
       sandbox_mode = "read-only";
       web_search = "cached";

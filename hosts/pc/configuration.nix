@@ -44,6 +44,11 @@
 
   custom.bash.flakeDir = "~/myNixOS";
 
+  custom.codex.trustedProjectsRelativeToHome = [
+    "myNixOS"
+    "bazel-repo"
+  ];
+
   home-manager.users.tacascer.programs.niri.settings.outputs = {
     "DP-1".position = {
       x = 0;
