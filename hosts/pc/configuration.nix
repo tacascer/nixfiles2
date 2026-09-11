@@ -46,7 +46,7 @@
 
   custom.codex.trustedProjectsRelativeToHome = [
     "myNixOS"
-    "bazel-repo"
+    "Projects/bazel-repo"
   ];
 
   home-manager.users.tacascer.programs.niri.settings.outputs = {

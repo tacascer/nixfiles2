@@ -40,7 +40,7 @@ in
 
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";
-      model = "gpt-6";
+      model = "gpt-6-astra";
       model_provider = "openai";
       sandbox_mode = "read-only";
       web_search = "cached";
