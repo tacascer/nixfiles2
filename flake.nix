@@ -28,6 +28,10 @@
       url = "github:thedotmack/claude-mem";
       flake = false;
     };
+    ai-plugins = {
+      url = "github:tacascer/ai-plugins";
+      flake = false;
+    };
     superpowers = {
       url = "github:obra/superpowers";
       flake = false;

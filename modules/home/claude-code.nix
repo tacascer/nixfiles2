@@ -2,6 +2,7 @@
   claudeCodePackage,
   claudeCodeClaudeMd,
   claudeCodeMdManagementPlugin,
+  claudeCodeTestingPrinciplesPlugin,
   ...
 }:
 {
@@ -9,7 +10,10 @@
     enable = true;
     package = claudeCodePackage;
     context = claudeCodeClaudeMd;
-    plugins.claude-md-management = claudeCodeMdManagementPlugin;
+    plugins = {
+      claude-md-management = claudeCodeMdManagementPlugin;
+      testing-principles = claudeCodeTestingPrinciplesPlugin;
+    };
     settings = {
       includeCoAuthoredBy = false;
       enabledPlugins = {

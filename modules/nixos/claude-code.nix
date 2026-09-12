@@ -19,6 +19,7 @@ in
 {
   home-manager.extraSpecialArgs = {
     claudeCodePackage = claudeCodePackage;
+    claudeCodeTestingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/testing-principles";
     claudeCodeClaudeMd = ../home/claude-home-instructions.md;
     claudeCodeMdManagementPlugin = claudeCodeMdManagementPlugin;
   };

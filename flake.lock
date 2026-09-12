@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "ai-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789172369,
+        "narHash": "sha256-wpipwEkxWe6BPa609tu4G/caAQS5wcgMoU2aqTgDv+8=",
+        "owner": "tacascer",
+        "repo": "ai-plugins",
+        "rev": "13124ddd2b612f53a5eb5fd9aeaee3954705cb3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tacascer",
+        "repo": "ai-plugins",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -575,6 +591,7 @@
     },
     "root": {
       "inputs": {
+        "ai-plugins": "ai-plugins",
         "blueprint": "blueprint",
         "claude-mem": "claude-mem",
         "dms": "dms",
