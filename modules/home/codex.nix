@@ -92,6 +92,12 @@ in
         shell_tool = true;
         multi_agent = true;
         child_agents_md = true;
+        memories = true;
+      };
+
+      memories = {
+        generate_memories = true;
+        use_memories = true;
       };
 
       history.persistence = "save-all";
