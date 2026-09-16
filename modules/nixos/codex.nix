@@ -31,6 +31,7 @@ in
     home-manager.extraSpecialArgs = {
       inherit codexPackage;
       codexTestingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/testing-principles";
+      codexTimeModelingPlugin = "${inputs.ai-plugins}/plugins/time-modeling";
       codexSuperpowersPlugin = inputs.superpowers;
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };

@@ -4,6 +4,7 @@
   codexPackage,
   codexSuperpowersPlugin,
   codexTestingPrinciplesPlugin,
+  codexTimeModelingPlugin,
   codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
@@ -55,6 +56,7 @@ in
     plugins = [
       codexSuperpowersPlugin
       codexTestingPrinciplesPlugin
+      codexTimeModelingPlugin
     ];
     settings = {
       model_reasoning_effort = "medium";
