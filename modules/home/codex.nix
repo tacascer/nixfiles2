@@ -31,39 +31,20 @@ let
 
 in
 {
-  # Codex 0.154 ignores symlinked version directories when finding installed plugins.
-  # Link each top-level entry instead, keeping the version directory real and
-  # skill directories symlinked as required by the skill loader.
-  home.file = lib.mkMerge (
-    map (
-      plugin:
-      let
-        manifest = builtins.fromJSON (builtins.readFile "${plugin}/.codex-plugin/plugin.json");
-        cachePath = ".codex/plugins/cache/home-manager/${manifest.name}/${manifest.version}";
-      in
-      {
-        "${cachePath}".enable = false;
-      }
-      // lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "${cachePath}/${name}" {
-          source = "${plugin}/${name}";
-        }
-      ) (builtins.readDir plugin)
-    ) config.programs.codex.plugins
-  );
-
-  home.activation.migrateCodexPluginDirectories = lib.hm.dag.entryBefore [ "checkLinkTargets" ] (
+  # Codex 0.154 loads local marketplace installations from the "local" cache
+  # and ignores symlinked plugin manifests. Materialize the pinned sources there
+  # after Home Manager has linked its versioned marketplace sources.
+  home.activation.installCodexLocalPlugins = lib.hm.dag.entryAfter [ "linkGeneration" ] (
     lib.concatMapStringsSep "\n" (
       plugin:
       let
         manifest = builtins.fromJSON (builtins.readFile "${plugin}/.codex-plugin/plugin.json");
-        cachePath = "${homeDirectory}/.codex/plugins/cache/home-manager/${manifest.name}/${manifest.version}";
+        cachePath = "${homeDirectory}/.codex/plugins/cache/home-manager/${manifest.name}/local";
       in
       ''
-        if [[ -L ${lib.escapeShellArg cachePath} && $(readlink ${lib.escapeShellArg cachePath}) == /nix/store/* ]]; then
-          run unlink ${lib.escapeShellArg cachePath}
-        fi
+        run rm -rf -- ${lib.escapeShellArg cachePath}
+        run mkdir -p -- ${lib.escapeShellArg cachePath}
+        run cp -RL --no-preserve=mode -- ${lib.escapeShellArg "${plugin}/."} ${lib.escapeShellArg cachePath}
       ''
     ) config.programs.codex.plugins
   );
