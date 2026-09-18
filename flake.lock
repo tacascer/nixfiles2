@@ -3,11 +3,11 @@
     "ai-plugins": {
       "flake": false,
       "locked": {
-        "lastModified": 1789678815,
-        "narHash": "sha256-Y+hYF0tWRXHHFzr3xxTnlrMk68k4mjdFPXoFQUPk/b8=",
+        "lastModified": 1789685690,
+        "narHash": "sha256-q9MeygUBFNPw8GRmoEhGEnpO9XWdFvic5q47ZZvXNOw=",
         "owner": "tacascer",
         "repo": "ai-plugins",
-        "rev": "7e9b9c1bb716838c2372bd281d1acc7fa6607774",
+        "rev": "3f684568483d1c1c450f96e2ec8d79fcf70d7b4a",
         "type": "github"
       },
       "original": {
