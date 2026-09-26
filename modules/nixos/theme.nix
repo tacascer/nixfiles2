@@ -58,9 +58,18 @@ in
       };
     };
 
-    home-manager.users.${config.custom.homeManager.username} = {
-      programs.zellij.settings.theme = "stylix";
-      stylix.targets.starship.enable = false;
-    };
+    home-manager.users.${config.custom.homeManager.username} =
+      { config, ... }:
+      {
+        programs.zellij.settings.theme = "stylix";
+        stylix.targets.starship.enable = false;
+
+        # The pinned Stylix Rofi target still uses the deprecated programs.rofi.font.
+        # Keep its font styling through Home Manager's replacement option.
+        stylix.targets.rofi.fonts.enable = false;
+        programs.rofi.settings.font =
+          lib.mkIf (config.stylix.enable && config.stylix.targets.rofi.enable && config.stylix.fonts.enable)
+            "${config.stylix.fonts.monospace.name} ${toString config.stylix.fonts.sizes.popups}";
+      };
   };
 }

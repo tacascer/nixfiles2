@@ -77,10 +77,6 @@
           mini.animate.enable = true;
 
           ui.noice.enable = true;
-          ui.breadcrumbs = {
-            enable = true;
-            navbuddy.enable = true;
-          };
 
           notify.nvim-notify.enable = true;
 
@@ -727,7 +723,13 @@
             }
           ];
 
-          statusline.lualine.enable = true;
+          statusline.lualine = {
+            enable = true;
+            integrations.breadcrumbs = {
+              nvim-navic.enable = true;
+              navbuddy.enable = true;
+            };
+          };
           telescope = {
             enable = true;
             setupOpts.defaults.vimgrep_arguments = [
