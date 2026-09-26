@@ -5,7 +5,7 @@
   claudeCodeClaudeMd,
   claudeCodeMdManagementPlugin,
   claudeCodeTestingPrinciplesPlugin,
-  claudeCodeLoggingPrinciplesPlugin,
+  claudeCodeDesignObservabilityPlugin,
   ...
 }:
 {
@@ -16,7 +16,7 @@
     plugins = {
       claude-md-management = claudeCodeMdManagementPlugin;
       testing-principles = claudeCodeTestingPrinciplesPlugin;
-      logging-principles = claudeCodeLoggingPrinciplesPlugin;
+      design-observability = claudeCodeDesignObservabilityPlugin;
     };
     settings = {
       includeCoAuthoredBy = false;
@@ -29,7 +29,7 @@
 
   # Keep manifest-relative skills inside the plugin root; the Home Manager
   # wrapper links component directories outside it, which Claude rejects.
-  home.file."${config.programs.claude-code.configDir}/skills/logging-principles".source = lib.mkForce claudeCodeLoggingPrinciplesPlugin;
+  home.file."${config.programs.claude-code.configDir}/skills/design-observability".source = lib.mkForce claudeCodeDesignObservabilityPlugin;
 
   home.sessionVariables = {
     CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION = "true";

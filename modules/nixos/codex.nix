@@ -32,7 +32,7 @@ in
       inherit codexPackage;
       codexTestingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/testing-principles";
       codexTimeModelingPlugin = "${inputs.ai-plugins}/plugins/time-modeling";
-      codexLoggingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/logging-principles";
+      codexDesignObservabilityPlugin = "${inputs.ai-plugins}/plugins/design-observability";
       codexSuperpowersPlugin = inputs.superpowers;
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };
