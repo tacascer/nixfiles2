@@ -6,6 +6,9 @@
   codexTestingPrinciplesPlugin,
   codexTimeModelingPlugin,
   codexDesignObservabilityPlugin,
+  codexDomainDrivenDesignPlugin,
+  codexRustPatternsPlugin,
+  codexGraphqlDesignPlugin,
   codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
@@ -59,6 +62,9 @@ in
       codexTestingPrinciplesPlugin
       codexTimeModelingPlugin
       codexDesignObservabilityPlugin
+      codexDomainDrivenDesignPlugin
+      codexRustPatternsPlugin
+      codexGraphqlDesignPlugin
     ];
     settings = {
       model_reasoning_effort = "medium";
