@@ -2,7 +2,6 @@
   config,
   lib,
   codexPackage,
-  codexSuperpowersPlugin,
   codexTestingPrinciplesPlugin,
   codexTimeModelingPlugin,
   codexDesignObservabilityPlugin,
@@ -58,7 +57,6 @@ in
     enable = true;
     package = codexPackage;
     plugins = [
-      codexSuperpowersPlugin
       codexTestingPrinciplesPlugin
       codexTimeModelingPlugin
       codexDesignObservabilityPlugin
@@ -68,7 +66,10 @@ in
     ];
     settings = {
       model_reasoning_effort = "medium";
-      developer_instructions = "When writing git commits, use conventional commits.";
+      developer_instructions =
+        "When writing git commits, use conventional commits. "
+        + "When a Matt Pocock skill refers to the Skill tool or /skill-name, "
+        + "load the named skill by reading its SKILL.md from the available skills catalog.";
 
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";

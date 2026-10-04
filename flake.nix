@@ -32,8 +32,8 @@
       url = "github:tacascer/ai-plugins";
       flake = false;
     };
-    superpowers = {
-      url = "github:obra/superpowers";
+    matt-pocock-skills = {
+      url = "github:mattpocock/skills";
       flake = false;
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
