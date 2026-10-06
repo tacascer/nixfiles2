@@ -67,12 +67,12 @@ in
       codexGraphqlDesignPlugin
     ];
     settings = {
-      model_reasoning_effort = "medium";
+      model_reasoning_effort = "high";
       developer_instructions = "When writing git commits, use conventional commits.";
 
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";
-      model = "gpt-6-astra";
+      model = "gpt-6.1-sol";
       model_provider = "openai";
       sandbox_mode = "read-only";
       web_search = "cached";
