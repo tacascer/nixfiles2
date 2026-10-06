@@ -36,7 +36,6 @@ in
       codexDomainDrivenDesignPlugin = "${inputs.ai-plugins}/plugins/domain-driven-design";
       codexRustPatternsPlugin = "${inputs.ai-plugins}/plugins/rust-patterns";
       codexGraphqlDesignPlugin = "${inputs.ai-plugins}/plugins/graphql-design";
-      codexSuperpowersPlugin = inputs.superpowers;
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };
 
