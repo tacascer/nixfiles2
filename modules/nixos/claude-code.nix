@@ -21,7 +21,7 @@ in
     claudeCodePackage = claudeCodePackage;
     claudeCodeTestingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/testing-principles";
     claudeCodeDesignObservabilityPlugin = "${inputs.ai-plugins}/plugins/design-observability";
-    claudeCodeClaudeMd = ../home/claude-home-instructions.md;
+    claudeCodeClaudeMd = ../home/agent-home-instructions.md;
     claudeCodeMdManagementPlugin = claudeCodeMdManagementPlugin;
   };
 

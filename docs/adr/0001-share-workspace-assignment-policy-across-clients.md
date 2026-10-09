@@ -1,0 +1,3 @@
+# Share the workspace-assignment policy across clients
+
+Codex, Claude Code, and OpenCode adopt pooled workspaces by default for editing tasks across repositories, with bazel-repo as the first validation target. Deliver one shared policy through each client's native Home Manager context because assignment ownership and recovery responsibilities must be present before tool use; lazily loaded skills or independently maintained client policies risk omissions and drift. Preserve repository-specific instructions, explicit assignment handles, durable receipts, and human-approved recovery, and verify actual loading in fresh CLI sessions rather than inferring it from deployed files.

@@ -56,6 +56,7 @@ in
   programs.codex = {
     enable = true;
     package = codexPackage;
+    context = ./agent-home-instructions.md;
     plugins = [
       codexTestingPrinciplesPlugin
       codexTimeModelingPlugin

@@ -6,6 +6,6 @@
   programs.opencode = {
     enable = true;
     package = opencodePackage;
-    context = ./claude-home-instructions.md;
+    context = ./agent-home-instructions.md;
   };
 }
