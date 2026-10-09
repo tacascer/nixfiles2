@@ -17,6 +17,7 @@
     flake.nixosModules.helix
     flake.nixosModules.bash
     flake.nixosModules.bazel
+    flake.nixosModules.worktree-pool
     flake.nixosModules."home-manager"
     flake.nixosModules."1password"
     flake.nixosModules.node
