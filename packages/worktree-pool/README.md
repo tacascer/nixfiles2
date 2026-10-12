@@ -1,9 +1,9 @@
 # worktree-pool through Nix
 
-The package builds the standalone `worktree_pool` crate from merged bazel-repo
-commit `44063c8865be48acab7d844330d0a9687787e187`. Source and Cargo vendor hashes
-are pinned. The crate's own Cargo.lock supplies locked dependencies; the monorepo
-root lockfile and Bazel toolchain are not used by this package.
+The package builds the `worktree-pool` crate from the standalone
+[LowkeyLab/worktree-pool repository](https://github.com/LowkeyLab/worktree-pool)
+at immutable commit `eea69ea10a1ce577f8a997181289edb21a34a75d`. Source and Cargo
+vendor hashes are pinned. Its Cargo.lock supplies locked dependencies.
 
 The pinned Nixpkgs Rust compiler is 1.98.1, satisfying the manifest's 1.96 minimum.
 Upstream supports x86_64-linux; Blueprint omits this package from both aarch64
@@ -27,8 +27,8 @@ worktree-pool --version
 ```
 
 The package uses Nixpkgs [buildRustPackage](https://nixos.org/manual/nixpkgs/stable/#rust).
-Its default Cargo check ran all 39 library tests with real private fixtures:
-39 passed, zero failed, ignored or filtered. The installed-command pilot below
+The upstream Cargo suite includes 39 library tests and 123 CLI tests with real
+private fixtures. The original installed-command pilot below
 checks wrapper wiring and actual origin transport beyond those library checks.
 No application interfaces or test doubles were added. Catalog files are owned
 application state; Git's common directory and origin are shared external
@@ -41,7 +41,7 @@ The installed executable reported worktree-pool 0.1.0. Blueprint's unknown-outpu
 warnings were non-blocking; flake check skipped incompatible aarch64 systems.
 This does not establish runtime support outside x86_64-linux.
 
-## Explicit local pilot
+## Historical local pilot (2026-10-09)
 
 Inspect `worktree-pool --json catalog info` first. A missing catalog was confirmed
 before initializing the default authority. Do not initialize another catalog to
@@ -111,5 +111,5 @@ and catalog history retain the workflow identities. This pilot does not rerun th
 accepted benchmark or establish crash/power-loss behavior. Retained worktree and
 Bazel formatter state remain local; no cache cleanup was performed.
 
-Crates.io publication, wider adoption and agent-instruction updates remain
-separate follow-ups. The Nix change is local until separately approved for publication.
+Crates.io publication and binary-release automation remain separate follow-ups.
+The source migration preserves the installed command and agent guidance.
