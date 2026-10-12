@@ -5,12 +5,11 @@ pkgs.rustPlatform.buildRustPackage {
 
   src = pkgs.fetchFromGitHub {
     owner = "LowkeyLab";
-    repo = "bazel-repo";
-    rev = "44063c8865be48acab7d844330d0a9687787e187";
-    hash = "sha256-AemqE7a0sadm0J/d0bD9DqfLwCxPYqizuTKM2bUlGAg=";
+    repo = "worktree-pool";
+    rev = "eea69ea10a1ce577f8a997181289edb21a34a75d";
+    hash = "sha256-VkYyZRLu49LAtGCVMUVobR5ZI/sKED1QSq3hPx5d2dY=";
   };
-  sourceRoot = "source/worktree_pool";
-  cargoHash = "sha256-5XHXV3W6g/dvuseJ9Wvx81VE86moBeRhZt31e7hddOg=";
+  cargoHash = "sha256-bfNQ472mfBuJQm3EhB7QEHnXh72fvEnEztYQyMKSeWs=";
 
   nativeBuildInputs = [ pkgs.makeWrapper ];
   nativeCheckInputs = [ pkgs.git ];
@@ -26,7 +25,7 @@ pkgs.rustPlatform.buildRustPackage {
 
   meta = {
     description = "Explicit ownership for persistent local Git worktrees";
-    homepage = "https://github.com/LowkeyLab/bazel-repo/tree/44063c8865be48acab7d844330d0a9687787e187/worktree_pool";
+    homepage = "https://github.com/LowkeyLab/worktree-pool";
     license = pkgs.lib.licenses.agpl3Only;
     mainProgram = "worktree-pool";
     # Match the upstream runtime support contract.
