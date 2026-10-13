@@ -5,8 +5,7 @@
   mattPocockPlugin,
   claudeCodeClaudeMd,
   claudeCodeMdManagementPlugin,
-  claudeCodeTestingPrinciplesPlugin,
-  claudeCodeDesignObservabilityPlugin,
+  claudeCodeTimSkillsPlugin,
   ...
 }:
 {
@@ -17,8 +16,7 @@
     plugins = {
       mattpocock-skills = mattPocockPlugin;
       claude-md-management = claudeCodeMdManagementPlugin;
-      testing-principles = claudeCodeTestingPrinciplesPlugin;
-      design-observability = claudeCodeDesignObservabilityPlugin;
+      tim-skills = claudeCodeTimSkillsPlugin;
     };
     settings = {
       includeCoAuthoredBy = false;
@@ -31,8 +29,8 @@
 
   # Keep manifest-relative skills inside the plugin root; the Home Manager
   # wrapper links component directories outside it, which Claude rejects.
-  home.file."${config.programs.claude-code.configDir}/skills/design-observability".source =
-    lib.mkForce claudeCodeDesignObservabilityPlugin;
+  home.file."${config.programs.claude-code.configDir}/skills/tim-skills".source =
+    lib.mkForce claudeCodeTimSkillsPlugin;
 
   home.file."${config.programs.claude-code.configDir}/skills/mattpocock-skills".source =
     lib.mkForce mattPocockPlugin;

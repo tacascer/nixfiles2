@@ -2,12 +2,7 @@
   config,
   lib,
   codexPackage,
-  codexTestingPrinciplesPlugin,
-  codexTimeModelingPlugin,
-  codexDesignObservabilityPlugin,
-  codexDomainDrivenDesignPlugin,
-  codexRustPatternsPlugin,
-  codexGraphqlDesignPlugin,
+  codexTimSkillsPlugin,
   codexTrustedProjectsRelativeToHome ? [ ],
   ...
 }:
@@ -57,14 +52,7 @@ in
     enable = true;
     package = codexPackage;
     context = ./agent-home-instructions.md;
-    plugins = [
-      codexTestingPrinciplesPlugin
-      codexTimeModelingPlugin
-      codexDesignObservabilityPlugin
-      codexDomainDrivenDesignPlugin
-      codexRustPatternsPlugin
-      codexGraphqlDesignPlugin
-    ];
+    plugins = [ codexTimSkillsPlugin ];
     settings = {
       model_reasoning_effort = "high";
       developer_instructions =

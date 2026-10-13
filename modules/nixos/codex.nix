@@ -30,12 +30,7 @@ in
   config = {
     home-manager.extraSpecialArgs = {
       inherit codexPackage;
-      codexTestingPrinciplesPlugin = "${inputs.ai-plugins}/plugins/testing-principles";
-      codexTimeModelingPlugin = "${inputs.ai-plugins}/plugins/time-modeling";
-      codexDesignObservabilityPlugin = "${inputs.ai-plugins}/plugins/design-observability";
-      codexDomainDrivenDesignPlugin = "${inputs.ai-plugins}/plugins/domain-driven-design";
-      codexRustPatternsPlugin = "${inputs.ai-plugins}/plugins/rust-patterns";
-      codexGraphqlDesignPlugin = "${inputs.ai-plugins}/plugins/graphql-design";
+      codexTimSkillsPlugin = "${inputs.ai-plugins}/plugins/tim-skills";
       codexTrustedProjectsRelativeToHome = cfg.trustedProjectsRelativeToHome;
     };
 
