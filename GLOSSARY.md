@@ -31,3 +31,9 @@ _Avoid_: Reclamation, recovery
 **Assignment receipt**:
 The retained result identifying a particular workspace assignment and its reported outcome, used to support continuation and handoff.
 _Avoid_: Worktree path, latest assignment
+
+## English writing
+
+**Strict mode**:
+A writing mode that applies structural rules and requires consistent word meanings. STE-flavored mode treats lexical rules as advice.
+_Avoid_: STE-flavored mode, certified ASD-STE100 compliance

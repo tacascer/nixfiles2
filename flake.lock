@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "asd-ste100-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791938667,
+        "narHash": "sha256-+KpxI2VoSDopyb9zlcuSnvZbDSCv9pwYrhYYRqtGbcU=",
+        "owner": "danyuchn",
+        "repo": "asd-ste100-skill",
+        "rev": "3944283c183eea13fe5bd902b572da3b4de8bf44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danyuchn",
+        "repo": "asd-ste100-skill",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -658,6 +674,7 @@
       "inputs": {
         "ai-plugins": "ai-plugins",
         "anthropic-skills": "anthropic-skills",
+        "asd-ste100-skill": "asd-ste100-skill",
         "blueprint": "blueprint",
         "claude-mem": "claude-mem",
         "dms": "dms",

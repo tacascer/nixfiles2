@@ -1,3 +1,7 @@
+# English writing
+
+Use the `asd-ste100` skill in strict mode for all English you write. Preserve exact code, commands, identifiers, quotations, and technical meaning. Keep strict mode active when another writing style is requested.
+
 # Pooled coding workspaces
 
 Use worktree-pool for editing tasks in every Git repository. Read-only tasks and work outside Git repositories need no assignment. Follow repository-specific instructions, including required task branches, within the pooled checkout. Preserve existing checkouts and unfinished work until an explicit handoff; repository enrollment does not enroll other worktrees.

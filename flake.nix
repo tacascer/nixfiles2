@@ -36,6 +36,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    asd-ste100-skill = {
+      url = "github:danyuchn/asd-ste100-skill";
+      flake = false;
+    };
     anthropic-skills = {
       url = "github:anthropics/skills";
       flake = false;
