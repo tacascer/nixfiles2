@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "anthropic-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791571549,
+        "narHash": "sha256-+UIqBnzyeIOvJSKYaDaE3GYPEpLw7qQqyUw5S971AfU=",
+        "owner": "anthropics",
+        "repo": "skills",
+        "rev": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -195,6 +211,22 @@
         "type": "github"
       }
     },
+    "emilkowalski-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791727112,
+        "narHash": "sha256-4/xWVt4HqB1nwqdLMFC3No07vkEWqRcQDtqNY8FHwh8=",
+        "owner": "emilkowalski",
+        "repo": "skills",
+        "rev": "2d228630ba1446365f614a108cb8252f1feda202",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emilkowalski",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -337,6 +369,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "impeccable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792324488,
+        "narHash": "sha256-ddi1fxOiankzK1Napn3Q3LZeewpDLNaaCCKBV6zBtSo=",
+        "owner": "pbakaus",
+        "repo": "impeccable",
+        "rev": "97b5b60f9189fa07c0c90d609ca6a064d4b9c8fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pbakaus",
+        "repo": "impeccable",
         "type": "github"
       }
     },
@@ -609,10 +657,13 @@
     "root": {
       "inputs": {
         "ai-plugins": "ai-plugins",
+        "anthropic-skills": "anthropic-skills",
         "blueprint": "blueprint",
         "claude-mem": "claude-mem",
         "dms": "dms",
+        "emilkowalski-skills": "emilkowalski-skills",
         "home-manager": "home-manager",
+        "impeccable": "impeccable",
         "llm-agents": "llm-agents",
         "matt-pocock-skills": "matt-pocock-skills",
         "niri": "niri",

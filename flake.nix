@@ -36,6 +36,18 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
+    emilkowalski-skills = {
+      url = "github:emilkowalski/skills";
+      flake = false;
+    };
+    impeccable = {
+      url = "github:pbakaus/impeccable";
+      flake = false;
+    };
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 

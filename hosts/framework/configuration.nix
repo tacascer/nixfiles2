@@ -35,6 +35,7 @@
     flake.nixosModules.opencode
     flake.nixosModules.claude-code
     flake.nixosModules.matt-pocock-skills
+    flake.nixosModules.design-skills
     flake.nixosModules.codex
     flake.nixosModules.chatgpt
     flake.nixosModules.pi
