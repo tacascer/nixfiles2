@@ -54,7 +54,7 @@ in
     context = ./agent-home-instructions.md;
     plugins = [ codexTimSkillsPlugin ];
     settings = {
-      model_reasoning_effort = "high";
+      model_reasoning_effort = "medium";
       developer_instructions =
         "When writing git commits, use conventional commits. "
         + "When a Matt Pocock skill refers to the Skill tool or /skill-name, "
