@@ -69,6 +69,8 @@ in
 
       analytics.enabled = false;
 
+      plugins."browser@openai-bundled".enabled = true;
+
       features = {
         shell_tool = true;
         multi_agent = true;
