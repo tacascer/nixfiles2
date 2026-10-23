@@ -12,6 +12,19 @@ in
   };
 
   config = {
+    nix.settings = {
+      extra-substituters = [ "https://cache.numtide.com" ];
+      extra-trusted-public-keys = [
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      ];
+    };
+
+    # Reserve memory for desktop applications during builds.
+    systemd.services.nix-daemon.serviceConfig = {
+      MemoryHigh = "40%";
+      MemoryMax = "50%";
+    };
+
     nix.gc = {
       automatic = true;
       dates = "weekly";
