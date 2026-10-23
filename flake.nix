@@ -59,6 +59,10 @@
     inputs:
     inputs.blueprint {
       inherit inputs;
+      nixpkgs = {
+        config.allowUnfree = true;
+        overlays = [ (import ./overlays/build-fixes.nix) ];
+      };
       systems = [
         "x86_64-linux"
         "aarch64-linux"
