@@ -29,19 +29,19 @@ let
     "impeccable"
   ]
   ++ map installedName emilSkills;
-  engineVersion = "0.1.15";
+  engineVersion = "0.1.16";
   engineTargets = {
     x86_64-linux = {
       target = "linux-x64";
-      sha256 = "b4e2ebcb97b2be5e5a0ae71d4a03596c12d3672f19b24cfdd7244e304e679fb7";
+      sha256 = "a890a5b4b7d9d79ec54aa74612b5e924e5f5b422600a25fde8bcbda11b031787";
     };
     aarch64-linux = {
       target = "linux-arm64";
-      sha256 = "bb572a5250359731b3df902279ed4c3a901b149742b36623c2130f15221561e4";
+      sha256 = "a9a18bfa6d70642701446ed3b12a3e5e6eefe4a4b4c56effe30b449ccb329c4b";
     };
     aarch64-darwin = {
       target = "darwin-arm64";
-      sha256 = "c7914209b4490dc81b7ab17c20f1f76415d1f0b8bb5de6f7e86e9aa111d1c1a5";
+      sha256 = "5c00c3130b961f3aa1066f04ed0e1f58e87808ad153efa00f1c44184800084f2";
     };
   };
   engineTarget = engineTargets.${pkgs.stdenv.hostPlatform.system};
