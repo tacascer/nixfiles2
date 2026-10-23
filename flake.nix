@@ -36,6 +36,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    marketing-skills = {
+      url = "github:coreyhaines31/marketingskills";
+      flake = false;
+    };
     asd-ste100-skill = {
       url = "github:danyuchn/asd-ste100-skill";
       flake = false;

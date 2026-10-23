@@ -425,6 +425,22 @@
         "type": "github"
       }
     },
+    "marketing-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792445393,
+        "narHash": "sha256-7vfgajBoZMtgct2IZwqFoQrAoKkrMrK8jc644NdNju4=",
+        "owner": "coreyhaines31",
+        "repo": "marketingskills",
+        "rev": "e85f3cbc2e4a79bf33b2a12e9bdd9087d414735b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coreyhaines31",
+        "repo": "marketingskills",
+        "type": "github"
+      }
+    },
     "matt-pocock-skills": {
       "flake": false,
       "locked": {
@@ -681,6 +697,7 @@
         "home-manager": "home-manager",
         "impeccable": "impeccable",
         "llm-agents": "llm-agents",
+        "marketing-skills": "marketing-skills",
         "matt-pocock-skills": "matt-pocock-skills",
         "niri": "niri",
         "nixos-hardware": "nixos-hardware",
