@@ -1,17 +1,5 @@
 _final: prev:
 {
-  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-    (_pythonFinal: pythonPrev: {
-      diff-cover = pythonPrev.diff-cover.overridePythonAttrs (old: {
-        # Pygments now preserves quotes in highlighted text. Retain the tests.
-        postPatch = (old.postPatch or "") + ''
-          substituteInPlace tests/fixtures/{pycodestyle_violations_report{,_external_css},pyflakes_violations_report,pylint_violations_report}.html \
-            --replace-fail '&quot;' '"'
-        '';
-      });
-    })
-  ];
-
   # The Sphinx hook reads a scalar. An array selects only its first builder.
   khal = prev.khal.overrideAttrs {
     sphinxBuilders = "html man";
