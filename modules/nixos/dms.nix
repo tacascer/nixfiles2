@@ -11,6 +11,9 @@
       inputs.dms.homeModules.niri
     ];
 
+    # DMS requires a Boolean for this nullable Niri option.
+    programs.niri.settings.layout.border.enable = false;
+
     home.sessionVariables.DMS_DISABLE_MATUGEN = "1";
 
     programs.dank-material-shell = {
